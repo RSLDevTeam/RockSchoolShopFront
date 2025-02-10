@@ -396,6 +396,63 @@ html {
 
 /* Typography
 --------------------------------------------- */
+
+@font-face {
+    font-family: 'Webnar';
+    src: url('fonts/webnar-thin.woff2') format('woff2'),
+         url('fonts/webnar-thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Webnar';
+    src: url('fonts/webnar-light.woff2') format('woff2'),
+         url('fonts/webnar-light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Webnar';
+    src: url('fonts/webnar-regular.woff2') format('woff2'),
+         url('fonts/webnar-regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Webnar';
+    src: url('fonts/webnar-medium.woff2') format('woff2'),
+         url('fonts/webnar-medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Webnar';
+    src: url('fonts/webnar-semibold.woff2') format('woff2'),
+         url('fonts/webnar-semibold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Webnar';
+    src: url('fonts/webnar-bold.woff2') format('woff2'),
+         url('fonts/webnar-bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Webnar';
+    src: url('fonts/webnar-black.woff2') format('woff2'),
+         url('fonts/webnar-black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
 body,
 button,
 input,
@@ -403,7 +460,7 @@ select,
 optgroup,
 textarea {
 	color: #404040;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: 'Webnar', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 	font-size: 1rem;
 	line-height: 1.5;
 }
