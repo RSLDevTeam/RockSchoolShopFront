@@ -36,6 +36,8 @@
     "map": false
   },
   "scripts": {
+    "t-watch": "npx @tailwindcss/cli -i css/rockschool.css -o css/output.css --watch",
+    "t-build": "npx @tailwindcss/cli -i css/rockschool.css -o css/output.css",
     "watch": "node-sass sass/ -o ./ --source-map true --output-style expanded --indent-type tab --indent-width 1 -w",
     "compile:css": "node-sass sass/ -o ./ && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
     "compile:rtl": "rtlcss style.css style-rtl.css",

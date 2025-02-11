@@ -548,9 +548,6 @@
   .hidden {
     display: none;
   }
-  .h-4 {
-    height: calc(var(--spacing) * 4);
-  }
   .rounded {
     border-radius: 0.25rem;
   }
