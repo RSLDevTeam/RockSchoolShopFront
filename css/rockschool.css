@@ -196,3 +196,18 @@
         display: flex;
     }
 }
+#menu-footer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5rem; /* Space between menu items */
+}
+
+#menu-footer-menu li {
+    display: block;
+}
+
+#menu-footer-menu li a {
+    text-decoration: none;
+}
