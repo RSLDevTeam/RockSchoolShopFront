@@ -374,6 +374,61 @@
     --default-mono-font-variation-settings: var(
       --font-mono--font-variation-settings
     );
+    --color-rock-moonstone-50: #f0f9fb;
+    --color-rock-moonstone-100: #d9f1f4;
+    --color-rock-moonstone-200: #b8e2e9;
+    --color-rock-moonstone-300: #86ccda;
+    --color-rock-moonstone-400: #4cadc2;
+    --color-rock-moonstone-500: #3292a8;
+    --color-rock-moonstone-600: #2c778e;
+    --color-rock-moonstone-700: #2a6174;
+    --color-rock-moonstone-800: #295061;
+    --color-rock-moonstone-900: #264553;
+    --color-rock-moonstone-950: #152b37;
+    --color-rock-cinerous-50: #f9f7f7;
+    --color-rock-cinerous-100: #f2efee;
+    --color-rock-cinerous-200: #e8e2e0;
+    --color-rock-cinerous-300: #d7cdca;
+    --color-rock-cinerous-400: #bfafaa;
+    --color-rock-cinerous-500: #a6938d;
+    --color-rock-cinerous-600: #95817b;
+    --color-rock-cinerous-700: #76645f;
+    --color-rock-cinerous-800: #645550;
+    --color-rock-cinerous-900: #554a47;
+    --color-rock-cinerous-950: #2c2523;
+    --color-rock-purple-50: #fdf2f7;
+    --color-rock-purple-100: #fce7f2;
+    --color-rock-purple-200: #fad0e6;
+    --color-rock-purple-300: #f7aad0;
+    --color-rock-purple-400: #f175b0;
+    --color-rock-purple-500: #e94b91;
+    --color-rock-purple-600: #d72b6e;
+    --color-rock-purple-700: #b71b54;
+    --color-rock-purple-800: #9a1a48;
+    --color-rock-purple-900: #811a3e;
+    --color-rock-purple-950: #4e0921;
+    --color-rock-gray-50: #f6f6f6;
+    --color-rock-gray-100: #e7e7e7;
+    --color-rock-gray-200: #d1d1d1;
+    --color-rock-gray-300: #b0b0b0;
+    --color-rock-gray-400: #888888;
+    --color-rock-gray-500: #6d6d6d;
+    --color-rock-gray-600: #5d5d5d;
+    --color-rock-gray-700: #4f4f4f;
+    --color-rock-gray-800: #454545;
+    --color-rock-gray-900: #3d3d3d;
+    --color-rock-gray-950: #080808;
+    --color-rock-alabaster-50: #fafafa;
+    --color-rock-alabaster-100: #efefef;
+    --color-rock-alabaster-200: #dcdcdc;
+    --color-rock-alabaster-300: #bdbdbd;
+    --color-rock-alabaster-400: #989898;
+    --color-rock-alabaster-500: #7c7c7c;
+    --color-rock-alabaster-600: #656565;
+    --color-rock-alabaster-700: #525252;
+    --color-rock-alabaster-800: #464646;
+    --color-rock-alabaster-900: #3d3d3d;
+    --color-rock-alabaster-950: #292929;
   }
 }
 @layer base {
@@ -582,6 +637,9 @@
   .text-gray-950 {
     color: var(--color-gray-950);
   }
+  .text-rock-moonstone-700 {
+    color: var(--color-rock-moonstone-700);
+  }
   .blur {
     --tw-blur: blur(8px);
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -661,7 +719,6 @@
     }
   }
 }
-@import url(header.css);
 .container {
   display: flex;
   justify-content: space-between;
