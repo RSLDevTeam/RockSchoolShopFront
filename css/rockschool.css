@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import url(header.css);
+@custom-variant dark (&:where(.dark, .dark *));
+
+
 .container {
     display: flex;
     justify-content: space-between;

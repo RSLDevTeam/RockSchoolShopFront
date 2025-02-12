@@ -74,3 +74,21 @@ function rockschool_include_inc_files() {
 }
 add_action('after_setup_theme', 'rockschool_include_inc_files');
 
+function rockschool_scripts() {
+    // Enqueue the main stylesheet
+    wp_enqueue_style( 'rockschool-style', get_stylesheet_uri(), array(), _S_VERSION );
+    wp_style_add_data( 'rockschool-style', 'rtl', 'replace' );
+
+    // Enqueue the navigation script
+    wp_enqueue_script( 'rockschool-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+
+    // Enqueue the theme mode script
+    wp_enqueue_script( 'rockschool-theme-mode', get_template_directory_uri() . '/js/theme-mode.js', array(), _S_VERSION, true );
+
+    // Enable comment-reply script if needed
+    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+        wp_enqueue_script( 'comment-reply' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'rockschool_scripts' );
+
