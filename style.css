@@ -387,7 +387,6 @@ html {
     font-style: normal;
 }
 
-body,
 button,
 input,
 select,
@@ -621,10 +620,7 @@ textarea {
 
 /* Navigation
 --------------------------------------------- */
-.main-navigation {
-	display: block;
-	width: 100%;
-}
+
 
 .main-navigation ul {
 	display: none;
@@ -664,6 +660,7 @@ textarea {
 
 .main-navigation li {
 	position: relative;
+	padding-left: 50px;
 }
 
 .main-navigation a {

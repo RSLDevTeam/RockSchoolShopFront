@@ -70,12 +70,6 @@
     margin: 0 auto;
     padding: 0 20px;
 }
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 /* Header Styles */
 .site-header {
