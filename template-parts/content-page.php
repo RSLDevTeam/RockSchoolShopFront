@@ -14,6 +14,8 @@
 	<div class="entry-content">
 		<?php
 		get_template_part( 'section-templates/section', 'flex-content' );
+		get_template_part( 'section-templates/section', 'content-group' );
+		get_template_part( 'section-templates/section', 'two-content' );
 		the_content();
 		?>
 	</div><!-- .entry-content -->
