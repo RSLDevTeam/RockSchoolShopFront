@@ -23,9 +23,51 @@
 <body  class="bg-rock-alabaster-50 dark:bg-rock-gray-900 text-rock-gray-950 dark:text-rock-alabaster-50" <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'rockschool' ); ?></a>
-	<header class="py-2.5 border-b border-gray-300">
-        <div class="flex justify-between items-center">
+	
+	<header class="absolute z-99 border-b border-gray-300 rounded-bl-[10px] rounded-br-[10px] bg-rock-alabaster-50 dark:bg-rock-gray-900 text-rock-gray-950 dark:text-rock-alabaster-50 md:w-[calc(100%-60px)] md:ml-[30px] md:mr-[30px]">
+		<div class="bg-rock-moonstone-500 flex justify-between px-4 py-1">
+			<!-- Contacts -->
+			<div class="flex items-center gap-x-8 xl:gap-x-4">
+				<!-- Email -->
+				<a href="mailto:info@example.com" class="flex items-center gap-x-2.5 font-light text-white/80">
+					<span class="icon shrink-0">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/mail.svg" alt="Email Icon" class="w-5 h-5">
+					</span>
+					<span>info@example.com</span>
+				</a>
+				<!-- Phone -->
+				<a href="tel:+20866660112" class="flex items-center gap-x-2.5 font-light text-white/80">
+					<span class="icon shrink-0">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/phone.svg" alt="Phone Icon" class="w-5 h-5">
+					</span>
+					<span>+208-6666-0112</span>
+				</a>
+			</div>
+
+			<!-- Notice -->
+			<div class="flex items-center gap-x-8 xl:gap-x-4">
+				<p class="font-medium text-white text-base xxs:text-sm mx-4">
+					Rock School Flash Discount: Starting at <span class="text-rock-moonstone-800 text-xl"> $3.49/mon </span> for a Limited time
+				</p>
+			</div>
+			
+
+			<!-- Actions -->
+			<div class="flex items-center gap-x-7.5 xl:gap-x-4 text-white">
+				<!-- Login -->
+				<a href="<?php echo esc_url( wp_login_url() ); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
+					<span class="icon shrink-0">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/avatar.svg" alt="Login Icon" class="w-5 h-5">
+					</span>
+					<span>Login</span>
+				</a>
+				<!-- Guardian Access Button -->
+				<a href="<?php echo esc_url( wp_registration_url() ); ?>" class="register-link rounded-none sm:px-4 bg-rock-gray-950 text-white font-medium px-4 py-2 my-0.5">
+					Teach Rock School Access
+				</a>
+			</div>
+		</div>
+		<div class="flex justify-between items-center p-2.5">
             <div class="logo">
                 <?php if ( has_custom_logo() ) : ?>
                     <?php the_custom_logo(); ?>
@@ -76,15 +118,11 @@
 					?>
 				</div>
 			</nav>
-            <div class="header-actions">
-                <a href="<?php echo esc_url( wp_login_url() ); ?>" class="login-link">Login</a>
-                <a href="<?php echo esc_url( wp_registration_url() ); ?>" class="register-link">Teach Rock School</a>
-            </div>
         </div>
     </header>
 	
-	<button id="theme-toggle" class="relative z-0 inline-grid gap-0.5 rounded-full bg-gray-950/5 p-0.75 text-gray-950 dark:bg-white/10 dark:text-white" id="headlessui-radiogroup-:r6:" role="radiogroup">
-		<span id="theme-icon" class="rounded-full p-1.5 *:size-7 data-checked:bg-white data-checked:inset-ring data-checked:ring data-checked:ring-gray-950/10 data-checked:inset-ring-white/10 sm:p-0 dark:data-checked:bg-gray-700 dark:data-checked:text-white dark:data-checked:ring-transparent" aria-label="Dark theme" id="headlessui-radio-:r9:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="">
+	<button id="theme-toggle" class="fixed bottom-4 right-4 rounded-l-full bg-gray-950/5 p-0.75 text-gray-950 dark:bg-white/10 dark:text-white" role="radiogroup">
+		<span id="theme-icon" class="rounded-full p-1.5 *:size-7 data-checked:bg-white data-checked:inset-ring data-checked:ring data-checked:ring-gray-950/10 data-checked:inset-ring-white/10 sm:p-0 dark:data-checked:bg-gray-700 dark:data-checked:text-white dark:data-checked:ring-transparent" aria-label="Dark theme" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="">
 			<svg viewBox="0 0 28 28" fill="none">
 				<path d="M10.5 9.99914C10.5 14.1413 13.8579 17.4991 18 17.4991C19.0332 17.4991 20.0176 17.2902 20.9132 16.9123C19.7761 19.6075 17.109 21.4991 14 21.4991C9.85786 21.4991 6.5 18.1413 6.5 13.9991C6.5 10.8902 8.39167 8.22304 11.0868 7.08594C10.7089 7.98159 10.5 8.96597 10.5 9.99914Z" stroke="currentColor" stroke-linejoin="round"></path>
 				<path d="M16.3561 6.50754L16.5 5.5L16.6439 6.50754C16.7068 6.94752 17.0525 7.29321 17.4925 7.35607L18.5 7.5L17.4925 7.64393C17.0525 7.70679 16.7068 8.05248 16.6439 8.49246L16.5 9.5L16.3561 8.49246C16.2932 8.05248 15.9475 7.70679 15.5075 7.64393L14.5 7.5L15.5075 7.35607C15.9475 7.29321 16.2932 6.94752 16.3561 6.50754Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
