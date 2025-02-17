@@ -387,7 +387,6 @@ html {
     font-style: normal;
 }
 
-body,
 button,
 input,
 select,
@@ -462,9 +461,6 @@ big {
 
 /* Elements
 --------------------------------------------- */
-body {
-	background: #fff;
-}
 
 hr {
 	background-color: #ccc;
@@ -624,10 +620,7 @@ textarea {
 
 /* Navigation
 --------------------------------------------- */
-.main-navigation {
-	display: block;
-	width: 100%;
-}
+
 
 .main-navigation ul {
 	display: none;
@@ -667,6 +660,7 @@ textarea {
 
 .main-navigation li {
 	position: relative;
+	padding-left: 50px;
 }
 
 .main-navigation a {
