@@ -136,7 +136,7 @@ img {
  * 1. Change the font styles in all browsers.
  * 2. Remove the margin in Firefox and Safari.
  */
-button,
+
 input,
 optgroup,
 select,
@@ -530,7 +530,7 @@ a:active {
 
 /* Forms
 --------------------------------------------- */
-button,
+
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
@@ -543,22 +543,11 @@ input[type="submit"] {
 	padding: 0.6em 1em 0.4em;
 }
 
-button:hover,
+
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
 	border-color: #ccc #bbb #aaa;
-}
-
-button:active,
-button:focus,
-input[type="button"]:active,
-input[type="button"]:focus,
-input[type="reset"]:active,
-input[type="reset"]:focus,
-input[type="submit"]:active,
-input[type="submit"]:focus {
-	border-color: #aaa #bbb #bbb;
 }
 
 input[type="text"],
@@ -728,7 +717,6 @@ textarea {
 }
 
 .page-content,
-.entry-content,
 .entry-summary {
 	margin: 1.5em 0 0;
 }
