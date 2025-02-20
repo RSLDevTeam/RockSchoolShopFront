@@ -36,6 +36,19 @@ function rockschool_content_width() {
 }
 add_action( 'after_setup_theme', 'rockschool_content_width', 0 );
 
+// ACF options pages
+if( function_exists('acf_add_options_page') ) {
+    acf_add_options_page(array(
+        'page_title'    => 'Rock School Theme Settings',
+        'menu_title'    => 'Theme Settings',
+        'menu_slug'     => 'theme-general-settings',
+        'capability'    => 'edit_posts',
+        'redirect'      => false,
+        'icon_url'      => 'dashicons-marker',
+        'position'      => 2
+    ));
+}
+
 /**
  * Register widget area.
  */
@@ -51,6 +64,15 @@ function rockschool_widgets_init() {
     ) );
 }
 add_action( 'widgets_init', 'rockschool_widgets_init' );
+
+function register_footer_menu() {
+    register_nav_menus(
+        array(
+            'footer-menu' => __('Footer Menu', 'rockschool'),
+        )
+    );
+}
+add_action('after_setup_theme', 'register_footer_menu');
 
 
 /**
