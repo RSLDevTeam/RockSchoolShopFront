@@ -275,6 +275,27 @@
                     "layout": "horizontal"
                 }
             ]
+        },
+        {
+            "key": "field_67b5e43c751c5",
+            "label": "Header Top Note",
+            "name": "header_top_note",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Rock School Flash Discount: Starting at $3.49\/mon for a Limited time",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         }
     ],
     "location": [
@@ -295,5 +316,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1739814354
+    "modified": 1739973973
 }

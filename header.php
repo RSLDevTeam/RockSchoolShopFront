@@ -29,26 +29,26 @@
 			<!-- Contacts -->
 			<div class="flex items-center gap-x-8 xl:gap-x-4">
 				<!-- Email -->
-				<a href="mailto:info@example.com" class="flex items-center gap-x-2.5 font-light text-white/80">
+				<a href="<?php the_field('email', 'option'); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
 					<span class="icon shrink-0">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/mail.svg" alt="Email Icon" class="w-5 h-5">
 					</span>
-					<span>info@example.com</span>
+					<span><?php the_field('email', 'option'); ?></span>
 				</a>
 				<!-- Phone -->
-				<a href="tel:+20866660112" class="flex items-center gap-x-2.5 font-light text-white/80">
+				<a href="tel:<?php the_field('telephone', 'option'); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
 					<span class="icon shrink-0">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/phone.svg" alt="Phone Icon" class="w-5 h-5">
 					</span>
-					<span>+208-6666-0112</span>
+					<span><?php the_field('telephone', 'option'); ?></span>
 				</a>
 			</div>
 
 			<!-- Notice -->
-			<div class="flex items-center gap-x-8 xl:gap-x-4">
-				<p class="font-medium text-white text-base xxs:text-sm mx-4">
-					Rock School Flash Discount: Starting at <span class="text-rock-moonstone-800 text-xl"> $3.49/mon </span> for a Limited time
-				</p>
+			<div class="content-center gap-x-8 xl:gap-x-4">
+				<?php if ( get_field('header_top_note', 'option') ) : ?>
+					<?php the_field('header_top_note', 'option'); ?>
+				<?php endif; ?>
 			</div>
 			
 
