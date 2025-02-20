@@ -8,48 +8,45 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
  
+$acf_json_path = get_template_directory() . '/acf-json';
+
 // Check value exists.
 if( have_rows('flexible_elements') ):
  
     // Loop through rows.
     while ( have_rows('flexible_elements') ) : the_row();
- 
-        if( get_row_layout() == 'hero' ): ?>
-
-            <section class="hero">
-
-                <?php 
-                $image = get_sub_field('image');
-                if( !empty( $image ) ): ?>
-                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="hero-background" />
-                <?php endif; ?>
-
-                <div class="container">
-                    <div class="hero-content">
-                        
-                        <h1><?php echo get_sub_field('title'); ?></h1>
-                        <p><?php echo get_sub_field('intro'); ?></p>
-
-                        <?php 
-                        $button_text = get_sub_field('button_text');
-                        $button_link = get_sub_field('button_link');
-                        render_acf_button($button_text, $button_link);
-                        ?>
-
-                    </div>
-                </div>
-
-            </section>
-
-        <?php elseif( get_row_layout() == 'next_element_here' ): ?>
-
-            <!-- somehting -->
-
-        <?php endif;
+    
+        if (is_dir($acf_json_path)) {
+            $files = scandir($acf_json_path);
+            foreach ($files as $file) {
+                if (pathinfo($file, PATHINFO_EXTENSION) === 'json') {
+                    $json_data = json_decode(file_get_contents($acf_json_path . '/' . $file), true);
+                    if (isset($json_data['title']) && $json_data['title'] === 'Flexible content') {
+                        if (isset($json_data['fields'])) {
+                            foreach ($json_data['fields'] as $field) {
+                                if (isset($field['layouts'])) {
+                                    foreach ($field['layouts'] as $layout) {
+                                        $flexible_content_layouts[] = $layout['name'];
+                                        $layout = $layout['name'];
+                                        if (get_row_layout() === $layout) {
+                                            $sub_template_path = get_template_directory() . '/flex-sub-content/' . $layout . '.php';
+                                            if (file_exists($sub_template_path)) {
+                                                include $sub_template_path;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
 
     endwhile;
 
 endif;
-
+?>
 
 

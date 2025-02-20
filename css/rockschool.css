@@ -63,25 +63,11 @@
     --color-rock-alabaster-950: #292929;
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 0 20px;
-}
 
 /* Header Styles */
-.site-header {
-    background-color: #fff;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-
 .logo img {
     max-height: 100px;
-    width: 300px;
+    width: 220px;
 }
 
 .main-navigation {
@@ -163,6 +149,26 @@
     top: 8px;
 }
 
+.to-be-fixed.ed-sticky {
+    position: fixed;
+    top: 0;
+    inset: 0 30px auto 30px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1176470588);
+}
+
+.to-be-fixed {
+    transition: 0.4s ease;
+    border-radius: 0 0 10px 10px;
+}
+
+.ed-header-nav a:hover {
+    color: var(--ed-purple);
+}
+
+.menu-item a:hover {
+    color: #4CADC2;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
     .main-navigation {
