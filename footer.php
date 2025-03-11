@@ -163,7 +163,7 @@
 					d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
 				</svg>
 			</span>
-			info@example.com
+			<?php echo get_field('email', 'option'); ?>
 			</p>
 			<p class="mb-4 flex items-center justify-center md:justify-start">
 			<span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
@@ -191,7 +191,7 @@
 					clip-rule="evenodd" />
 				</svg>
 			</span>
-			+ 01 234 567 89
+			<?php echo get_field('telephone', 'option'); ?>
 			</p>
 		</div>
 		</div>

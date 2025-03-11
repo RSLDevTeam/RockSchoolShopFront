@@ -4,9 +4,17 @@
             <div class="swiper-slide">
                 <?php
                 $banner_bg_image = get_sub_field('image');
+                $banner_bg_video = get_sub_field('video');
                 if ($banner_bg_image) : ?>
                     <div class="max-h-[100px] pt-[390px] md:pt-[300px] xs:pt-[280px] pb-[205px] bg-no-repeat bg-center bg-cover relative z-[1] before:absolute before:-z-[1] before:inset-0 before:bg-edblue/70 before:pointer-events-none"
-                        style="background-image: url('<?php echo esc_url($banner_bg_image["url"]); ?>');">
+                        style="background-image: url('<?php echo esc_url($banner_bg_image["url"]); ?>');"> 
+                    <?php if ($banner_bg_video) : ?>
+                        <div class="video-container absolute top-0 w-full h-full overflow-hidden">
+                            <video class="w-full h-full object-cover" muted autoplay loop>
+                                <source src="<?php echo esc_url($banner_bg_video); ?>">
+                            </video>
+                        </div>
+                    <?php endif; ?>
                 <?php else : ?>
                     <div class="pt-[390px] md:pt-[300px] xs:pt-[280px] pb-[205px] bg-no-repeat bg-center bg-cover relative z-[1] before:absolute before:-z-[1] before:inset-0 before:bg-edblue/70 before:pointer-events-none"
                         style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/img/banner-bg-1.jpg');">

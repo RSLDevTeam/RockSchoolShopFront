@@ -3,11 +3,11 @@
     "title": "Global options",
     "fields": [
         {
-            "key": "field_67acb990d539d",
-            "label": "Intro",
-            "name": "intro",
+            "key": "field_67d05248fb530",
+            "label": "Social Logins",
+            "name": "",
             "aria-label": "",
-            "type": "textarea",
+            "type": "tab",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,33 +16,9 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "rows": "",
-            "placeholder": "",
-            "new_lines": ""
-        },
-        {
-            "key": "field_67acb8b3aeef7",
-            "label": "Facebook url",
-            "name": "facebook_url",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_67adcd29a856a",
@@ -87,9 +63,9 @@
             "append": ""
         },
         {
-            "key": "field_67adcea6c2948",
-            "label": "Instagram url",
-            "name": "instagram_url",
+            "key": "field_67adcef4c2949",
+            "label": "LinkedIn url",
+            "name": "LinkedIn_ur",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -108,9 +84,9 @@
             "append": ""
         },
         {
-            "key": "field_67adcef4c2949",
-            "label": "LinkedIn url",
-            "name": "LinkedIn_ur",
+            "key": "field_67adcea6c2948",
+            "label": "Instagram url",
+            "name": "instagram_url",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -148,6 +124,66 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_67acb8b3aeef7",
+            "label": "Facebook url",
+            "name": "facebook_url",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_67d0528cfb531",
+            "label": "Shop Front Settings",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_67acb990d539d",
+            "label": "Intro",
+            "name": "intro",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
         },
         {
             "key": "field_67acb4ea07b59",
@@ -296,6 +332,45 @@
             "toolbar": "full",
             "media_upload": 1,
             "delay": 0
+        },
+        {
+            "key": "field_67d052b7fb532",
+            "label": "Api Keys",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_67d052d4fb533",
+            "label": "Googel Map API key",
+            "name": "googel_map_api_key",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -316,5 +391,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1739973973
+    "modified": 1741705957
 }
