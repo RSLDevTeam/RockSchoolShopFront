@@ -114,14 +114,6 @@ function rockschool_scripts() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
-
-    // Enable Google Places API script on the front page
-    if (is_front_page() || is_home()) { 
-        $google_api_key = get_field('googel_map_api_key', 'option'); // Fetch API key from ACF options
-        if ($google_api_key) {
-            wp_enqueue_script('google-places', 'https://maps.googleapis.com/maps/api/js?key=' . esc_attr($google_api_key) . '&libraries=places', array(), null, true);
-        }
-    }
     
 }
 add_action( 'wp_enqueue_scripts', 'rockschool_scripts' );
