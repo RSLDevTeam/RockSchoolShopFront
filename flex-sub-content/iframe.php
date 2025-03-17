@@ -7,11 +7,7 @@
 
         <script>
             const iframeEl = document.getElementById('franscape-finder-iframe');
-            // Get the URL parameters
-            const params = new URLSearchParams(window.location.search);
         
-            // Get the 'place' parameter from the URL
-            const place = params.get("place");
             iframeEl.src = 'https://finder.rockschool.franscape.io/' + window.location.search;
         </script>
 
