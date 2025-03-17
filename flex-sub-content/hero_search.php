@@ -36,7 +36,7 @@
                             <h6 class="font-bold uppercase tracking-[3px] mb-[16px]"><?php echo get_sub_field('search_title'); ?></span></h6>   
                             <div class="flex items-center">                                
                                 <input id="place-search" aria-autocomplete="list" autocomplete="off" type="text" name="search" class="w-full px-4 py-2 text-lg focus:outline-none" placeholder="Search locations...">
-                                <button type="submit" class="p-2.5 ms-2 text-sm text-white font-medium bg-rock-moonstone-500 rounded-lg hover:bg-rock-moonstone-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                <button type="button" id="search-btn" class="p-2.5 ms-2 text-sm text-white font-medium bg-rock-moonstone-500 rounded-lg hover:bg-rock-moonstone-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                     </svg>
@@ -69,6 +69,18 @@
 		  console.log(place);
           //selectedPlaceTitle.textContent = "Selected Place:";
           //selectedPlaceInfo.textContent = JSON.stringify(place, null, 2);
+
+          // Extract place name or place ID for the URL
+          const selectedPlace = encodeURIComponent(place.name);
+
+          document.getElementById("search-btn").addEventListener("click", () => {
+                if (selectedPlace) {
+                    window.location.href = `/finder?location=${selectedPlace}`;
+                } else {
+                    alert("Please select a place first!");
+                }
+            });
+
         });
       }
       window.initMap = initMap;
