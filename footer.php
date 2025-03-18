@@ -207,15 +207,6 @@
 
 <?php wp_footer(); ?>
 
-<script>
-function initAutocomplete() {
-    var input = document.getElementById('place-search');
-    var autocomplete = new google.maps.places.Autocomplete(input);
-}
 
-document.addEventListener("DOMContentLoaded", function() {
-    initAutocomplete();
-});
-</script>
 </body>
 </html>
