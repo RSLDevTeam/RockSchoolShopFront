@@ -13,11 +13,11 @@
 
 	<!-- Footer container -->
 	<footer
-	class="bg-zinc-50 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
+	class="text-center text-surface/75 bg-rock-alabaster-50 dark:bg-rock-gray-900 text-rock-gray-950 dark:text-rock-alabaster-50 lg:text-left">
 	<div
 		class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
 		<div class="me-12 hidden lg:block">
-		<span>Get connected with us on social networks:</span>
+		<span><?php _e('Connect with us on socials', 'rockschool'); ?></span>
 		</div>
 		<!-- Social network icons container -->
 		<div class="flex justify-center">
@@ -90,13 +90,10 @@
 		
 		<div class="">
 		<div class="logo">
-                <?php if ( has_custom_logo() ) : ?>
-                    <?php the_custom_logo(); ?>
-                <?php else : ?>
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/Rockschool-OG-G1-3-Dark.svg" alt="<?php bloginfo( 'name' ); ?>">
-                    </a>
-                <?php endif; ?>
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                    <img class="footer-logo light" src="<?php echo get_stylesheet_directory_uri(); ?>/img/rs-light-logo.svg" alt="<?php bloginfo( 'name' ); ?>">
+                	<img class="footer-logo dark" src="<?php echo get_stylesheet_directory_uri(); ?>/img/rs-dark-logo.svg" alt="<?php bloginfo( 'name' ); ?>">
+                </a>
             </div>
 			<p></p>
 			<p>
@@ -199,7 +196,7 @@
 
 	<!--Copyright section-->
 	<div class="bg-black/5 p-6 text-center">
-		<span>© 2025 Copyright Rock Scool Ltd. All rights reserved.</span>
+		<span class="copyright-text">© <?php echo date('Y'); ?> Copyright Rockschool London Ltd. All rights reserved.</span>
 		
 	</div>
 	</footer>
@@ -207,6 +204,7 @@
 
 <?php wp_footer(); ?>
 
+<script>AOS.init();</script>
 
 </body>
 </html>

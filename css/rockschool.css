@@ -46,8 +46,8 @@
     --color-rock-gray-500: #6d6d6d;
     --color-rock-gray-600: #5d5d5d;
     --color-rock-gray-700: #4f4f4f;
-    --color-rock-gray-800: #454545;
-    --color-rock-gray-900: #3d3d3d;
+    --color-rock-gray-800: #2a2a2a;
+    --color-rock-gray-900: #151515;
     --color-rock-gray-950: #080808;
   
     --color-rock-alabaster-50: #fafafa;
@@ -61,6 +61,8 @@
     --color-rock-alabaster-800: #464646;
     --color-rock-alabaster-900: #3d3d3d;
     --color-rock-alabaster-950: #292929;
+
+    --color-rockschool-latte-900: #8f807c;
 }
 
 
@@ -152,9 +154,9 @@
 .to-be-fixed.ed-sticky {
     position: fixed;
     top: 0;
-    inset: 0 30px auto 30px;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1176470588);
+    width: 100%;
+    z-index: 9;
+    border-radius: 0;
 }
 
 .to-be-fixed {
@@ -207,7 +209,7 @@
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 1.5rem; /* Space between menu items */
+    gap: .5rem; /* Space between menu items */
 }
 
 #menu-footer-menu li {

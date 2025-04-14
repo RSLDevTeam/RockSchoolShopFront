@@ -11,73 +11,82 @@
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="dark">
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css/style.css"> -->
-
 	<?php wp_head(); ?>
 </head>
 
 <body  class="bg-rock-alabaster-50 dark:bg-rock-gray-900 text-rock-gray-950 dark:text-rock-alabaster-50" <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
+
+<?php // page options
+$enable_absolute_header = get_field('enable_absolute_header');
+?>
 	
-	<header class="absolute z-99 border-b rounded-t-none rounded-b-lg border-gray-300 bg-rock-alabaster-50 dark:bg-rock-gray-900 text-rock-gray-950 dark:text-rock-alabaster-50 md:w-[calc(100%-60px)] md:ml-[30px]">
-		<div class="bg-rock-moonstone-500 flex justify-between px-4 py-1">
-			<!-- Contacts -->
-			<div class="flex items-center gap-x-8 xl:gap-x-4">
-				<!-- Email -->
-				<a href="<?php the_field('email', 'option'); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
-					<span class="icon shrink-0">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/mail.svg" alt="Email Icon" class="w-5 h-5">
-					</span>
-					<span><?php the_field('email', 'option'); ?></span>
-				</a>
-				<!-- Phone -->
-				<a href="tel:<?php the_field('telephone', 'option'); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
-					<span class="icon shrink-0">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/phone.svg" alt="Phone Icon" class="w-5 h-5">
-					</span>
-					<span><?php the_field('telephone', 'option'); ?></span>
-				</a>
+	<header class="<?php if ($enable_absolute_header) { echo 'absolute absolute-header'; } else { echo 'border-gray-300 bg-rock-alabaster-50 dark:bg-rock-gray-900 text-rock-gray-950 dark:text-rock-alabaster-50'; } ?> z-99 ">
+
+		<?php if (get_field('enable_top_bar', 'option')) : ?>
+
+			<div class="bg-rock-moonstone-500 flex justify-between px-4 py-1">
+				<!-- Contacts -->
+				<div class="flex items-center gap-x-8 xl:gap-x-4">
+					<!-- Email -->
+					<a href="<?php the_field('email', 'option'); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
+						<span class="icon shrink-0">
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/mail.svg" alt="Email Icon" class="w-5 h-5">
+						</span>
+						<span><?php the_field('email', 'option'); ?></span>
+					</a>
+					<!-- Phone -->
+					<a href="tel:<?php the_field('telephone', 'option'); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
+						<span class="icon shrink-0">
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/phone.svg" alt="Phone Icon" class="w-5 h-5">
+						</span>
+						<span><?php the_field('telephone', 'option'); ?></span>
+					</a>
+				</div>
+
+				<!-- Notice -->
+				<div class="content-center gap-x-8 xl:gap-x-4">
+					<?php if ( get_field('header_top_note', 'option') ) : ?>
+						<?php the_field('header_top_note', 'option'); ?>
+					<?php endif; ?>
+				</div>
+				
+
+				<!-- Actions -->
+				<div class="flex items-center gap-x-7.5 xl:gap-x-4 text-white">
+					<!-- Login -->
+					<a href="<?php echo esc_url( wp_login_url() ); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
+						<span class="icon shrink-0">
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/avatar.svg" alt="Login Icon" class="w-5 h-5">
+						</span>
+						<span>Login</span>
+					</a>
+					<!-- Guardian Access Button -->
+					<a href="<?php echo esc_url( wp_registration_url() ); ?>" class="register-link rounded-none sm:px-4 bg-rock-gray-950 text-white font-medium px-4 py-2 my-0.5">
+						<?php _e('Register', 'rockschool'); ?>
+					</a>
+				</div>
 			</div>
 
-			<!-- Notice -->
-			<div class="content-center gap-x-8 xl:gap-x-4">
-				<?php if ( get_field('header_top_note', 'option') ) : ?>
-					<?php the_field('header_top_note', 'option'); ?>
-				<?php endif; ?>
-			</div>
-			
+		<?php endif; ?>
 
-			<!-- Actions -->
-			<div class="flex items-center gap-x-7.5 xl:gap-x-4 text-white">
-				<!-- Login -->
-				<a href="<?php echo esc_url( wp_login_url() ); ?>" class="flex items-center gap-x-2.5 font-light text-white/80">
-					<span class="icon shrink-0">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icon/avatar.svg" alt="Login Icon" class="w-5 h-5">
-					</span>
-					<span>Login</span>
-				</a>
-				<!-- Guardian Access Button -->
-				<a href="<?php echo esc_url( wp_registration_url() ); ?>" class="register-link rounded-none sm:px-4 bg-rock-gray-950 text-white font-medium px-4 py-2 my-0.5">
-					Teach Rock School Access
-				</a>
-			</div>
-		</div>
-		<div class="flex justify-between items-center p-2.5 to-be-fixed  bg-rock-alabaster-50 dark:bg-rock-gray-900">
-            <div class="w-[200px]">
-                <?php if ( has_custom_logo() ) : ?>
-                    <?php the_custom_logo(); ?>
-                <?php else : ?>
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/Rockschool-OG-G1-3-Dark.svg" alt="<?php bloginfo( 'name' ); ?>">
-                    </a>
-                <?php endif; ?>
+		<div class="header-main-inner flex justify-between items-center p-2.5 <?php if (!$enable_absolute_header) echo 'bg-rock-alabaster-50 dark:bg-rock-gray-900'; ?>">
+
+            <div class="w-[100px]">
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">	  
+                	<img class="header-logo light" src="<?php echo get_stylesheet_directory_uri(); ?>/img/rs-light-logo.svg" alt="<?php bloginfo( 'name' ); ?>">
+                    <img class="header-logo dark" src="<?php echo get_stylesheet_directory_uri(); ?>/img/rs-dark-logo.svg" alt="<?php bloginfo( 'name' ); ?>">
+
+                </a>
             </div>
-			<nav id="site-navigation" class="main-navigation relative text-rock-gray-900 dark:text-rock-alabaster-50" role="navigation">
+
+			<nav id="site-navigation" class="main-navigation relative <?php if ($enable_absolute_header) { echo 'text-rock-alabaster-50 dark:text-rock-alabaster-50'; } else { echo 'text-rock-gray-900 dark:text-rock-alabaster-50'; } ?>" role="navigation">
+
 				<div class="container mx-auto flex items-center justify-between p-4">
 					
 					<!-- Mobile Menu Toggle Button -->
@@ -95,15 +104,16 @@
 
 					<!-- Desktop Menu -->
 					<div class="sm:hidden md:flex md:items-center md:space-x-6 relative lg:items-center lg:gap-[60px] xxs:gap-[30px]">
-					<?php
-					wp_nav_menu(array(
-						'theme_location' => 'menu-1',
-						'menu_id'        => 'primary-menu',
-						'menu_class'     => 'flex text-[17px] ed-header-nav font-normal space-x-6',
-						'container'      => false,
-					));
-					?>
+						<?php
+						wp_nav_menu(array(
+							'theme_location' => 'menu-1',
+							'menu_id'        => 'primary-menu',
+							'menu_class'     => 'flex text-[17px] ed-header-nav font-normal space-x-6',
+							'container'      => false,
+						));
+						?>
 					</div>
+
 				</div>
 
 				<!-- Mobile Menu -->
@@ -117,10 +127,11 @@
 					));
 					?>
 				</div>
+
 			</nav>
 			<!-- right actions -->
 			<div class="flex items-center gap-x-[60px] xxs:gap-[30px]">
-				<button class="px-5 rounded-full h-[50px] text-md font-medium border-0 focus:outline-none focus:ring transition text-white bg-rock-moonstone-500 hover:bg-rock-moonstone-600 active:bg-rock-moonstone-700 focus:ring-rock-moonstone-300" type="submit">Apply Franchise</button>
+				<button class="px-5 rounded-full h-[50px] text-md font-medium border-0 focus:outline-none focus:ring transition text-white bg-rock-moonstone-500 hover:bg-rock-moonstone-600 active:bg-rock-moonstone-700 focus:ring-rock-moonstone-300" type="submit"><?php _e('Register', 'rockschool'); ?></button>
 			</div>
         </div>
     </header>

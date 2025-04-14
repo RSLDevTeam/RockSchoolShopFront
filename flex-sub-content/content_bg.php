@@ -1,8 +1,8 @@
 <section class="contentBg ContentSection">
-    <div class="bg-rock-moonstone-500 p-[10px] pt-4">
+    <div class="<?php if (get_sub_field('background_color')) { echo 'bg-' . get_sub_field('background_color'); } else { echo 'bg-rockschool-latte-900';} ?> mb-[5em] py-[4em] text-white" data-aos="zoom-in">
         <div class="w-[80%] mx-auto">
             <h6 class="section-title-column font-semibold uppercase pr-[10px] inline-block relative mb-[10px] tracking-[1.5px]"><?php echo get_sub_field('title'); ?></h6>
-            <h2 class="section-title mb-[9px]"><?php echo get_sub_field('sub_title'); ?></h2>
+            <h2 class="section-title mb-[9px] text-[3em] font-bold mb-[0.3em]"><?php echo get_sub_field('sub_title'); ?></h2>
             <p">
                 <?php echo get_sub_field('content'); ?> 
             </p>

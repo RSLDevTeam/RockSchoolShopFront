@@ -97,6 +97,10 @@ function rockschool_include_inc_files() {
 add_action('after_setup_theme', 'rockschool_include_inc_files');
 
 function rockschool_scripts() {
+
+    // Enqueue jQuery
+    wp_enqueue_script('jquery');
+    
     // Enqueue the main stylesheet
     wp_enqueue_style( 'rockschool-style', get_stylesheet_uri(), array(), _S_VERSION );
     wp_style_add_data( 'rockschool-style', 'rtl', 'replace' );
@@ -114,6 +118,19 @@ function rockschool_scripts() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
+
+    // AOS Library
+    wp_enqueue_style('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.css', [], null);
+    wp_enqueue_script('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.js', [], null, true);
+
+    // Compiled stylesheet 
+    wp_enqueue_style( 'output', get_stylesheet_directory_uri() . '/css/output.css', array(), filemtime( get_stylesheet_directory() . '/css/output.css' ) );
+
+    // Custom JS 
+    wp_enqueue_script( 'custom', get_stylesheet_directory_uri() . '/js/custom.js', array(), filemtime( get_stylesheet_directory() . '/js/custom.js' ) );
+
+    // Custom stylesheet 
+    wp_enqueue_style( 'custom', get_stylesheet_directory_uri() . '/css/rs.min.css', array(), filemtime( get_stylesheet_directory() . '/css/rs.min.css' ) );
     
 }
 add_action( 'wp_enqueue_scripts', 'rockschool_scripts' );

@@ -1,4 +1,4 @@
-@import url('css/output.css');
+/*@import url('css/output.css');*/
 
 html {
 	line-height: 1.15;
@@ -550,9 +550,9 @@ input[type="datetime-local"],
 input[type="color"],
 textarea {
 	color: #666;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 3px;
+    border-radius: 3px;
+    padding: 20px;
+    background: #f6f6f6;
 }
 
 input[type="text"]:focus,
@@ -690,10 +690,10 @@ textarea {
 	display: block;
 }
 
-.post,
+/*.post,
 .page {
 	margin: 0 0 1.5em;
-}
+}*/
 
 .updated:not(.published) {
 	display: none;
@@ -909,7 +909,11 @@ textarea {
 	margin-right: auto;
 	margin-bottom: 1.5em;
 }
-.section-title-column:before {
+
+.coffee {
+	color: #8f807d !important;
+}
+/*.section-title-column:before {
     content: "";
     position: absolute;
     left: 100%;
@@ -918,4 +922,4 @@ textarea {
     height: 10px;
     width: 48px;
     background: linear-gradient(90deg,  #4cadc2 3px, rgba(255, 255, 255, 0) 3px, rgba(255, 255, 255, 0) 8px, #4cadc2 8px, #3292a8 13px, rgba(255, 255, 255, 0) 13px, rgba(255, 255, 255, 0) 18px, rgba(255, 255, 255, 0) 18px, #3292a8 0);
-}
+}*/

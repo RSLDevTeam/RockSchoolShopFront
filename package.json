@@ -19,8 +19,8 @@
   "devDependencies": {
     "@wordpress/scripts": "^19.2.2",
     "dir-archiver": "^1.1.1",
-    "node-sass": "^7.0.1",
-    "rtlcss": "^3.5.0"
+    "rtlcss": "^3.5.0",
+    "sass": "^1.86.3"
   },
   "rtlcssConfig": {
     "options": {
@@ -48,6 +48,7 @@
   "main": "index.js",
   "dependencies": {
     "@tailwindcss/cli": "^4.0.6",
+    "aos": "^2.3.4",
     "tailwindcss": "^4.0.6"
   }
 }
