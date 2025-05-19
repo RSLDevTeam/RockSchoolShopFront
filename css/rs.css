@@ -37,11 +37,7 @@ input#place-search {
 }
 
 button.large-button {
-    padding: 22px 25px;
-}
-
-section.heroSearch.ContentSection {
-    margin-bottom: 4em;
+    padding: 14px 25px;
 }
 
 span.copyright-text {

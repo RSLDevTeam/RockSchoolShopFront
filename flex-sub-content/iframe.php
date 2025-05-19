@@ -1,4 +1,4 @@
-<section class="iFrameSection">
+<section id="<?php echo get_sub_field('section_id'); ?>" class="iFrameSection module-<?php echo $flex_index; ?>">
     <section id="franscape-finder" class="h-screen p-0 m-0 w-full"><!-- THESE STYLES ENSURE THE FINDER FILLS THE HOST SITE SPACE -->
 
         <iframe id="franscape-finder-iframe" title="Rockschool Lesson Finder" name="Lesson Finder" width="100%" height="100%"></iframe>

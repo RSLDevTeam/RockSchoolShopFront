@@ -1,4 +1,4 @@
-<section class="video-module-section wrapper">
+<section id="<?php echo get_sub_field('section_id'); ?>" class="video-module-section wrapper module-<?php echo $flex_index; ?>">
 
     <?php
     $platform = get_sub_field('platform'); // 'youtube' or 'vimeo'

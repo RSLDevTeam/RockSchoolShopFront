@@ -430,6 +430,7 @@
     --color-rock-alabaster-900: #3d3d3d;
     --color-rock-alabaster-950: #292929;
     --color-rockschool-latte-900: #8f807c;
+    --color-rockschool-yellow-900: #ffce7b;
   }
 }
 @layer base {
@@ -592,9 +593,6 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
-  .top-\[65px\] {
-    top: 65px;
-  }
   .top-\[98\%\] {
     top: 98%;
   }
@@ -610,9 +608,6 @@
   .left-\[5\%\] {
     left: 5%;
   }
-  .left-\[25px\] {
-    left: 25px;
-  }
   .z-2 {
     z-index: 2;
   }
@@ -627,9 +622,6 @@
   }
   .z-\[1\] {
     z-index: 1;
-  }
-  .z-\[2\] {
-    z-index: 2;
   }
   .order-1 {
     order: 1;
@@ -793,11 +785,11 @@
   .w-\[5px\] {
     width: 5px;
   }
-  .w-\[75\%\] {
-    width: 75%;
-  }
   .w-\[80\%\] {
     width: 80%;
+  }
+  .w-\[85\%\] {
+    width: 85%;
   }
   .w-\[90\%\] {
     width: 90%;
@@ -810,12 +802,6 @@
   }
   .max-w-2xl {
     max-width: var(--container-2xl);
-  }
-  .max-w-\[50\%\] {
-    max-width: 50%;
-  }
-  .max-w-\[75\%\] {
-    max-width: 75%;
   }
   .max-w-\[1300px\] {
     max-width: 1300px;
@@ -887,9 +873,6 @@
   }
   .gap-x-8 {
     column-gap: calc(var(--spacing) * 8);
-  }
-  .gap-x-\[60px\] {
-    column-gap: 60px;
   }
   .space-y-1 {
     :where(& > :not(:last-child)) {
@@ -1005,6 +988,9 @@
   .bg-rockschool-latte-900 {
     background-color: var(--color-rockschool-latte-900);
   }
+  .bg-rockschool-yellow-900 {
+    background-color: var(--color-rockschool-yellow-900);
+  }
   .bg-white {
     background-color: var(--color-white);
   }
@@ -1101,6 +1087,9 @@
   .py-\[4em\] {
     padding-block: 4em;
   }
+  .pt-\[6em\] {
+    padding-top: 6em;
+  }
   .pt-\[390px\] {
     padding-top: 390px;
   }
@@ -1109,6 +1098,9 @@
   }
   .pb-12 {
     padding-bottom: calc(var(--spacing) * 12);
+  }
+  .pb-\[6em\] {
+    padding-bottom: 6em;
   }
   .pb-\[205px\] {
     padding-bottom: 205px;
@@ -1221,6 +1213,12 @@
   }
   .text-rock-gray-950 {
     color: var(--color-rock-gray-950);
+  }
+  .text-rockschool-latte-900 {
+    color: var(--color-rockschool-latte-900);
+  }
+  .text-rockschool-yellow-900 {
+    color: var(--color-rockschool-yellow-900);
   }
   .text-slate-500 {
     color: var(--color-slate-500);

@@ -78,3 +78,38 @@ document.addEventListener("DOMContentLoaded", function() {
 
   }
 })
+
+// add scrolled class
+window.addEventListener('scroll', function () {
+  if (window.scrollY > 50) {
+    document.body.classList.add('scrolled');
+  } else {
+    document.body.classList.remove('scrolled');
+  }
+});
+
+// mobile nav toggle & pane
+document.addEventListener('DOMContentLoaded', function () {
+  const navIcon = document.getElementById('nav-icon');
+
+  if (navIcon) {
+    navIcon.addEventListener('click', function () {
+      navIcon.classList.toggle('open');
+      document.body.classList.toggle('nav-open');
+    });
+  }
+});
+
+function setMobileMenuHeight() {
+  const menu = document.getElementById('mobile-menu');
+  if (!menu) return;
+
+  const rect = menu.getBoundingClientRect();
+  const remainingHeight = window.innerHeight - rect.top;
+
+  menu.style.height = `${remainingHeight}px`;
+}
+
+// Run on load and resize
+window.addEventListener('DOMContentLoaded', setMobileMenuHeight);
+window.addEventListener('resize', setMobileMenuHeight);

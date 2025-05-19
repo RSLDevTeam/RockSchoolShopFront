@@ -69,6 +69,7 @@ function register_footer_menu() {
     register_nav_menus(
         array(
             'footer-menu' => __('Footer Menu', 'rockschool'),
+            'footer-menu-2' => __('Footer Menu 2', 'rockschool'),
         )
     );
 }
@@ -109,7 +110,7 @@ function rockschool_scripts() {
     wp_enqueue_script( 'rockschool-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
     // Enqueue the theme mode script
-    wp_enqueue_script( 'rockschool-theme-mode', get_template_directory_uri() . '/js/theme-mode.js', array(), _S_VERSION, true );
+    // wp_enqueue_script( 'rockschool-theme-mode', get_template_directory_uri() . '/js/theme-mode.js', array(), _S_VERSION, true );
 
     // Enqueue the theme header fixed script
     wp_enqueue_script( 'rockschool-fixed-header', get_template_directory_uri() . '/js/fixed-header.js', array(), _S_VERSION, true );
@@ -118,6 +119,10 @@ function rockschool_scripts() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
+
+    // Slick.js 
+    wp_enqueue_style( 'slick', get_stylesheet_directory_uri() . '/css/slick.css', array(), filemtime( get_stylesheet_directory() . '/css/slick.css' ) );
+    wp_enqueue_script( 'slick', get_stylesheet_directory_uri() . '/js/slick.js', array('jquery'), filemtime( get_stylesheet_directory() . '/js/slick.js' ), true );
 
     // AOS Library
     wp_enqueue_style('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.css', [], null);

@@ -1,4 +1,4 @@
-<section class="iconGridCards">
+<section id="<?php echo get_sub_field('section_id'); ?>" class="iconGridCards module-<?php echo $flex_index; ?>">
 <!-- component -->
     <div class="px-40 py-20 bg-opacity-10" >
         <div class="grid grid-cols-3 sm:grid-cols-1 md:lg:xl:grid-cols-3 group bg-white shadow-xl shadow-neutral-100 ">
