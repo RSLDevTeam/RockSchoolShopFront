@@ -21,30 +21,9 @@
             "selected": 0
         },
         {
-            "key": "field_67adcd29a856a",
-            "label": "X url",
-            "name": "x_url",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_67adcd51a856b",
-            "label": "Google url",
-            "name": "google_url",
+            "label": "Youtube url",
+            "name": "youtube_url",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -106,8 +85,8 @@
         },
         {
             "key": "field_67adcf28ee1bb",
-            "label": "Github Url",
-            "name": "github_url",
+            "label": "Tik Tok Url",
+            "name": "tik_tok_url",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -392,6 +371,71 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_6825fa80659c3",
+            "label": "Provider options",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_6825f7110a07b",
+            "label": "Provider contact form ID",
+            "name": "provider_contact_form_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "The ID of the Contact Form 7 form used for providers direct email",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6825fa8d659c4",
+            "label": "Provider contact form image",
+            "name": "provider_contact_form_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
         }
     ],
     "location": [
@@ -412,5 +456,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1744360463
+    "modified": 1747408412
 }

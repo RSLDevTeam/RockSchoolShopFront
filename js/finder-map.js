@@ -71,11 +71,11 @@ function loadProviders(type = '') {
 
                 const info = new google.maps.InfoWindow({
                     content: `
-                        <div class="text-sm max-w-[220px]">
+                        <div class="map-card text-sm text-black max-w-[220px]">
                             ${provider.photo ? `<img src="${provider.photo}" alt="${provider.title}" class="mb-2 rounded-md" />` : ''}
                             <strong>${provider.title}</strong><br/>
                             ${provider.address}<br/>
-                            <a href="${provider.permalink}" class="underline text-blue-500 mt-2 block">View profile</a>
+                            <a href="${provider.permalink}" class="map-card-link mt-2 block">View profile</a>
                         </div>
                     `
                 });

@@ -110,7 +110,7 @@ function rockschool_scripts() {
     wp_enqueue_script( 'rockschool-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
     // Enqueue the theme mode script
-    // wp_enqueue_script( 'rockschool-theme-mode', get_template_directory_uri() . '/js/theme-mode.js', array(), _S_VERSION, true );
+    wp_enqueue_script( 'rockschool-theme-mode', get_template_directory_uri() . '/js/theme-mode.js', array(), _S_VERSION, true );
 
     // Enqueue the theme header fixed script
     wp_enqueue_script( 'rockschool-fixed-header', get_template_directory_uri() . '/js/fixed-header.js', array(), _S_VERSION, true );

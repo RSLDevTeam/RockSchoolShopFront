@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Toggle theme on button click
-    themeToggleBtn.addEventListener('click', function () {
-        htmlElement.classList.toggle('dark');
-        const isDarkMode = htmlElement.classList.contains('dark');
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        themeIcon.innerHTML = isDarkMode ? sun : moon
-    });
+    // themeToggleBtn.addEventListener('click', function () {
+    //     htmlElement.classList.toggle('dark');
+    //     const isDarkMode = htmlElement.classList.contains('dark');
+    //     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    //     themeIcon.innerHTML = isDarkMode ? sun : moon
+    // });
 });
