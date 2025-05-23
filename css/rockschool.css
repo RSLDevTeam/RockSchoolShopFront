@@ -554,4 +554,15 @@ section.timeline-module {
 }
 }
 
+.map-card img {
+    width: 100%;
+}
 
+a.map-card-link {
+    width: fit-content;
+    text-decoration: underline;
+}
+
+a.map-card-link:focus, a.map-card-link:focus-visible {
+    outline: none;
+}

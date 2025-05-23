@@ -13,7 +13,7 @@ function register_provider_post_type() {
 
     $args = array(
         'public'              => true,
-        'label'               => 'Associates',
+        'label'               => 'Providers',
         'menu_position'       => 2,
         'supports'            => array('title', 'editor', 'custom-fields'),
         'map_meta_cap'        => true,

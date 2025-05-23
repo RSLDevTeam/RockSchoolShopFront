@@ -35,7 +35,7 @@ function get_providers_json() {
             'lng'      => $location['lng'],
             'address'  => $location['address'],
             'type'     => get_field('type', $post->ID),
-            'photo'    => get_field('photo', $post->ID)['sizes']['thumbnail'] ?? '',
+            'photo'    => get_field('photo', $post->ID)['sizes']['square'] ?? '',
             'permalink' => get_permalink($post->ID),
         ];
     }
