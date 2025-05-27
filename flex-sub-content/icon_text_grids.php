@@ -7,6 +7,8 @@ $enable_bottom_border = get_sub_field('enable_bottom_border');
 $bottom_border_colour = get_sub_field('bottom_border_colour');
 $bottom_border_vector = get_sub_field('bottom_border_vector');
 
+$remove_bottom_padding = get_sub_field('remove_bottom_padding');
+
 set_query_var( 'enable_top_border', $enable_top_border );
 set_query_var( 'top_border_colour', $top_border_colour );
 set_query_var( 'top_border_vector', $top_border_vector );
@@ -24,7 +26,7 @@ set_query_var( 'flex_index', $flex_index );
     <?php 
     get_template_part( 'snippets/snippet', 'top-border' ); ?>
 
-    <div class="container mx-auto px-4 py-24 px-4 lg:px-16">
+    <div class="container mx-auto px-4 pt-[6em] <?php if(!$remove_bottom_padding) { echo 'pb-[6em]'; } ?> px-4 lg:px-16">
 
         <?php if (get_sub_field('title')) : ?><h2 class="text-center text-5xl pb-12"><?php echo get_sub_field('title'); ?></h2><?php endif; ?>
 

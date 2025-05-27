@@ -4,40 +4,23 @@
   $partial_height = get_sub_field('partial_height');
   ?>
 
-<script async defer src='https://maps.googleapis.com/maps/api/js?key=<?php echo $google_api_key; ?>&loading=async&libraries=places&callback=initMap'></script>
+<script async defer src='https://maps.googleapis.com/maps/api/js?key=<?php echo $google_api_key; ?>&loading=async&libraries=places&v=beta&callback=initFinderMap&modules=placeautocomplete'></script>
 
 
-<script>
-  async function initMap() {
-    // Request needed libraries.
-    //@ts-ignore
-    await google.maps.importLibrary("places");
 
-    // Get the input field.
-    const inputField = document.getElementById("place-search");
-    //@ts-ignore
-    const autocomplete = new google.maps.places.Autocomplete(inputField);
+<form action="<?php echo home_url('/finder'); ?>" method="get" class="bg-white shadow-lg p-[37px] w-full bg-rock-alabaster-50 dark:bg-rock-gray-800 text-rock-gray-950 dark:text-rock-alabaster-50">
+    <h5 class="font-bold uppercase tracking-[3px] mb-[16px]"><?php echo get_sub_field('search_title'); ?></span></h5>   
+    <div class="flex items-center">
+        <input id="place-search" aria-autocomplete="list" autocomplete="off" type="text" name="location" class="w-full p-[8px] text-lg focus:outline-none" placeholder="Search locations...">
+        <button type="submit" id="search-btn" class="large-button focus:ring-4 focus:outline-none focus:ring-blue-300">
+            <?php _e('Search', 'rockschool'); ?>
+        </button>
+    </div>
+    <ul id="google-results" style="margin-top: 10px;"></ul>
+    <p id="prediction"></p>
 
-    // Add listener for place selection.
-    autocomplete.addListener("place_changed", async () => {
-      const place = autocomplete.getPlace();
-      if (!place.geometry) return;
-      console.log(place);
-      //selectedPlaceTitle.textContent = "Selected Place:";
-      //selectedPlaceInfo.textContent = JSON.stringify(place, null, 2);
+    
+</form>
 
-      // Extract place name or place ID for the URL
-      const selectedPlace = encodeURIComponent(place.name);
 
-      document.getElementById("search-btn").addEventListener("click", () => {
-            if (selectedPlace) {
-                window.location.href = `/finder?location=${selectedPlace}`;
-            } else {
-                alert("Please select a place first!");
-            }
-        });
-
-    });
-  }
-  window.initMap = initMap;
-</script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/finder-map.js"></script>

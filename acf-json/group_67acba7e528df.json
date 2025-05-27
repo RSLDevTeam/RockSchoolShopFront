@@ -553,6 +553,27 @@
                             "preview_size": "medium"
                         },
                         {
+                            "key": "field_682de8e2ca787",
+                            "label": "video",
+                            "name": "video",
+                            "aria-label": "",
+                            "type": "file",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "library": "all",
+                            "min_size": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "allow_in_bindings": 0
+                        },
+                        {
                             "key": "field_680e59c3d9387",
                             "label": "Mask style",
                             "name": "mask_style",
@@ -2316,6 +2337,27 @@
                             "placeholder": "",
                             "prepend": "",
                             "append": ""
+                        },
+                        {
+                            "key": "field_682de74db0f47",
+                            "label": "Remove bottom padding",
+                            "name": "remove_bottom_padding",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "Use this if stacking multiple split modules together without a dividing border between them.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "allow_in_bindings": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         }
                     ],
                     "min": "",
@@ -2449,6 +2491,27 @@
                             "mime_types": "",
                             "allow_in_bindings": 0,
                             "preview_size": "medium"
+                        },
+                        {
+                            "key": "field_682ef5342fb8a",
+                            "label": "Video",
+                            "name": "video",
+                            "aria-label": "",
+                            "type": "file",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "library": "all",
+                            "min_size": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "allow_in_bindings": 0
                         },
                         {
                             "key": "field_681a676040eb5",
@@ -2695,6 +2758,46 @@
                                     "parent_repeater": "field_682b100dc7518"
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_682de70fe198e",
+                            "label": "Remove bottom padding",
+                            "name": "remove_bottom_padding",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "Use this if stacking multiple split modules together without a dividing border between them.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "allow_in_bindings": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_682f1b051e9d2",
+                            "label": "Gradient bottom",
+                            "name": "gradient_bottom",
+                            "aria-label": "",
+                            "type": "color_picker",
+                            "instructions": "Optional gradient border at the bottom of the element. Use colour picker to match the following element for a seamless effect.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "enable_opacity": 0,
+                            "return_format": "string",
+                            "allow_in_bindings": 0
                         }
                     ],
                     "min": "",
@@ -4092,5 +4195,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1747652962
+    "modified": 1747919412
 }

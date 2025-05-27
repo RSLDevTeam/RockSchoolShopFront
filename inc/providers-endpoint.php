@@ -29,13 +29,14 @@ function get_providers_json() {
         if (!$location) continue;
 
         $results[] = [
-            'id'       => $post->ID,
-            'title'    => get_the_title($post->ID),
-            'lat'      => $location['lat'],
-            'lng'      => $location['lng'],
-            'address'  => $location['address'],
-            'type'     => get_field('type', $post->ID),
-            'photo'    => get_field('photo', $post->ID)['sizes']['square'] ?? '',
+            'id'        => $post->ID,
+            'title'     => get_the_title($post->ID),
+            'lat'       => $location['lat'],
+            'lng'       => $location['lng'],
+            'address'   => $location['address'],
+            'type'      => get_field('type', $post->ID),
+            'instrument'=> get_field('instruments', $post->ID),
+            'photo'     => get_field('photo', $post->ID)['sizes']['square'] ?? '',
             'permalink' => get_permalink($post->ID),
         ];
     }

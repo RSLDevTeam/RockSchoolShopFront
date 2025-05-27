@@ -26,7 +26,7 @@
 $enable_absolute_header = get_field('enable_absolute_header');
 ?>
 	
-	<header class="<?php if ($enable_absolute_header) { echo 'absolute absolute-header'; } else { echo 'border-gray-300 bg-rock-alabaster-50 dark:bg-rock-gray-900 text-rock-gray-950 dark:text-rock-alabaster-50'; } ?> z-99 ">
+	<header class="<?php if ($enable_absolute_header) { echo 'absolute absolute-header'; } else { echo 'border-gray-300 bg-rock-alabaster-50 dark:bg-rock-gray-900 text-rock-gray-950 dark:text-rock-alabaster-50'; } ?> z-3 ">
 
 		<?php if (get_field('enable_top_bar', 'option')) : ?>
 
