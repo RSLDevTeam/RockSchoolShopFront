@@ -158,7 +158,9 @@ $google_maps_api_key = get_field('googel_map_api_key', 'option');
 
 if ($location && $google_maps_api_key) :
 ?>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr($google_maps_api_key); ?>"></script>
+
+		<script async defer src='https://maps.googleapis.com/maps/api/js?key=<?php echo $google_maps_api_key; ?>&loading=async&libraries=places&v=beta&callback=initMap'></script>
+
     <script src="<?php echo get_template_directory_uri(); ?>/js/acf-map.js"></script>
 <?php endif; ?>
 

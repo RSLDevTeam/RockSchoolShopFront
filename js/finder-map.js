@@ -49,6 +49,9 @@ async function loadProviders(userType = '', userInstrument = '', userLat = 51.5,
 				</a>
 				</div>
 			`).join('');
+			if (providers.length === 0) {
+				providerContainer.innerHTML = '<p class="text-center text-rock-gray-950 dark:text-rock-alabaster-50">No providers found in this area.</p>';
+			}
 
 			data.forEach((provider) => {
 				const marker = new AdvancedMarkerElement({
