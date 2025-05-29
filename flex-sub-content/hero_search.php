@@ -115,7 +115,7 @@
                 <?php
                     if ($search_field) : ?>
                     <div data-aos="zoom-in" class="absolute top-[98%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl z-2">
-                    <?php
+                    <?php if ($search_field) 
                         get_template_part( 'snippets/snippet', 'google-places-map' ); 
                     ?>
                     </div>

@@ -20,6 +20,19 @@ function get_providers_json() {
         ];
     }
 
+    if (!empty($_GET['instrument'])) {
+        $args['meta_query'] = [
+            [
+                'key' => 'instruments',
+                'value' => sanitize_text_field($_GET['instrument']),
+                'compare' => 'LIKE'
+            ]
+        ];
+    }
+    $user_lat = isset($_GET['lat']) ? floatval($_GET['lat']) : 51.5;
+    $user_lng = isset($_GET['lng']) ? floatval($_GET['lng']) : -0.1;
+    $user_distance = isset($_GET['distance']) ? $_GET['distance'] : 15;
+
     $query = new WP_Query($args);
 
     $results = [];
@@ -28,18 +41,49 @@ function get_providers_json() {
         $location = get_field('location', $post->ID);
         if (!$location) continue;
 
-        $results[] = [
-            'id'        => $post->ID,
-            'title'     => get_the_title($post->ID),
-            'lat'       => $location['lat'],
-            'lng'       => $location['lng'],
-            'address'   => $location['address'],
-            'type'      => get_field('type', $post->ID),
-            'instrument'=> get_field('instruments', $post->ID),
-            'photo'     => get_field('photo', $post->ID)['sizes']['square'] ?? '',
-            'permalink' => get_permalink($post->ID),
-        ];
+        $provider_lat = floatval($location['lat']);
+        $provider_lng = floatval($location['lng']);
+        $distance = null;
+
+        if ($user_lat !== null && $user_lng !== null) {
+            $distance = haversine_distance($user_lat, $user_lng, $provider_lat, $provider_lng);
+        }
+
+        if ($distance === null || $distance <= $user_distance) {
+            $results[] = [
+                'id'        => $post->ID,
+                'title'     => get_the_title($post->ID),
+                'lat'       => $location['lat'],
+                'lng'       => $location['lng'],
+                'address'   => $location['address'],
+                'type'      => get_field('type', $post->ID),
+                'instrument'=> get_field('instruments', $post->ID),
+                'photo'     => get_field('photo', $post->ID)['sizes']['square'] ?? '',
+                'permalink' => get_permalink($post->ID),
+                'distance'   => $distance, // distance in miles
+            ];
+        }
+
     }
 
     wp_send_json($results);
+}
+
+function haversine_distance($lat1, $lon1, $lat2, $lon2) {
+    $earth_radius = 3958.8; // in miles
+
+    $lat1 = deg2rad($lat1);
+    $lat2 = deg2rad($lat2);
+    $lon1 = deg2rad($lon1);
+    $lon2 = deg2rad($lon2);
+
+    $delta_lat = $lat2 - $lat1;
+    $delta_lon = $lon2 - $lon1;
+
+    $a = sin($delta_lat / 2) * sin($delta_lat / 2) +
+         cos($lat1) * cos($lat2) *
+         sin($delta_lon / 2) * sin($delta_lon / 2);
+
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+    return $earth_radius * $c;
 }

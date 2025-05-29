@@ -79,6 +79,15 @@
     --color-rockschool-purple: #532075;
 }
 
+select:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+.provider-card p {
+    margin: 0;
+}
+
 
 .logo img {
     max-height: 100px;

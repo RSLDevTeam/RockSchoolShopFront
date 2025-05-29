@@ -8,22 +8,47 @@ let input;
 let defaultLocation = { lat: 51.5, lng: -0.1 }; // Default to London if no location is found
 let userLat = null;
 let userLng = null;
+let providers = [];
+let uniqueTypes = [];
+let uniqueInstruments = [];
 
 
 
-async function loadProviders(type = '') {
-	const url = `/wp-admin/admin-ajax.php?action=get_providers&type=${encodeURIComponent(type)}`;
+async function loadProviders(userType = '', userInstrument = '', userLat = 51.5, userLng = -0.1, distance = 15) {
+	const url = `/wp-admin/admin-ajax.php?action=get_providers&type=${encodeURIComponent(userType)}&instrument=${encodeURIComponent(userInstrument)}&lat=${encodeURIComponent(userLat)}&lng=${encodeURIComponent(userLng)}&distance=${encodeURIComponent(distance)}`;
 	const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
+	const providerContainer = document.getElementById("provider-cards");
+
 	fetch(url)
 		.then((res) => res.json())
 		.then((data) => {
 			console.log('Loaded providers:', data);
+			providers = data;
 			if (markerCluster) markerCluster.clearMarkers();
 			markers.forEach(marker => marker.setMap(null));
 			markers = [];
+			uniqueTypes = [...new Set(providers.map(p => p.type))];
 
+			const allInstruments = providers.flatMap(p => p.instrument);
+			uniqueInstruments = [...new Set(allInstruments)];
 			const markerIconUrl = document.getElementById('finder-map')?.dataset.markerIcon;
 
+			providerContainer.innerHTML = '';
+			providerContainer.innerHTML = providers.map(p => `
+				<div class="provider-card">
+				<a href="${p.permalink}">
+					<div class="bg-white shadow-lg bg-rock-alabaster-50 dark:bg-rock-gray-800 text-rock-gray-950 dark:text-rock-alabaster-50 flex gap-4 p-4 items-center hover:shadow-xl transition">
+						<img src="${p.photo}" alt="${p.title}" class="w-20 h-20 rounded-full object-cover" />
+						<div>
+							<h5 class="font-bold uppercase tracking-[3px]">${p.title}</h5>
+							<p class="text-sm">${p.type} &bull; ${p.instrument.join(', ')}</p>
+							<p class="text-sm">${p.address}</p>
+							<p class="text-sm font-medium">Distance: ${p.distance.toFixed(2)} miles</p>
+						</div>
+					</div>
+				</a>
+				</div>
+			`).join('');
 
 			data.forEach((provider) => {
 				const marker = new AdvancedMarkerElement({
@@ -57,25 +82,36 @@ async function loadProviders(type = '') {
 				markers.push(marker);
 			});
 
+
+			//Add option to the filter type select
+			const filterTypeSelect = document.getElementById("filter-type");
+			filterTypeSelect.length = 1;
+			uniqueTypes.forEach(type => {
+				const option = document.createElement("option");
+				option.value = type;
+				option.textContent = type;
+				filterTypeSelect.appendChild(option);
+				if (type === userType) {
+					option.selected = true;
+				}
+			});
+
+			//Add option to the filter instrument select
+			const filterInstrumentSelect = document.getElementById("filter-instrument");
+			filterInstrumentSelect.length = 1;
+			uniqueInstruments.forEach(instrument => {
+				const option = document.createElement("option");
+				option.value = instrument;
+				option.textContent = instrument;
+				filterInstrumentSelect.appendChild(option);
+				//add selecrted attribute if the instrument matches the provider's instrument
+				if (instrument === userInstrument) {
+					option.selected = true;
+				}
+			});
+
 		});
 
-	const typeSelect = document.getElementById('filter-type');
-	if (typeSelect) {
-		typeSelect.addEventListener('change', () => {
-			loadProviders(typeSelect.value);
-		});
-	}
-
-	const searchForm = document.querySelector('.finder-search form');
-	if (searchForm) {
-		searchForm.addEventListener('submit', (e) => {
-			e.preventDefault();
-			const query = input?.value;
-			if (query) {
-				findPlace(query);
-			}
-		});
-	}
 }
 
 
@@ -83,7 +119,7 @@ async function initFinderMap() {
 	const { Place, AutocompleteSessionToken, AutocompleteSuggestion } = await google.maps.importLibrary("places");
 	const { Map } = await google.maps.importLibrary("maps");
 	const { MarkerEl } = await google.maps.importLibrary("marker");
-
+	input = document.getElementById("place-search");
 	//get user location
 	const googleRequest = await getCurrentLocation();
 	if (!googleRequest) {
@@ -99,19 +135,34 @@ async function initFinderMap() {
 	initAutocomplete();
 
 
-
 	//get current path of window
 	const currentSitePath = window.location.pathname;
 	if (currentSitePath.includes('find-an-instructor')) {
-		if (mapEl) {
+		if (input && input.value.trim() !== "") {
+			await geocodeAndCenter(input.value, (geocodedCenter) => {
+				if (geocodedCenter) {
+					center = geocodedCenter;
+					map = new Map(mapEl, {
+						center: center,
+						zoom: 13,
+						mapId: 'f137ea192ad53b4a4b4ca0d3',
+						disableDefaultUI: true,
+					});
+					loadProviders('', '', center.lat, center.lng);
+				}
+			});
+
+		} else if (mapEl) {
 			map = new Map(mapEl, {
 				center: center,
 				zoom: 13,
 				mapId: 'f137ea192ad53b4a4b4ca0d3',
 				disableDefaultUI: true,
 			});
+
+			loadProviders();
+
 		}
-		loadProviders();
 
 	}
 	document.addEventListener("DOMContentLoaded", async () => {
@@ -125,32 +176,13 @@ async function initFinderMap() {
 
 		searchBtn.addEventListener("click", () => {
 			if (selectedPlace) {
-				window.location.href = `/finder?location=${selectedPlace}`;
+				window.location.href = `/find-an-instructor?location=${selectedPlace}`;
 			} else {
 				alert("Please select a place first!");
 			}
 		});
 	});
 
-
-
-}
-
-function findSchools() {
-	const input = document.getElementById("place-search");
-	if (!input) return;
-
-	const searchBtn = document.getElementById("search-btn");
-	if (!searchBtn) return;
-
-	searchBtn.addEventListener("click", () => {
-		const query = input.value;
-		if (query) {
-			window.location.href = `/finder?location=${encodeURIComponent(query)}`;
-		} else {
-			alert("Please enter a location.");
-		}
-	});
 }
 
 
@@ -160,10 +192,7 @@ async function initAutocomplete() {
 		AutocompleteSuggestion,
 	} = await google.maps.importLibrary("places");
 
-	const input = document.getElementById("place-search");
 	const resultsEl = document.getElementById("google-results");
-	const predictionEl = document.getElementById("prediction");
-
 	let sessionToken = new AutocompleteSessionToken();
 
 	input.addEventListener("input", async () => {
@@ -246,10 +275,17 @@ async function initAutocomplete() {
 				input.text = selectedName;
 				resultsEl.innerHTML = ""; // Clear results
 
-				//predictionEl.textContent = `You selected: ${place.displayName} - ${place.formattedAddress}`;
+				const currentSitePath = window.location.pathname;
+				if (currentSitePath.includes('find-an-instructor')) {
+					const url = new URL(window.location);
+					url.searchParams.set("location", selectedName);
+					window.history.pushState({}, "", url);
+				}
+
+
 				document.getElementById("search-btn").onclick = () => {
 					const selectedPlace = encodeURIComponent(selectedName);
-					window.location.href = `/finder?location=${selectedPlace}`;
+					window.location.href = `/find-an-instructor?location=${selectedPlace}`;
 				};
 			});
 
@@ -319,4 +355,25 @@ function calculateDistanceKM(lat1, lon1, lat2, lon2) {
 function calculateDistanceMiles(lat1, lon1, lat2, lon2) {
 	const km = calculateDistanceKM(lat1, lon1, lat2, lon2);
 	return km * 0.621371; // Convert km to miles
+}
+
+// A helper function which uses Google Maps Geocoder to get coordinates
+function geocodeAndCenter(address, callback) {
+	// Create a new geocoder
+	const geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode({ address: address }, (results, status) => {
+		if (status === 'OK' && results[0]) {
+			const location = results[0].geometry.location;
+			// Call the callback with the location
+			callback({ lat: location.lat(), lng: location.lng() });
+		} else {
+			console.error("Geocode was not successful for the following reason: " + status);
+			callback(null);
+		}
+	});
+}
+
+function filterProviders(type = null, instrument = null, distance = 15) {
+	loadProviders(type, instrument, center.lat, center.lng, distance);
 }
