@@ -2,8 +2,6 @@ let map;
 let center;
 let markers = [];
 let markerCluster;
-let placesService;
-let autocomplete;
 let input;
 let defaultLocation = { lat: 51.5, lng: -0.1 }; // Default to London if no location is found
 let userLat = null;
@@ -11,30 +9,116 @@ let userLng = null;
 let providers = [];
 let uniqueTypes = [];
 let uniqueInstruments = [];
+let userDistance = 15; // Default distance in miles
+let searchRadiusCircle;
+let allProviders = [];
+
+async function fetchProviders(userType = '', userInstrument = '', userLat = 51.5, userLng = -0.1, userDistance = 15) {
+	try {
+		const url = `/wp-admin/admin-ajax.php?action=get_providers&type=${encodeURIComponent(userType)}&instrument=${encodeURIComponent(userInstrument)}&lat=${encodeURIComponent(userLat)}&lng=${encodeURIComponent(userLng)}&distance=${encodeURIComponent(userDistance)}`;
+		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		const providers = await response.json();
+		return providers;
+	} catch (error) {
+		console.error('Error fetching providers:', error);
+		return [];
+	}
+}
+
+async function loadProviders(userType = '', userInstrument = '', userLat = 51.5, userLng = -0.1, userDistance = 60) {
+	try {
+
+		const providers = await fetchProviders(userType, userInstrument, userLat, userLng, userDistance);
+
+		allProviders = providers;
+
+		// Show all providers on the map
+		displayProvidersOnMap(providers);
+
+		// Show all in inputs
+		filterOptions(providers, userType, userInstrument);
+
+		// Show filtered providers in list (initial load)
+		applyFiltersAndUpdateList();
 
 
+	} catch (error) {
+		console.error('Error loading providers:', error);
+	}
+}
 
-async function loadProviders(userType = '', userInstrument = '', userLat = 51.5, userLng = -0.1, distance = 15) {
-	const url = `/wp-admin/admin-ajax.php?action=get_providers&type=${encodeURIComponent(userType)}&instrument=${encodeURIComponent(userInstrument)}&lat=${encodeURIComponent(userLat)}&lng=${encodeURIComponent(userLng)}&distance=${encodeURIComponent(distance)}`;
+async function displayProvidersOnMap(providers) {
 	const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
-	const providerContainer = document.getElementById("provider-cards");
+	const markerIconUrl = document.getElementById('finder-map')?.dataset.markerIcon;
+	if (markerCluster) markerCluster.clearMarkers();
+	markers.forEach(marker => marker.setMap(null));
+	markers = [];
 
-	fetch(url)
-		.then((res) => res.json())
-		.then((data) => {
-			console.log('Loaded providers:', data);
-			providers = data;
-			if (markerCluster) markerCluster.clearMarkers();
-			markers.forEach(marker => marker.setMap(null));
-			markers = [];
-			uniqueTypes = [...new Set(providers.map(p => p.type))];
+	providers.forEach(provider => {
+		const marker = new AdvancedMarkerElement({
+			position: {
+				lat: parseFloat(provider.lat),
+				lng: parseFloat(provider.lng),
+			},
+			map,
+			title: provider.title,
+			content: (() => {
+				const img = document.createElement('img');
+				img.src = markerIconUrl;
+				img.style.width = '80px';
+				img.style.height = '80px';
+				return img;
+			})()
+		});
+		const infoWindow = new google.maps.InfoWindow({
+			content: `
+								<div class="map-card mb-[10px] text-sm text-black max-w-[220px]">
+									${provider.photo ? `<img src="${provider.photo}" alt="${provider.title}" class="mb-2 rounded-md" />` : ''}
+									<strong>${provider.title}</strong> | ${provider.type}<br/>
+									${provider.address}<br/>
+									<a href="${provider.permalink}" class="map-card-link mt-2 block">View profile</a>
+								</div>
+							`
+		});
 
-			const allInstruments = providers.flatMap(p => p.instrument);
-			uniqueInstruments = [...new Set(allInstruments)];
-			const markerIconUrl = document.getElementById('finder-map')?.dataset.markerIcon;
+		marker.addListener('gmp-click', () => infoWindow.open(map, marker));
+		markers.push(marker);
+	});
+}
 
-			providerContainer.innerHTML = '';
-			providerContainer.innerHTML = providers.map(p => `
+function applyFiltersAndUpdateList() {
+	const selectedTypeRaw = document.getElementById('filter-type').value;
+	const selectedInstrumentRaw = document.getElementById('filter-instrument').value;
+	const selectedDistanceRaw = document.getElementById('distanceRange').value;
+	const mapEl = document.getElementById('finder-map');
+
+
+	const selectedType = selectedTypeRaw === '' ? 'all' : selectedTypeRaw;
+	const selectedInstrument = selectedInstrumentRaw === '' ? 'all' : selectedInstrumentRaw;
+	const selectedDistance = selectedDistanceRaw === '' ? Infinity : parseFloat(selectedDistanceRaw);
+
+	const filtered = allProviders.filter(provider => {
+		const matchesType = selectedType === 'all' || provider.type === selectedType;
+		const matchesInstrument = selectedInstrument === 'all' || (provider.instrument && provider.instrument.includes(selectedInstrument));
+		const matchesDistance = provider.distance <= selectedDistance;
+		return matchesType && matchesInstrument && matchesDistance;
+	});
+
+	updateProviderList(filtered);
+	drawSearchRadius(map, center, selectedDistance);
+}
+
+function updateProviderList(providers) {
+	console.log('Updating provider list with:', providers);
+	const providerContainer = document.getElementById('provider-cards');
+	providerContainer.innerHTML = '';
+
+
+	providerContainer.innerHTML = '';
+	providerContainer.innerHTML = providers.map(p => `
 				<div class="provider-card">
 				<a href="${p.permalink}">
 					<div class="bg-white shadow-lg bg-rock-alabaster-50 dark:bg-rock-gray-800 text-rock-gray-950 dark:text-rock-alabaster-50 flex gap-4 p-4 items-center hover:shadow-xl transition">
@@ -49,79 +133,48 @@ async function loadProviders(userType = '', userInstrument = '', userLat = 51.5,
 				</a>
 				</div>
 			`).join('');
-			if (providers.length === 0) {
-				providerContainer.innerHTML = '<p class="text-center text-rock-gray-950 dark:text-rock-alabaster-50">No providers found in this area.</p>';
-			}
-
-			data.forEach((provider) => {
-				const marker = new AdvancedMarkerElement({
-					position: {
-						lat: parseFloat(provider.lat),
-						lng: parseFloat(provider.lng),
-					},
-					map,
-					title: provider.title,
-					content: (() => {
-						const img = document.createElement('img');
-						img.src = markerIconUrl;
-						img.style.width = '80px';
-						img.style.height = '80px';
-						return img;
-					})()
-				});
-				const infoWindow = new google.maps.InfoWindow({
-					content: `
-						<div class="map-card mb-[10px] text-sm text-black max-w-[220px]">
-							${provider.photo ? `<img src="${provider.photo}" alt="${provider.title}" class="mb-2 rounded-md" />` : ''}
-							<strong>${provider.title}</strong> | ${provider.type}<br/>
-							${provider.address}<br/>
-							<a href="${provider.permalink}" class="map-card-link mt-2 block">View profile</a>
-						</div>
-					`
-				});
-
-				marker.addListener('gmp-click', () => infoWindow.open(map, marker));
-
-				markers.push(marker);
-			});
-
-
-			//Add option to the filter type select
-			const filterTypeSelect = document.getElementById("filter-type");
-			filterTypeSelect.length = 1;
-			uniqueTypes.forEach(type => {
-				const option = document.createElement("option");
-				option.value = type;
-				option.textContent = type;
-				filterTypeSelect.appendChild(option);
-				if (type === userType) {
-					option.selected = true;
-				}
-			});
-
-			//Add option to the filter instrument select
-			const filterInstrumentSelect = document.getElementById("filter-instrument");
-			filterInstrumentSelect.length = 1;
-			uniqueInstruments.forEach(instrument => {
-				const option = document.createElement("option");
-				option.value = instrument;
-				option.textContent = instrument;
-				filterInstrumentSelect.appendChild(option);
-				//add selecrted attribute if the instrument matches the provider's instrument
-				if (instrument === userInstrument) {
-					option.selected = true;
-				}
-			});
-
-		});
-
+	if (providers.length === 0) {
+		providerContainer.innerHTML = '<p class="text-center text-rock-gray-950 dark:text-rock-alabaster-50">No providers found in this area.</p>';
+	}
 }
 
 
+function filterOptions(providers, userType = '', userInstrument = '') {
+	uniqueTypes = [...new Set(providers.map(p => p.type))];
+
+	const allInstruments = providers.flatMap(p => p.instrument);
+	uniqueInstruments = [...new Set(allInstruments)];
+
+	//Add option to the filter type select
+	const filterTypeSelect = document.getElementById("filter-type");
+	filterTypeSelect.length = 1;
+	uniqueTypes.forEach(type => {
+		const option = document.createElement("option");
+		option.value = type;
+		option.textContent = type;
+		filterTypeSelect.appendChild(option);
+		if (type === userType) {
+			option.selected = true;
+		}
+	});
+
+	//Add option to the filter instrument select
+	const filterInstrumentSelect = document.getElementById("filter-instrument");
+	filterInstrumentSelect.length = 1;
+	uniqueInstruments.forEach(instrument => {
+		const option = document.createElement("option");
+		option.value = instrument;
+		option.textContent = instrument;
+		filterInstrumentSelect.appendChild(option);
+		//add selecrted attribute if the instrument matches the provider's instrument
+		if (instrument === userInstrument) {
+			option.selected = true;
+		}
+	});
+}
+
 async function initFinderMap() {
-	const { Place, AutocompleteSessionToken, AutocompleteSuggestion } = await google.maps.importLibrary("places");
 	const { Map } = await google.maps.importLibrary("maps");
-	const { MarkerEl } = await google.maps.importLibrary("marker");
 	input = document.getElementById("place-search");
 	//get user location
 	const googleRequest = await getCurrentLocation();
@@ -145,26 +198,16 @@ async function initFinderMap() {
 			await geocodeAndCenter(input.value, (geocodedCenter) => {
 				if (geocodedCenter) {
 					center = geocodedCenter;
-					map = new Map(mapEl, {
-						center: center,
-						zoom: 13,
-						mapId: 'f137ea192ad53b4a4b4ca0d3',
-						disableDefaultUI: true,
-					});
+					drawMap(center, 10, mapEl);
 					loadProviders('', '', center.lat, center.lng);
+					drawSearchRadius(map, center, userDistance);
 				}
 			});
 
 		} else if (mapEl) {
-			map = new Map(mapEl, {
-				center: center,
-				zoom: 13,
-				mapId: 'f137ea192ad53b4a4b4ca0d3',
-				disableDefaultUI: true,
-			});
-
+			drawMap(center, 15, mapEl);
 			loadProviders();
-
+			drawSearchRadius(map, center, userDistance);
 		}
 
 	}
@@ -377,6 +420,38 @@ function geocodeAndCenter(address, callback) {
 	});
 }
 
-function filterProviders(type = null, instrument = null, distance = 15) {
-	loadProviders(type, instrument, center.lat, center.lng, distance);
+
+function drawSearchRadius(map, center, radiusInMiles) {
+	// Convert miles to meters
+	const radiusInMeters = radiusInMiles * 1609.34;
+
+	// Remove previous circle if exists
+	if (searchRadiusCircle) {
+		searchRadiusCircle.setMap(null);
+	}
+
+	// Create new circle
+	searchRadiusCircle = new google.maps.Circle({
+		strokeColor: "#8f807c",
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: "#8f807c",
+		fillOpacity: 0.15,
+		map,
+		center,
+		radius: radiusInMeters,
+		clickable: false,
+	});
+}
+
+function drawMap(center, zoom = 13, mapEl = null) {
+
+	if (mapEl) {
+		map = new google.maps.Map(mapEl, {
+			center: center,
+			zoom: zoom,
+			mapId: 'f137ea192ad53b4a4b4ca0d3',
+			disableDefaultUI: true,
+		});
+	}
 }

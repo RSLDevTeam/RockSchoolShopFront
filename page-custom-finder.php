@@ -157,7 +157,7 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 
 
 			// You can call your filtering logic here using the values
-			filterProviders( type, instrument, distance );
+			applyFiltersAndUpdateList()
 			
 		}
 		// Attach change event listeners
