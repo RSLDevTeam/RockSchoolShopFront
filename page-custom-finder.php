@@ -68,7 +68,7 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 							    <h5 class="font-bold uppercase tracking-[3px] mb-[16px]"><?php _e('Filter by Distance', 'rockschool'); ?></h5>
 					
 									<div class="inputRange relative w-[350px] flex justify-center items-center">
-									<input type="range" id="distanceRange" value="15" min="1" max="20" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor\-pointer">
+									<input type="range" id="distanceRange" value="15" min="1" max="50" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor\-pointer">
 										<output class="relative text-sm w-6 text-center pointer-events-none ml-1 text-gray-500 font-medium">0 <?php _e('miles', 'rockschool'); ?></output>
 									</div>
 							</div>
@@ -86,7 +86,7 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 					<div class="finder-map flex-grow">
 						<div
 							id="finder-map" 
-							class="w-full h-[600px] rounded-md shadow-md" 
+							class="w-full h-[600px] shadow-md" 
 							data-marker-icon="<?php echo get_template_directory_uri(); ?>/img/map-marker-single.svg"
 							data-cluster-icon="<?php echo get_template_directory_uri(); ?>/img/map-marker-single.svg">
 						</div>

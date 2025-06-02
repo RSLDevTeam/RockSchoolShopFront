@@ -31,7 +31,7 @@ function get_providers_json() {
     }
     $user_lat = isset($_GET['lat']) ? floatval($_GET['lat']) : 51.5;
     $user_lng = isset($_GET['lng']) ? floatval($_GET['lng']) : -0.1;
-    $user_distance = isset($_GET['distance']) ? $_GET['distance'] : 15;
+    $user_distance = isset($_GET['distance']) ? $_GET['distance'] : null;
 
     $query = new WP_Query($args);
 
@@ -49,7 +49,7 @@ function get_providers_json() {
             $distance = haversine_distance($user_lat, $user_lng, $provider_lat, $provider_lng);
         }
 
-        if ($distance === null || $distance <= $user_distance) {
+        // if ($distance === null || $distance <= $user_distance) {
             $results[] = [
                 'id'        => $post->ID,
                 'title'     => get_the_title($post->ID),
@@ -62,7 +62,7 @@ function get_providers_json() {
                 'permalink' => get_permalink($post->ID),
                 'distance'   => $distance, // distance in miles
             ];
-        }
+        // }
 
     }
 

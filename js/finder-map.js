@@ -31,7 +31,7 @@ async function fetchProviders(userType = '', userInstrument = '', userLat = 51.5
 async function loadProviders(userType = '', userInstrument = '', userLat = 51.5, userLng = -0.1, userDistance = 60) {
 	try {
 
-		const providers = await fetchProviders(userType, userInstrument, userLat, userLng, userDistance);
+		const providers = await fetchProviders(userType, userInstrument, userLat, userLng);
 
 		allProviders = providers;
 
@@ -68,8 +68,8 @@ async function displayProvidersOnMap(providers) {
 			content: (() => {
 				const img = document.createElement('img');
 				img.src = markerIconUrl;
-				img.style.width = '80px';
-				img.style.height = '80px';
+				img.style.width = '82px';
+				img.style.height = '82px';
 				return img;
 			})()
 		});
@@ -112,7 +112,6 @@ function applyFiltersAndUpdateList() {
 }
 
 function updateProviderList(providers) {
-	console.log('Updating provider list with:', providers);
 	const providerContainer = document.getElementById('provider-cards');
 	providerContainer.innerHTML = '';
 
@@ -205,7 +204,7 @@ async function initFinderMap() {
 			});
 
 		} else if (mapEl) {
-			drawMap(center, 15, mapEl);
+			drawMap(center, 10, mapEl);
 			loadProviders();
 			drawSearchRadius(map, center, userDistance);
 		}
