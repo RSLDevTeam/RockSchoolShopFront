@@ -35,64 +35,63 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 					<?php get_template_part( 'snippets/snippet', 'google-places-map' ); ?>
 				</section>
 
-				<section class="finder-body flex flex-wrap justify-center mb-[1em] gap-4">
+				<section class="finder-body flex flex-col md:flex-row flex-wrap justify-start md:justify-center mb-[1em] gap-4 px-[10px] md:px-0">
 
-					<div class="finder-sidebar md:col-span-1">
-
-							<div class="finder-filters mt-6">
-							    <h5 class="font-bold uppercase tracking-[3px] mb-[16px]"><?php _e('Filter by Type', 'rockschool'); ?></h5>
-					
-							    <select id="filter-type" name="type" class="w-full p-[8px] text-lg">
-							        <option value=""><?php _e('All Types', 'rockschool'); ?></option>
-							    </select>
-							</div>
-					
-		      </div>
-
-					<div class="finder-sidebar md:col-span-1">
-
-							<div class="finder-filters mt-6">
-							    <h5 class="font-bold uppercase tracking-[3px] mb-[16px]"><?php _e('Filter by Instrument', 'rockschool'); ?></h5>
-					
-							    <select id="filter-instrument" name="instrument" class="w-full p-[8px] text-lg">
-							        <option value=""><?php _e('All Instruments', 'rockschool'); ?></option>
-							    </select>
-							</div>
-					
-
-		      </div>
-
-					<div class="finder-sidebar md:col-span-2">
-
-							<div class="finder-filters mt-6">
-							    <h5 class="font-bold uppercase tracking-[3px] mb-[16px]"><?php _e('Filter by Distance', 'rockschool'); ?></h5>
-					
-									<div class="inputRange relative w-[350px] flex justify-center items-center">
-									<input type="range" id="distanceRange" value="15" min="1" max="50" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor\-pointer">
-										<output class="relative text-sm w-6 text-center pointer-events-none ml-1 text-gray-500 font-medium">0 <?php _e('miles', 'rockschool'); ?></output>
-									</div>
-							</div>
-		      </div>
-				</section>
-
-				<section class="finder-body flex flex-col md:flex-row">
-
-					<div class="finder-results basis-[30%] max-w-[30%] overflow-y-auto max-h-[600px]">
-						<div id="provider-cards">
-						
+					<!-- Filter by Type -->
+					<div class="finder-sidebar w-full md:w-auto">
+						<div class="finder-filters mt-6">
+							<h6 class="font-bold uppercase tracking-[3px] mb-[16px]">
+								<?php _e('Filter by Type', 'rockschool'); ?>
+							</h6>
+							<select id="filter-type" name="type" class="w-full p-[8px] text-lg">
+								<option value=""><?php _e('All Types', 'rockschool'); ?></option>
+							</select>
 						</div>
 					</div>
 
-					<div class="finder-map flex-grow">
+					<!-- Filter by Instrument -->
+					<div class="finder-sidebar w-full md:w-auto">
+						<div class="finder-filters mt-6">
+							<h6 class="font-bold uppercase tracking-[3px] mb-[16px]">
+								<?php _e('Filter by Instrument', 'rockschool'); ?>
+							</h6>
+							<select id="filter-instrument" name="instrument" class="w-full p-[8px] text-lg">
+								<option value=""><?php _e('All Instruments', 'rockschool'); ?></option>
+							</select>
+						</div>
+					</div>
+
+					<!-- Filter by Distance -->
+					<div class="finder-sidebar w-full md:w-auto">
+						<div class="finder-filters mt-6">
+							<h6 class="font-bold uppercase tracking-[3px] mb-[16px]">
+								<?php _e('Filter by Distance', 'rockschool'); ?>
+							</h6>
+							<div class="inputRange relative w-full md:w-[350px] flex items-center gap-2">
+								<input type="range" id="distanceRange" value="15" min="1" max="50" step="1"
+									class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+								<output class="text-sm text-gray-500 font-medium">0 <?php _e('miles', 'rockschool'); ?></output>
+							</div>
+						</div>
+					</div>
+
+				</section>
+
+				<section class="finder-body w-full flex flex-col-reverse xl:flex-row">
+					<div class="finder-results w-full xl:basis-[30%] xl:max-w-[30%] overflow-y-auto max-h-[600px]">
+						<div id="provider-cards"></div>
+					</div>
+
+					<div class="finder-map w-full xl:flex-grow">
 						<div
-							id="finder-map" 
-							class="w-full h-[600px] shadow-md" 
+							id="finder-map"
+							class="w-full h-[600px] shadow-md"
 							data-marker-icon="<?php echo get_template_directory_uri(); ?>/img/map-marker-single.svg"
 							data-cluster-icon="<?php echo get_template_directory_uri(); ?>/img/map-marker-single.svg">
 						</div>
 					</div>
-
 				</section>
+
 
 
 			</div><!-- .entry-content -->

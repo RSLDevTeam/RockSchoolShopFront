@@ -153,7 +153,6 @@ function updateProviderList(providers) {
 	}
 }
 
-
 function filterOptions(providers, userType = '', userInstrument = '') {
 	uniqueTypes = [...new Set(providers.map(p => p.type))];
 
@@ -245,7 +244,6 @@ async function initFinderMap() {
 	});
 
 }
-
 
 async function initAutocomplete() {
 	const {
