@@ -50,6 +50,22 @@ async function loadProviders(userType = '', userInstrument = '', userLat = 51.5,
 	}
 }
 
+function applyFiltersAndUpdateMap() {
+	const selectedTypeRaw = document.getElementById('filter-type').value;
+	const selectedInstrumentRaw = document.getElementById('filter-instrument').value;
+
+	const selectedType = selectedTypeRaw === '' ? 'all' : selectedTypeRaw;
+	const selectedInstrument = selectedInstrumentRaw === '' ? 'all' : selectedInstrumentRaw;
+
+	const filteredProviders = allProviders.filter(provider => {
+		const matchesType = selectedType === 'all' || provider.type === selectedType;
+		const matchesInstrument = selectedInstrument === 'all' || (provider.instrument && provider.instrument.includes(selectedInstrument));
+		return matchesType && matchesInstrument;
+	});
+
+	displayProvidersOnMap(filteredProviders);
+}
+
 async function displayProvidersOnMap(providers) {
 	const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
 	const markerIconUrl = document.getElementById('finder-map')?.dataset.markerIcon;

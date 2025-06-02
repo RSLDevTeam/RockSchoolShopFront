@@ -141,12 +141,6 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 			const instrument = instrumentSelect.value;
 			const distance = distanceRange.value;
 
-			console.log("Filter Values:", {
-				type,
-				instrument,
-				distance
-			});
-
 			//set these options in the URL and options 
 			const urlParams = new URLSearchParams(window.location.search);
 			urlParams.set('type', type);
@@ -157,7 +151,8 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 
 
 			// You can call your filtering logic here using the values
-			applyFiltersAndUpdateList()
+			applyFiltersAndUpdateList();
+			applyFiltersAndUpdateMap();
 			
 		}
 		// Attach change event listeners
