@@ -35,14 +35,31 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 					<?php get_template_part( 'snippets/snippet', 'google-places-map' ); ?>
 				</section>
 
-				<section class="finder-body flex flex-col md:flex-row flex-wrap justify-start md:justify-center mb-[1em] gap-4 px-[10px] md:px-0">
+				<!-- Mobile Filter Controls -->
+				<div class="flex justify-end items-center gap-2 mt-[10px] mb-[10px] md:hidden px-4">
+					<button id="close-filters" class="hidden p-2">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+						</svg>
+					</button>
+
+					<!-- Filter Button -->
+					<button id="toggle-filters" class="p-2">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18M6 10h12M9 16h6"/>
+						</svg>
+					</button>
+				</div>
+
+				<!-- Filters Section -->
+				<section id="filters-section" class="finder-body hidden md:flex flex-col md:flex-row flex-wrap justify-start md:justify-center mb-[1em] gap-4 px-[10px] md:px-0">
 
 					<!-- Filter by Type -->
 					<div class="finder-sidebar w-full md:w-auto">
 						<div class="finder-filters mt-6">
-							<h6 class="font-bold uppercase tracking-[3px] mb-[16px]">
+							<h5 class="font-bold text-[1em] tracking-[3px] mb-[16px]">
 								<?php _e('Filter by Type', 'rockschool'); ?>
-							</h6>
+							</h5>
 							<select id="filter-type" name="type" class="w-full p-[8px] text-lg">
 								<option value=""><?php _e('All Types', 'rockschool'); ?></option>
 							</select>
@@ -52,9 +69,9 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 					<!-- Filter by Instrument -->
 					<div class="finder-sidebar w-full md:w-auto">
 						<div class="finder-filters mt-6">
-							<h6 class="font-bold uppercase tracking-[3px] mb-[16px]">
+							<h5 class="font-bold text-[1em] tracking-[3px] mb-[16px]">
 								<?php _e('Filter by Instrument', 'rockschool'); ?>
-							</h6>
+							</h5>
 							<select id="filter-instrument" name="instrument" class="w-full p-[8px] text-lg">
 								<option value=""><?php _e('All Instruments', 'rockschool'); ?></option>
 							</select>
@@ -64,9 +81,9 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 					<!-- Filter by Distance -->
 					<div class="finder-sidebar w-full md:w-auto">
 						<div class="finder-filters mt-6">
-							<h6 class="font-bold uppercase tracking-[3px] mb-[16px]">
+							<h5 class="font-bold text-[1em] tracking-[3px] mb-[16px]">
 								<?php _e('Filter by Distance', 'rockschool'); ?>
-							</h6>
+							</h5>
 							<div class="inputRange relative w-full md:w-[350px] flex items-center gap-2">
 								<input type="range" id="distanceRange" value="15" min="1" max="50" step="1"
 									class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
@@ -106,6 +123,24 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
+
+		//Filter Toggle Button Functionality
+		const toggleBtn = document.getElementById('toggle-filters');
+		const closeBtn = document.getElementById('close-filters');
+		const filtersSection = document.getElementById('filters-section');
+
+		toggleBtn.addEventListener('click', () => {
+			filtersSection.classList.remove('hidden');
+			toggleBtn.classList.add('hidden');
+			closeBtn.classList.remove('hidden');
+		});
+
+		closeBtn.addEventListener('click', () => {
+			filtersSection.classList.add('hidden');
+			toggleBtn.classList.remove('hidden');
+			closeBtn.classList.add('hidden');
+		});
+		//Input range
 		document.querySelectorAll('.inputRange').forEach(function (element) {
 			let input = element.getElementsByTagName('input')[0];
 			let output = element.getElementsByTagName('output')[0];

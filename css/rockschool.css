@@ -600,3 +600,7 @@ a.map-card-link:focus,
 a.map-card-link:focus-visible {
     outline: none;
 }
+
+.finder-body h5 {
+    font-size: 1em !important;
+}

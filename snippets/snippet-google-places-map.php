@@ -19,7 +19,7 @@
             <?php _e('Search', 'rockschool'); ?>
         </button>
     </div>
-    <ul id="google-results" style="margin-top: 10px;"></ul>
+    <ul id="google-results" class="absolute left-0 w-full shadow-lg max-h-60 overflow-auto z-5 mt-1 bg-rock-alabaster-50 dark:bg-rock-gray-800"></ul>
     <p id="prediction"></p>
 
     
