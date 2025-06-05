@@ -140,3 +140,7 @@ function rockschool_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'rockschool_scripts' );
 
+//Provdiers endpoint
+require get_template_directory() . '/apis/api-loader.php';
+
+
