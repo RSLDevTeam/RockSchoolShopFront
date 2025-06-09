@@ -5,6 +5,9 @@ function rest_custom_check_jwt($headers) {
   }
 
   $auth_header = trim($headers['authorization'][0]);
+  if (empty($auth_header)) {
+      return new WP_Error('unauthorized', 'Authorization header is empty', ['status' => 401]);
+  }
 
   if (stripos($auth_header, 'Bearer ') !== 0) {
       return new WP_Error('unauthorized', 'Invalid Bearer token', ['status' => 401]);
@@ -38,13 +41,11 @@ function verify_jwt_token($jwt, $secret_key) {
   }
 
   list($header_b64, $payload_b64, $signature_b64) = $parts;
-
   $header = json_decode(base64url_decode($header_b64), true);
   $payload = json_decode(base64url_decode($payload_b64), true);
   $signature = base64url_decode($signature_b64);
 
   $data_to_sign = "$header_b64.$payload_b64";
-  
   $expected_signature = hash_hmac('sha256', $data_to_sign, $secret_key, true);
 
   if (!hash_equals($expected_signature, $signature)) {
@@ -58,21 +59,7 @@ function verify_jwt_token($jwt, $secret_key) {
   return $payload;
 }
 
-function get_user_details($email) {
-  $user = get_user_by('email', $email);
-  if (!$user) {
-      return new WP_Error('user_not_found', 'User not found', ['status' => 404]);
-  }
-  $user_data = [
-      'id' => $user->ID,
-      'email' => $user->user_email,
-      'name' => $user->display_name,
-      'roles' => $user->roles,
-      'first_name' => $user->first_name,
-      'last_name' => $user->last_name
-  ];
-  return $user_data;
-}
+
 
 function create_jwt($email, $time) {
   $secret_key = get_field('jwt_secret', 'option');

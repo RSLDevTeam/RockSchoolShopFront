@@ -8,7 +8,7 @@ class ApiLoader {
 
         // Load all REST API endpoints
         foreach (glob(get_template_directory() . '/apis/endpoints/*.php') as $file) {
-            require_once $file;
+          require_once $file;
         }
     }
 }
