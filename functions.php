@@ -145,4 +145,3 @@ add_action( 'wp_enqueue_scripts', 'rockschool_scripts' );
  */
 require get_template_directory() . '/apis/api-loader.php';
 
-

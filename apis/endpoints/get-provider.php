@@ -7,8 +7,7 @@
  */
 register_rest_route('api/v1', '/provider', [
     'methods'  => 'GET',
-    'callback' => 'get_provider_by_franchise_id',
-    'permission_callback' => '__return_true'
+    'callback' => 'get_provider_by_franchise_id'
 ]);
 
 function get_provider_by_franchise_id($request) {
