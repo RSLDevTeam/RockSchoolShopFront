@@ -36,8 +36,15 @@ function get_provider_by_franchise_id($request) {
     if (!$query->have_posts()) {
         return rest_custom_json_response(['error' => 'Provider not found'], 200);
     }
-
     $post = $query->posts[0];
+
+    $photo = get_field('photo', $post->ID);
+    if ($photo && is_array($photo)) {
+        $profile_picture = $photo['url'] ?? '';
+    } else {
+        $profile_picture = '';
+    }
+    
     $post = [
         'id' => $post->ID,
         'title' => $post->post_title,
@@ -52,6 +59,7 @@ function get_provider_by_franchise_id($request) {
         'franscape_id' => get_field('franscape_id', $post->ID),
         'location' => get_field('location', $post->ID),
         'instruments' => get_field('instruments', $post->ID),
+        'profile_picture' => $profile_picture
     ];
     $post['code'] = 'successful';
 

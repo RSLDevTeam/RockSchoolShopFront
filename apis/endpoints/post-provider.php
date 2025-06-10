@@ -18,16 +18,44 @@ function create_update_provider_api_callback($request) {
 	if (is_wp_error($custom_auth_check)) {
 			return $custom_auth_check;
 	}
+	//Array to include all params
+	//$_POST is used to get the request body
+	if (empty($_POST)) {
+			return rest_custom_json_response(['error' => 'No data provided'], 400);
+	}
+	
+	$franscape_id = $_POST['franscape_id'] ?? '';
+	$title = $_POST['title'] ?? '';
+	$content = $_POST['content'] ?? '';
+	$location = $_POST['location'] ?? [];
+	$instruments = $_POST['instruments'] ?? '';
+	$user_type = $_POST['user_type'] ?? '';
+	$profile_picture = $_FILES['profile_picture'] ?? '';
 
-	$params = $request->get_json_params();
-	$franscape_id = sanitize_text_field($params['franscape_id'] ?? '');
-	$title = sanitize_text_field($params['title'] ?? '');
-	$content = sanitize_textarea_field($params['content'] ?? '');
-	$location = $params['location'] ?? [];
-	$instruments = sanitize_text_field($params['instruments'] ?? '');
-	$user_type = sanitize_text_field($params['user_type'] ?? '');
+	if($profile_picture) {
+		// Handle file upload if provided
+		require_once(ABSPATH . 'wp-admin/includes/file.php');
+		require_once(ABSPATH . 'wp-admin/includes/image.php');
+		require_once(ABSPATH . 'wp-admin/includes/media.php');
 
-	//wp_die('Title: ' . $title . ', Content: ' . $content . ', Location: ' . print_r($location, true) . ', Instruments: ' . $instruments . ', User Type: ' . $user_type);
+		$upload = wp_handle_upload($profile_picture, ['test_form' => false]);
+		if (!isset($upload['error'])) {
+				$filetype = wp_check_filetype($upload['file']);
+				$attachment = [
+						'post_mime_type' => $filetype['type'],
+						'post_title'     => sanitize_file_name($upload['file']),
+						'post_content'   => '',
+						'post_status'    => 'inherit',
+				];
+				$profile_picture_id = wp_insert_attachment($attachment, $upload['file']);
+				//wp_die('Profile picture ID: ' . $profile_picture_id);
+				wp_update_attachment_metadata($profile_picture_id, wp_generate_attachment_metadata($profile_picture_id, $upload['file']));
+		}
+		
+	} else {
+		$profile_picture_id = null;
+	}
+
 	//validate if any is empty then throw required error
 	if (empty($title) || empty($content) || empty($location) || empty($instruments) || empty($user_type)) {
 			return rest_custom_json_response(['error' => 'All fields are required'], 400);
@@ -73,13 +101,22 @@ function create_update_provider_api_callback($request) {
     'lat'     => $location['lat'] ?? '',
 		'lng'     => $location['lng'] ?? ''
 	];
-
+	if (!empty($profile_picture_id)) {
+		update_field('photo', $profile_picture_id, $post_id);
+	}
 	update_field('location', $acf_map_value, $post_id);
 	$instruments_array = array_map('trim', explode(',', $instruments));
 	update_field('instruments', $instruments_array, $post_id);
 
 	//Get updated post object
 	$post = get_post($post_id);
+	$photo = get_field('photo', $post->ID);
+    if ($photo && is_array($photo)) {
+        $profile_picture = $photo['url'] ?? '';
+    } else {
+        $profile_picture = '';
+    }
+    
 	$post = [
 		'id' => $post->ID,
 		'title' => $post->post_title,
@@ -94,6 +131,7 @@ function create_update_provider_api_callback($request) {
 		'franscape_id' => get_field('franscape_id', $post->ID),
 		'location' => get_field('location', $post->ID),
 		'instruments' => get_field('instruments', $post->ID),
+		'profile_picture' => $profile_picture
 ];
 $post['code'] = 'successful';
 
