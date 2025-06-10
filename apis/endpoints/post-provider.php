@@ -23,17 +23,17 @@ function create_update_provider_api_callback($request) {
 	$franscape_id = sanitize_text_field($params['franscape_id'] ?? '');
 	$title = sanitize_text_field($params['title'] ?? '');
 	$content = sanitize_textarea_field($params['content'] ?? '');
-	$location = sanitize_text_field($params['location'] ?? '');
+	$location = $params['location'] ?? [];
 	$instruments = sanitize_text_field($params['instruments'] ?? '');
 	$user_type = sanitize_text_field($params['user_type'] ?? '');
 
-	// wp_die('Title: ' . $title . ', Content: ' . $content . ', Location: ' . $location . ', Instruments: ' . $instruments . ', User Type: ' . $user_type);
+	//wp_die('Title: ' . $title . ', Content: ' . $content . ', Location: ' . print_r($location, true) . ', Instruments: ' . $instruments . ', User Type: ' . $user_type);
 	//validate if any is empty then throw required error
 	if (empty($title) || empty($content) || empty($location) || empty($instruments) || empty($user_type)) {
 			return rest_custom_json_response(['error' => 'All fields are required'], 400);
 	}
 
-	if (empty($user_type) || !in_array($user_type, ['Accossiate Teacher', 'Accossiate School'])) {
+	if (empty($user_type) || !in_array($user_type, ['Associate Teacher', 'Associate School'])) {
 			return rest_custom_json_response(['error' => 'Invalid user type'], 400);
 	}
 
@@ -69,9 +69,9 @@ function create_update_provider_api_callback($request) {
 
 	// Update ACF fields
 	$acf_map_value = [
-    'address' => $location,
-    'lat'     => '',
-    'lng'     => ''
+    'address' => $location['address'] ?? '',
+    'lat'     => $location['lat'] ?? '',
+		'lng'     => $location['lng'] ?? ''
 	];
 
 	update_field('location', $acf_map_value, $post_id);

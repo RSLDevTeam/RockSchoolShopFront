@@ -8,7 +8,7 @@
   ?>
 
 <script async defer src='https://maps.googleapis.com/maps/api/js?key=<?php echo $google_api_key; ?>&loading=async&libraries=places&v=beta&callback=initFinderMap&modules=placeautocomplete'></script>
-
+<script src="<?php echo get_template_directory_uri(); ?>/js/finder-map.js"></script>
 
 
 <form action="<?php echo home_url('/find-an-instructor'); ?>" method="get" class="bg-white shadow-lg p-[37px] w-full bg-rock-alabaster-50 dark:bg-rock-gray-800 text-rock-gray-950 dark:text-rock-alabaster-50">
@@ -26,4 +26,3 @@
 </form>
 
 
-<script src="<?php echo get_template_directory_uri(); ?>/js/finder-map.js"></script>
