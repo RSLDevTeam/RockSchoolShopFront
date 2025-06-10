@@ -79,6 +79,42 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 })
 
+// lazy load video
+document.addEventListener('DOMContentLoaded', function () {
+    const lazyVideos = document.querySelectorAll('.lazy-video');
+
+    const config = {
+        root: null,
+        rootMargin: '100px 0px',
+        threshold: 0.25
+    };
+
+    const loadVideo = (video) => {
+        if (video.dataset.src) {
+            const source = document.createElement('source');
+            source.src = video.dataset.src;
+            source.type = 'video/mp4'; // You can make this dynamic if needed
+            video.appendChild(source);
+            video.load();
+            video.play();
+        }
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                loadVideo(video);
+                observer.unobserve(video);
+            }
+        });
+    }, config);
+
+    lazyVideos.forEach(video => {
+        observer.observe(video);
+    });
+});
+
 // add scrolled class
 window.addEventListener('scroll', function () {
   if (window.scrollY > 50) {

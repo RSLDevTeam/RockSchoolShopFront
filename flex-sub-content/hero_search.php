@@ -5,9 +5,6 @@
     $partial_height = get_sub_field('partial_height');
     ?>
 
-    <?php if ($search_field) : ?>
-        <script async defer src='https://maps.googleapis.com/maps/api/js?key=<?php echo $google_api_key; ?>&loading=async&libraries=places&callback=initMap'></script>
-    <?php endif; ?>
 
     <div class="ed-banner-slider swiper relative">
         
@@ -118,55 +115,13 @@
                 <?php
                     if ($search_field) : ?>
                     <div data-aos="zoom-in" class="absolute top-[98%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl z-2">
-                        
-                        <form action="<?php echo home_url('/finder'); ?>" method="get" class="bg-white shadow-lg p-[37px] w-full bg-rock-alabaster-50 dark:bg-rock-gray-800 text-rock-gray-950 dark:text-rock-alabaster-50">
-                            <h5 class="font-bold uppercase tracking-[3px] mb-[16px]"><?php echo get_sub_field('search_title'); ?></span></h5>   
-                            <div class="flex items-center">                                
-                                <input id="place-search" aria-autocomplete="list" autocomplete="off" type="text" name="location" class="w-full p-[8px] text-lg focus:outline-none" placeholder="Search locations...">
-                                <button type="submit" id="search-btn" class="large-button focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                    <?php _e('Search', 'rockschool'); ?>
-                                </button>
-                            </div>
-                            
-                        </form>
+                    <?php if ($search_field) 
+                        get_template_part( 'snippets/snippet', 'google-places-map' ); 
+                    ?>
                     </div>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 
-    <script>
-      async function initMap() {
-        // Request needed libraries.
-        //@ts-ignore
-        await google.maps.importLibrary("places");
-
-        // Get the input field.
-        const inputField = document.getElementById("place-search");
-        //@ts-ignore
-        const autocomplete = new google.maps.places.Autocomplete(inputField);
-
-        // Add listener for place selection.
-        autocomplete.addListener("place_changed", async () => {
-          const place = autocomplete.getPlace();
-          if (!place.geometry) return;
-		  console.log(place);
-          //selectedPlaceTitle.textContent = "Selected Place:";
-          //selectedPlaceInfo.textContent = JSON.stringify(place, null, 2);
-
-          // Extract place name or place ID for the URL
-          const selectedPlace = encodeURIComponent(place.name);
-
-          document.getElementById("search-btn").addEventListener("click", () => {
-                if (selectedPlace) {
-                    window.location.href = `/finder?location=${selectedPlace}`;
-                } else {
-                    alert("Please select a place first!");
-                }
-            });
-
-        });
-      }
-      window.initMap = initMap;
-    </script>
 </section>

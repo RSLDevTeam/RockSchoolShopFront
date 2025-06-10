@@ -140,3 +140,8 @@ function rockschool_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'rockschool_scripts' );
 
+/**
+ * Api Directory functions.
+ */
+require get_template_directory() . '/apis/api-loader.php';
+

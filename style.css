@@ -13,81 +13,81 @@ html {
 --------------------------------------------- */
 
 @font-face {
-    font-family: 'Montage';
-    src: url('fonts/Montage.woff2') format('woff2'),
-        url('fonts/Montage.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+	font-family: 'Montage';
+	src: url('fonts/Montage.woff2') format('woff2'),
+		url('fonts/Montage.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-    font-family: 'Webnar';
-    src: url('fonts/webnar-thin.woff2') format('woff2'),
-         url('fonts/webnar-thin.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
+	font-family: 'Webnar';
+	src: url('fonts/webnar-thin.woff2') format('woff2'),
+		url('fonts/webnar-thin.woff') format('woff');
+	font-weight: 100;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Webnar';
-    src: url('fonts/webnar-light.woff2') format('woff2'),
-         url('fonts/webnar-light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
+	font-family: 'Webnar';
+	src: url('fonts/webnar-light.woff2') format('woff2'),
+		url('fonts/webnar-light.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Webnar';
-    src: url('fonts/webnar-regular.woff2') format('woff2'),
-         url('fonts/webnar-regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
+	font-family: 'Webnar';
+	src: url('fonts/webnar-regular.woff2') format('woff2'),
+		url('fonts/webnar-regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Webnar';
-    src: url('fonts/webnar-medium.woff2') format('woff2'),
-         url('fonts/webnar-medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
+	font-family: 'Webnar';
+	src: url('fonts/webnar-medium.woff2') format('woff2'),
+		url('fonts/webnar-medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Webnar';
-    src: url('fonts/webnar-semibold.woff2') format('woff2'),
-         url('fonts/webnar-semibold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
+	font-family: 'Webnar';
+	src: url('fonts/webnar-semibold.woff2') format('woff2'),
+		url('fonts/webnar-semibold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Webnar';
-    src: url('fonts/webnar-bold.woff2') format('woff2'),
-         url('fonts/webnar-bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
+	font-family: 'Webnar';
+	src: url('fonts/webnar-bold.woff2') format('woff2'),
+		url('fonts/webnar-bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Webnar';
-    src: url('fonts/webnar-black.woff2') format('woff2'),
-         url('fonts/webnar-black.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
+	font-family: 'Webnar';
+	src: url('fonts/webnar-black.woff2') format('woff2'),
+		url('fonts/webnar-black.woff') format('woff');
+	font-weight: 900;
+	font-style: normal;
 }
 
 body {
 	font-family: 'Webnar', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 	font-size: 1.45em;
-    line-height: 1.5em;
-    font-weight: 300;
+	line-height: 1.5em;
+	font-weight: 300;
 }
 
 @media (max-width:950px) {
-body {	
-	font-size: 1.2em;
-}
+	body {
+		font-size: 1.2em;
+	}
 }
 
 input,
@@ -110,36 +110,43 @@ h6 {
 	font-family: 'Montage', Tahoma, Verdana, sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
-    line-height: 0.85em;
+	line-height: 0.85em;
 }
 
 h1 {
-    font-size: 6em;
+	font-size: 6em;
 }
+
 .heroSearch h1 {
-    font-size: 8em;
+	font-size: 8em;
 }
+
 h2 {
-    font-size: 4em;
+	font-size: 4em;
 }
+
 h3 {
-    font-size: 4em;
+	font-size: 4em;
 }
+
 h4 {
-    font-size: 3em;
+	font-size: 3em;
 }
+
 h5 {
-    font-size: 2em;
+	font-size: 2em;
 }
+
 h6 {
-    font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 @media (max-width:950px) {
-.heroSearch h1,
-h1 {
-    font-size: 5em;
-}
+
+	.heroSearch h1,
+	h1 {
+		font-size: 5em;
+	}
 }
 
 dfn,
@@ -191,7 +198,7 @@ big {
 }
 
 p {
-    margin-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 /* Sections
@@ -533,8 +540,8 @@ ol {
 	list-style: decimal;
 }
 
-li > ul,
-li > ol {
+li>ul,
+li>ol {
 	margin-bottom: 0;
 	margin-left: 1.5em;
 }
@@ -553,6 +560,7 @@ iframe,
 object {
 	max-width: 100%;
 }
+
 figure {
 	margin: 1em 0;
 }
@@ -614,9 +622,9 @@ input[type="datetime-local"],
 input[type="color"],
 textarea {
 	color: #666;
-    border-radius: 3px;
-    padding: 20px;
-    background: #f6f6f6;
+	border-radius: 3px;
+	padding: 20px;
+	background: #f6f6f6;
 }
 
 input[type="text"]:focus,
@@ -687,10 +695,10 @@ textarea {
 	top: 0;
 }
 
-.main-navigation ul ul li:hover > ul,
-.main-navigation ul ul li.focus > ul,
-.topbar-navigation ul ul li:hover > ul,
-.topbar-navigation ul ul li.focus > ul {
+.main-navigation ul ul li:hover>ul,
+.main-navigation ul ul li.focus>ul,
+.topbar-navigation ul ul li:hover>ul,
+.topbar-navigation ul ul li.focus>ul {
 	display: block;
 	left: auto;
 }
@@ -700,10 +708,10 @@ textarea {
 	width: 200px;
 }
 
-.main-navigation ul li:hover > ul,
-.main-navigation ul li.focus > ul,
-.topbar-navigation ul li:hover > ul,
-.topbar-navigation ul li.focus > ul {
+.main-navigation ul li:hover>ul,
+.main-navigation ul li.focus>ul,
+.topbar-navigation ul li:hover>ul,
+.topbar-navigation ul li.focus>ul {
 	left: auto;
 }
 
@@ -737,10 +745,8 @@ textarea {
 }
 
 .site-main .comment-navigation,
-.site-main
-.posts-navigation,
-.site-main
-.post-navigation {
+.site-main .posts-navigation,
+.site-main .post-navigation {
 	margin: 0 0 1.5em;
 }
 
@@ -992,17 +998,18 @@ textarea {
 /* animation */
 
 @keyframes slow-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .rotate-svg {
-  animation: slow-rotate 20s linear infinite;
-  transform-origin: center center; 
+	animation: slow-rotate 20s linear infinite;
+	transform-origin: center center;
 }
 
 /* ad-hoc */
@@ -1012,14 +1019,14 @@ textarea {
 }
 
 button {
-    border: 2px solid #0a0a0a;
-    padding: 10px 25px;
-    text-transform: uppercase;
+	border: 2px solid #0a0a0a;
+	padding: 10px 25px;
+	text-transform: uppercase;
 }
 
 button:hover {
-    background: #0a0a0a;
-    color: #fff;
+	background: #0a0a0a;
+	color: #fff;
 }
 
 .dark button {
@@ -1027,18 +1034,18 @@ button:hover {
 }
 
 .dark button:hover {
-    background: #fff;
-    color: #0a0a0a;
+	background: #fff;
+	color: #0a0a0a;
 }
 
 .background-image-cover {
-    background-size: cover;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-position: center;    
-    z-index: -1;
+	background-size: cover;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	background-position: center;
+	z-index: -1;
 }
 
 .centre_align {
@@ -1046,61 +1053,67 @@ button:hover {
 }
 
 .section-border {
-    height: 50px;
+	height: 50px;
 }
 
 section {
-    position: relative;
+	position: relative;
 }
 
 .section-bottom-border {
-    position: absolute;
-    bottom: 0;
+	position: absolute;
+	bottom: 0;
 }
-.section-bottom-border{
-    width: 920px;
-    max-width: 920px;
+
+.section-bottom-border {
+	width: 920px;
+	max-width: 920px;
 }
+
 .section-bottom-border.vector-border-l {
-    left: 0;
+	left: 0;
 }
+
 .section-bottom-border.vector-border-r {
-    right: 0;
+	right: 0;
 }
 
 .section-top-border {
-    position: absolute;
-    top: 0;
+	position: absolute;
+	top: 0;
 }
-.section-top-border{
-    width: 920px;
-    max-width: 920px;
+
+.section-top-border {
+	width: 920px;
+	max-width: 920px;
 }
+
 .section-top-border.vector-border-l {
-    left: 0;
+	left: 0;
 }
+
 .section-top-border.vector-border-r {
-    right: 0;
+	right: 0;
 }
 
 
 .enable_pick {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+	width: 100%;
+	height: 100%;
+	position: absolute;
 }
 
 .enable_pick svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    max-width: 450px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	max-width: 450px;
 }
 
 button#theme-toggle {
-    z-index: 5;
+	z-index: 5;
 }
 
 .hero-text-container {
@@ -1109,26 +1122,26 @@ button#theme-toggle {
 
 ul#primary-menu a,
 ul#topbar-menu a {
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 0.8em;
-    letter-spacing: 1.2px;
-    line-height: 1.3em;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 0.8em;
+	letter-spacing: 1.2px;
+	line-height: 1.3em;
 }
 
 ul#primary-menu li,
 ul#topbar-menu li {
-    margin-right: 15px;
-    padding-right: 15px;
-    border-right: 2px solid #fff;
-    height: 1em;
+	margin-right: 15px;
+	padding-right: 15px;
+	border-right: 2px solid #fff;
+	height: 1em;
 }
 
 ul#primary-menu li:last-child,
 ul#topbar-menu li:last-child {
-    border: 0;
-    margin-right: 0;
-    padding-right: 0;
+	border: 0;
+	margin-right: 0;
+	padding-right: 0;
 }
 
 #hero-mask-object {
@@ -1138,10 +1151,9 @@ ul#topbar-menu li:last-child {
 }
 
 section.heroSearch.ContentSection {
-    margin-bottom: -100px;
+	margin-bottom: -100px;
 }
 
-section.heroSearch.ContentSection + section .grid {
-    padding-top: 100px;
+section.heroSearch.ContentSection+section .grid {
+	padding-top: 100px;
 }
-

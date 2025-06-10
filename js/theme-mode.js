@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         htmlElement.classList.remove('dark');
-        themeIcon.innerHTML = moon;
+        //themeIcon.innerHTML = moon;
     } else {
         htmlElement.classList.add('dark');
-        themeIcon.innerHTML = sun;
+        //themeIcon.innerHTML = sun;
     }
 
     // Toggle theme on button click

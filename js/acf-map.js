@@ -1,29 +1,7 @@
-function getMapStyles() {
-    return [
-        { elementType: "geometry", stylers: [{ color: "#212121" }] },
-        { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
-        { elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
-        { elementType: "labels.text.stroke", stylers: [{ color: "#212121" }] },
-        { featureType: "administrative", elementType: "geometry", stylers: [{ color: "#757575" }] },
-        { featureType: "administrative.country", elementType: "labels.text.fill", stylers: [{ color: "#9e9e9e" }] },
-        { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#bdbdbd" }] },
-        { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
-        { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#181818" }] },
-        { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
-        { featureType: "poi.park", elementType: "labels.text.stroke", stylers: [{ color: "#1b1b1b" }] },
-        { featureType: "road", elementType: "geometry.fill", stylers: [{ color: "#2c2c2c" }] },
-        { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#8a8a8a" }] },
-        { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#373737" }] },
-        { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#3c3c3c" }] },
-        { featureType: "road.highway.controlled_access", elementType: "geometry", stylers: [{ color: "#4e4e4e" }] },
-        { featureType: "road.local", elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
-        { featureType: "transit", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
-        { featureType: "water", elementType: "geometry", stylers: [{ color: "#000000" }] },
-        { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#3d3d3d" }] }
-    ];
-}
 
-document.addEventListener('DOMContentLoaded', function () {
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
     const mapEl = document.getElementById('single-acf-map');
     if (!mapEl) return;
 
@@ -31,36 +9,37 @@ document.addEventListener('DOMContentLoaded', function () {
     const lng = parseFloat(mapEl.dataset.lng);
     const title = mapEl.dataset.title;
     const address = mapEl.dataset.address;
-
+    const markerIconUrl = mapEl.dataset.markerIcon;
     const center = { lat, lng };
 
-    const map = new google.maps.Map(mapEl, {
+    const map = new Map(mapEl, {
         center,
         zoom: 15,
-        mapTypeId: 'roadmap',
-        styles: getMapStyles(),
-        disableDefaultUI: true, 
+        mapId: 'f137ea192ad53b4a4b4ca0d3',
+        disableDefaultUI: true,
         zoomControl: false,
         streetViewControl: false,
         mapTypeControl: false,
         fullscreenControl: false
     });
 
-    const marker = new google.maps.Marker({
+    const marker = new AdvancedMarkerElement({
         position: center,
-        map: map,
+        map,
         title: title,
-        icon: {
-        url: mapEl.dataset.markerIcon,
-            scaledSize: new google.maps.Size(150, 150) 
-        }
+        content: (() => {
+            const img = document.createElement('img');
+            img.src = markerIconUrl;
+            img.style.width = '150px';
+            img.style.height = '150px';
+            return img;
+        })()
     });
 
     const infoWindow = new google.maps.InfoWindow({
         content: `<strong>${title}</strong><br>${address}`,
     });
 
-    marker.addListener('click', () => {
-        infoWindow.open(map, marker);
-    });
-});
+    marker.addListener('gmp-click', () => infoWindow.open(map, marker));
+
+}

@@ -20,8 +20,10 @@ $provider_contact_form_id = get_field('provider_contact_form_id', 'option');
 $background_image = get_field('provider_contact_form_image', 'option');
 ?>
 
-<main id="primary" class="site-main">
-	<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/profile-bg.svg" class="profile-bg z-[-1] absolute" />
+<main id="primary" class="site-main" style="background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/img/profile-bg.svg');
+	background-repeat: repeat-y;
+    background-size: 100% auto;
+    background-position: top left;">
 	<?php while ( have_posts() ) : the_post(); ?>
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class('single-provider '); ?>>
@@ -119,25 +121,29 @@ $background_image = get_field('provider_contact_form_image', 'option');
 
 			<?php get_template_part( 'section-templates/section', 'flex-content' ); ?>
 
-			<section class="contact_shortcode_module provider-contact-form">
+			<?php if ($email) : ?>
 
-			    <?php if ($background_image) { echo '<div class="background-image-cover" style="background-image:url(' . $background_image['url'] . ');"></div>'; } ?>
+				<section class="contact_shortcode_module provider-contact-form">
 
-			    <div class="container mx-auto px-4 max-w-[1300px] py-24 px-4 lg:px-16">
+				    <?php if ($background_image) { echo '<div class="background-image-cover" style="background-image:url(' . $background_image['url'] . ');"></div>'; } ?>
 
-			        <h2 class="text-center text-5xl pb-12" data-aos="zoom-in">Questions?</h2>
+				    <div class="container mx-auto px-4 max-w-[1300px] py-24 px-4 lg:px-16">
 
-			        <div class="text-white mb-[3em] text-center ml-0 mr-auto" data-aos="zoom-in">You can reach out directly to <?php echo get_the_title(); ?> by completing the form below or by calling <a href="tel:<?php echo $phone; ?>" class="text-rockschool-teal"><?php echo $phone; ?></a></div>
+				        <h2 class="text-center text-5xl pb-12" data-aos="zoom-in">Questions?</h2>
 
-			        <div class="contact_shortcode" data-aos="zoom-in">
-			        	<?php
-						echo do_shortcode('[contact-form-7 id="' . esc_attr($provider_contact_form_id) . '" recipient-email="' . esc_attr($email) . '"]');
-						?>
-			        </div>
+				        <div class="text-white mb-[3em] text-center ml-0 mr-auto" data-aos="zoom-in">You can reach out directly to <?php echo get_the_title(); ?> by completing the form below.</div>
 
-			    </div>
+				        <div class="contact_shortcode" data-aos="zoom-in">
+				        	<?php
+							echo do_shortcode('[contact-form-7 id="' . esc_attr($provider_contact_form_id) . '" recipient-email="' . esc_attr($email) . '"]');
+							?>
+				        </div>
 
-			</section>
+				    </div>
+
+				</section>
+
+			<?php endif; ?>
 
 		</article>
 
@@ -152,7 +158,9 @@ $google_maps_api_key = get_field('googel_map_api_key', 'option');
 
 if ($location && $google_maps_api_key) :
 ?>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr($google_maps_api_key); ?>"></script>
+
+		<script async defer src='https://maps.googleapis.com/maps/api/js?key=<?php echo $google_maps_api_key; ?>&loading=async&libraries=places&v=beta&callback=initMap'></script>
+
     <script src="<?php echo get_template_directory_uri(); ?>/js/acf-map.js"></script>
 <?php endif; ?>
 
