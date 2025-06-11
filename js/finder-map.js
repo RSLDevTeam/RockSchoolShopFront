@@ -13,6 +13,7 @@ let userDistance = 15; // Default distance in miles
 let searchRadiusCircle;
 let allProviders = [];
 
+
 async function fetchProviders(userType = '', userInstrument = '', userLat = 51.5, userLng = -0.1, userDistance = 15) {
 	try {
 		const url = `/wp-admin/admin-ajax.php?action=get_providers&type=${encodeURIComponent(userType)}&instrument=${encodeURIComponent(userInstrument)}&lat=${encodeURIComponent(userLat)}&lng=${encodeURIComponent(userLng)}&distance=${encodeURIComponent(userDistance)}`;
@@ -207,7 +208,7 @@ async function initFinderMap() {
 
 	//get current path of window
 	const currentSitePath = window.location.pathname;
-	if (currentSitePath.includes('find-an-instructor')) {
+	if (currentSitePath.includes(acfData.finderUrl)) {
 		if (input && input.value.trim() !== "") {
 			await geocodeAndCenter(input.value, (geocodedCenter) => {
 				if (geocodedCenter) {
@@ -236,7 +237,7 @@ async function initFinderMap() {
 
 		searchBtn.addEventListener("click", () => {
 			if (selectedPlace) {
-				window.location.href = `/find-an-instructor?location=${selectedPlace}`;
+				window.location.href = `${acfData.finderUrl}?location=${selectedPlace}`;
 			} else {
 				alert("Please select a place first!");
 			}
@@ -335,7 +336,7 @@ async function initAutocomplete() {
 				resultsEl.innerHTML = ""; // Clear results
 
 				const currentSitePath = window.location.pathname;
-				if (currentSitePath.includes('find-an-instructor')) {
+				if (currentSitePath.includes(acfData.finderUrl)) {
 					const url = new URL(window.location);
 					url.searchParams.set("location", selectedName);
 					window.history.pushState({}, "", url);
@@ -344,7 +345,7 @@ async function initAutocomplete() {
 
 				document.getElementById("search-btn").onclick = () => {
 					const selectedPlace = encodeURIComponent(selectedName);
-					window.location.href = `/find-an-instructor?location=${selectedPlace}`;
+					window.location.href = `/${acfData.finderUrl}?location=${selectedPlace}`;
 				};
 			});
 

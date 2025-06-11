@@ -145,3 +145,24 @@ add_action( 'wp_enqueue_scripts', 'rockschool_scripts' );
  */
 require get_template_directory() . '/apis/api-loader.php';
 
+/**
+ * Get Acf fields for the finder map.
+ */
+function enqueue_custom_script_with_acf_data() {
+    
+    $acf_value = get_field('finder_url', 'option'); 
+    // Register your JS file
+    wp_enqueue_script(
+        'finder-map-js', 
+        get_template_directory_uri() . '/js/custom.js', 
+        array('jquery'), 
+        null, 
+        true
+    );
+
+    // Pass ACF data to JS
+    wp_localize_script('finder-map-js', 'acfData', array(
+        'finderUrl' => $acf_value
+    ));
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_script_with_acf_data');
