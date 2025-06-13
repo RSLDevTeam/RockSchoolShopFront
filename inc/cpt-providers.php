@@ -69,36 +69,33 @@ function show_revisions_column_content( $column, $post_id ) {
 add_action( 'manage_providers_posts_custom_column', 'show_revisions_column_content', 10, 2 );
 
 /**
- * Track the published revision of provider posts
+ * Track when provider posts are published
  */
-function track_published_revision($post_id, $post) {
-    // Skip if not a provider post or not published
-    if ($post->post_type !== 'providers' || $post->post_status !== 'publish') {
+function track_provider_publication($new_status, $old_status, $post) {
+    if ($post->post_type !== 'providers' || $new_status !== 'publish') {
         return;
     }
 
-    // Skip autosaves and revisions
-    if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
-        return;
-    }
-
-    $revisions = wp_get_post_revisions($post_id);
+    // Get the most recent revision before this publish action
+    $revisions = wp_get_post_revisions($post->ID, [
+        'posts_per_page' => 1,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    ]);
     
     if (!empty($revisions)) {
         $latest_revision = reset($revisions);
         
-        // Store the published post ID in the revision
-        update_post_meta($latest_revision->ID, 'published_version', $post_id);
+        // Mark this revision as the published version
+        update_post_meta($latest_revision->ID, 'is_published_revision', '1');
+        update_post_meta($latest_revision->ID, 'published_post_id', $post->ID);
+        update_post_meta($latest_revision->ID, 'published_at', current_time('mysql'));
         
-        // Also store the revision ID in the published post
-        update_post_meta($post_id, 'latest_revision_id', $latest_revision->ID);
-        
-        // Add context
-        update_post_meta($latest_revision->ID, 'publish_timestamp', current_time('mysql'));
-        update_post_meta($latest_revision->ID, 'published_by', get_current_user_id());
+        // Also store revision ID in the published post
+        update_post_meta($post->ID, 'last_published_revision', $latest_revision->ID);
     }
 }
-add_action('save_post', 'track_published_revision', 20, 2);
+add_action('transition_post_status', 'track_provider_publication', 10, 3);
 
 
 /**
@@ -119,30 +116,32 @@ add_action('pre_get_posts', 'allow_access_to_pending_providers');
 
 
 /**
- * Get the published version of a provider post
+ * Get the last published content for a provider
  */
-function get_published_provider_version($post) {
-    // If this is already a published post, return it
-    if ($post->post_status === 'publish') {
-        return $post;
-    }
+function get_last_published_provider_content($post_id) {
+    // Check if we have a direct published revision reference
+    $last_pub_rev_id = get_post_meta($post_id, 'last_published_revision', true);
     
-    // Check if this is a revision with a published version
-    if (wp_is_post_revision($post->ID)) {
-        $published_id = get_post_meta($post->ID, 'published_version', true);
-        if ($published_id) {
-            return get_post($published_id);
+    if ($last_pub_rev_id) {
+        $revision = get_post($last_pub_rev_id);
+        if ($revision) {
+            return $revision;
         }
     }
     
-    // For other cases (drafts, pending), try to find the published version
-    $published_post = get_posts([
-        'post_type' => 'providers',
-        'post_status' => 'publish',
-        'meta_key' => 'franscape_id',
-        'meta_value' => get_field('franscape_id', $post->ID),
-        'posts_per_page' => 1
+    // Fallback: Find the most recent published revision
+    $revisions = wp_get_post_revisions($post_id, [
+        'meta_key' => 'is_published_revision',
+        'meta_value' => '1',
+        'posts_per_page' => 1,
+        'orderby' => 'date',
+        'order' => 'DESC'
     ]);
     
-    return $published_post ? $published_post[0] : $post;
+    if (!empty($revisions)) {
+        return reset($revisions);
+    }
+    
+    // Final fallback: return the current post
+    return get_post($post_id);
 }
