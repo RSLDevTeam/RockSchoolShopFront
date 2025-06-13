@@ -24,6 +24,7 @@ $background_image = get_field('provider_contact_form_image', 'option');
 		<?php
 		$post = get_post();
 		$published_content = get_last_published_provider_content($post->ID);
+
 		?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class('single-provider '); ?>>
 
@@ -54,14 +55,11 @@ $background_image = get_field('provider_contact_form_image', 'option');
 								<h1 data-aos="zoom-in">
 									<?php
 										$display_title = '';
-
 										if (isset($published_content->post_title) && $published_content->post_title !== '') {
 												$display_title = $published_content->post_title;
-										} elseif (function_exists('the_title')) {
-												$display_title = get_the_title();
 										} else {
-												$display_title = __('No title available', 'your-text-domain');
-										} 
+												$display_title = get_the_title();
+										}
 
 										echo esc_html($display_title);
 								 	?>

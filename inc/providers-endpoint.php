@@ -4,10 +4,11 @@ add_action('wp_ajax_nopriv_get_providers', 'get_providers_json');
 add_action('wp_ajax_get_providers', 'get_providers_json');
 
 function get_providers_json() {
+
     $args = [
         'post_type' => 'providers',
         'posts_per_page' => -1,
-        'post_status' => 'publish',
+        'post_status' => ['publish', 'pending']
     ];
 
     if (!empty($_GET['type'])) {
@@ -39,6 +40,14 @@ function get_providers_json() {
 
     foreach ($query->posts as $post) {
         $location = get_field('location', $post->ID);
+        $published_content = get_last_published_provider_content($post->ID);
+        $display_title = get_the_title($post->ID);
+        
+        if ($post->post_status == 'pending') {
+            if (isset($published_content->post_title) && $published_content->post_title !== '') {
+                $display_title = $published_content->post_title;
+            }
+        }
         if (!$location) continue;
 
         $provider_lat = floatval($location['lat']);
@@ -52,7 +61,7 @@ function get_providers_json() {
         // if ($distance === null || $distance <= $user_distance) {
             $results[] = [
                 'id'        => $post->ID,
-                'title'     => get_the_title($post->ID),
+                'title'     => $display_title,
                 'lat'       => $location['lat'],
                 'lng'       => $location['lng'],
                 'address'   => $location['address'],
