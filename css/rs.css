@@ -97,7 +97,23 @@ img.footer-logo {
     z-index: 2;
 }
 
+.finder-results {
+    overflow: scroll;
+    scrollbar-width: none;
+    ms-overflow-style: none;
+}
 
+.finder-results::-webkit-scrollbar {
+    display: none;
+}
+
+@media(max-width: 1279px) {
+.finder-results {
+    overflow: visible;
+    position: relative;
+    max-height: fit-content;
+}
+}
 
 
 
