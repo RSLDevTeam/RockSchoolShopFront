@@ -23,14 +23,7 @@ $background_image = get_field('provider_contact_form_image', 'option');
 	<?php while ( have_posts() ) : the_post(); ?>
 		<?php
 		$post = get_post();
-		$published_version = get_published_provider_version($post);
-	
-		$location = get_field('location', $published_version->ID);
-		$franscape_id = get_field('franscape_id', $published_version->ID);
-		$title = $published_version->post_title;
-		$content = $published_version->post_title;
-
-		wp_die($title);
+		$published_content = get_last_published_provider_content($post->ID);
 		?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class('single-provider '); ?>>
 
@@ -58,7 +51,21 @@ $background_image = get_field('provider_contact_form_image', 'option');
 
 						<div class="prose max-w-none">
 							<header class="provider-header">
-								<h1 data-aos="zoom-in"><?php the_title(); ?></h1>
+								<h1 data-aos="zoom-in">
+									<?php
+										$display_title = '';
+
+										if (isset($published_content->post_title) && $published_content->post_title !== '') {
+												$display_title = $published_content->post_title;
+										} elseif (function_exists('the_title')) {
+												$display_title = get_the_title();
+										} else {
+												$display_title = __('No title available', 'your-text-domain');
+										} 
+
+										echo esc_html($display_title);
+								 	?>
+								 </h1>
 								<div class="provider-meta mb-[0.5em]" data-aos="zoom-in">
 									<div class="provider-type">
 										<?php echo get_field('type'); ?>
@@ -78,7 +85,19 @@ $background_image = get_field('provider_contact_form_image', 'option');
 							</header>
 
 							<div class="provider-biog" data-aos="zoom-in">
-								<?php the_content(); ?>
+								<?php
+									$content_to_display = '';
+									if (!empty($published_content->post_content)) {
+											$content_to_display = $published_content->post_content;
+									} elseif (function_exists('get_the_content')) {
+											$content_to_display = get_the_content();
+									} else {
+											$content_to_display = __('Content not available', 'your-text-domain');
+									}
+									// Apply content filters and output
+									echo apply_filters('the_content', $content_to_display);
+
+								?>
 							</div>
 
 						</div>
