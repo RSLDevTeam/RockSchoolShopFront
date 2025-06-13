@@ -31,6 +31,7 @@ function get_provider_by_franchise_id($request) {
         'post_type'  => 'providers',
         'meta_key'   => 'franscape_id',
         'meta_value' => $franscape_id,
+        'post_status'    => ['publish', 'draft', 'pending'],
         'posts_per_page' => 1
     ]);
     if (!$query->have_posts()) {

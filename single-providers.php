@@ -9,11 +9,7 @@
 
 get_header();
 
-// Provider variables
-$location = get_field('location');
-$franscape_id = get_field('franscape_id');
-$phone = get_field('phone');
-$email = get_field('email');
+
 
 // Global variables
 $provider_contact_form_id = get_field('provider_contact_form_id', 'option');
@@ -25,7 +21,17 @@ $background_image = get_field('provider_contact_form_image', 'option');
     background-size: 100% auto;
     background-position: top left;">
 	<?php while ( have_posts() ) : the_post(); ?>
+		<?php
+		$post = get_post();
+		$published_version = get_published_provider_version($post);
+	
+		$location = get_field('location', $published_version->ID);
+		$franscape_id = get_field('franscape_id', $published_version->ID);
+		$title = $published_version->post_title;
+		$content = $published_version->post_title;
 
+		wp_die($title);
+		?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class('single-provider '); ?>>
 
 			<div class="container mx-auto p-2.5 max-w-[1440px] z-1">
@@ -95,8 +101,8 @@ $background_image = get_field('provider_contact_form_image', 'option');
 
 							<h2 data-aos="zoom-in">Location</h2>
 							<div id="location-text" data-aos="zoom-in">
-						    	<?php echo $location['address']; ?>
-						    </div>
+								<?php echo $location['address']; ?>
+							</div>
 
 						</div>
 
@@ -135,8 +141,8 @@ $background_image = get_field('provider_contact_form_image', 'option');
 
 				        <div class="contact_shortcode" data-aos="zoom-in">
 				        	<?php
-							echo do_shortcode('[contact-form-7 id="' . esc_attr($provider_contact_form_id) . '" recipient-email="' . esc_attr($email) . '"]');
-							?>
+									echo do_shortcode('[contact-form-7 id="' . esc_attr($provider_contact_form_id) . '" recipient-email="' . esc_attr($email) . '"]');
+									?>
 				        </div>
 
 				    </div>
@@ -155,7 +161,6 @@ $background_image = get_field('provider_contact_form_image', 'option');
 <?php
 $location = get_field('location');
 $google_maps_api_key = get_field('googel_map_api_key', 'option');
-
 if ($location && $google_maps_api_key) :
 ?>
 
@@ -192,7 +197,7 @@ if (get_the_title() && $instruments && $location):
         ]
     }
     </script>
-<?php endif; ?>
+<?php endif;
 
-<?php
+
 get_footer();

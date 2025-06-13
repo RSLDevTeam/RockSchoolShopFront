@@ -73,11 +73,22 @@ function create_update_provider_api_callback($request) {
 			'post_type'  => 'providers',
 			'meta_key'   => 'franscape_id',
 			'meta_value' => $franscape_id,
-			'posts_per_page' => 1
+			'post_status'    => ['publish', 'draft', 'pending'],
+			'posts_per_page' => 1,
+			'perm'           => 'readable' // Ensure the post is readable
 	]);
+	//wp_die(print_r($query->have_posts(), true));
 
 	if ($query->have_posts()) {
 			$post_id = $query->posts[0]->ID;
+			//wp update_post
+			$post_data = [
+					'ID'           => $post_id,
+					'post_title'   => $title,
+					'post_content' => $content,
+					'post_status'  => 'publish', 
+			];
+			$post_id = wp_update_post($post_data);
 			$message = 'Provider updated';
 	} else {
 			$post_id = wp_insert_post([
@@ -116,7 +127,7 @@ function create_update_provider_api_callback($request) {
     } else {
         $profile_picture = '';
     }
-    
+  
 	$post = [
 		'id' => $post->ID,
 		'title' => $post->post_title,
@@ -125,7 +136,7 @@ function create_update_provider_api_callback($request) {
 		'date' => $post->post_date,
 		'modified' => $post->post_modified,
 		'status' => $post->post_status,
-		'slug' => $post->post_name,
+		'slug' => $post->slug,
 		'user_type' => get_field('user_type', $post->ID),
 		'link' => get_permalink($post),
 		'franscape_id' => get_field('franscape_id', $post->ID),

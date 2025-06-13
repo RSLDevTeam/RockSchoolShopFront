@@ -27,3 +27,10 @@
 </form>
 
 
+<script>
+document.getElementById('place-search').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+});
+</script>

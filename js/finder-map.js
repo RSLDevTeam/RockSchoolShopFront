@@ -330,7 +330,7 @@ async function initAutocomplete() {
 
 
 			li.addEventListener("click", () => {
-				const selectedName = place.displayName;
+				const selectedName = place.formattedAddress || place.displayName;
 				input.value = selectedName;
 				input.text = selectedName;
 				resultsEl.innerHTML = ""; // Clear results
@@ -345,6 +345,7 @@ async function initAutocomplete() {
 
 				document.getElementById("search-btn").onclick = () => {
 					const selectedPlace = encodeURIComponent(selectedName);
+					//console.log("Redirecting to:", `/${acfData.finderUrl}?location=${selectedPlace}`);
 					window.location.href = `/${acfData.finderUrl}?location=${selectedPlace}`;
 				};
 			});
@@ -423,6 +424,8 @@ function geocodeAndCenter(address, callback) {
 	const geocoder = new google.maps.Geocoder();
 
 	geocoder.geocode({ address: address }, (results, status) => {
+		// console.error("Geocoding results:", results);
+		// console.error("Geocoding status:", status);
 		if (status === 'OK' && results[0]) {
 			const location = results[0].geometry.location;
 			// Call the callback with the location
