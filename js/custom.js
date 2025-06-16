@@ -1,6 +1,6 @@
 // Custom JS
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
   // lazy load images and fade in elements
 
@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
     lazyloadImages = document.querySelectorAll(".lazy");
     fadeinElements = document.querySelectorAll(".fade-in");
 
-    var observerCallback = function(entries, observer) {
-      entries.forEach(function(entry) {
+    var observerCallback = function (entries, observer) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           var element = entry.target;
           if (element.classList.contains("lazy")) {
@@ -30,39 +30,39 @@ document.addEventListener("DOMContentLoaded", function() {
     var imageObserver = new IntersectionObserver(observerCallback);
     var fadeInObserver = new IntersectionObserver(observerCallback);
 
-    lazyloadImages.forEach(function(image) {
+    lazyloadImages.forEach(function (image) {
       imageObserver.observe(image);
     });
 
-    fadeinElements.forEach(function(element) {
+    fadeinElements.forEach(function (element) {
       fadeInObserver.observe(element);
     });
 
-  } else {  
+  } else {
 
     var lazyloadThrottleTimeout;
     lazyloadImages = document.querySelectorAll(".lazy");
     fadeinElements = document.querySelectorAll(".fade-in");
-    
-    function lazyload () {
-      if(lazyloadThrottleTimeout) {
-        clearTimeout(lazyloadThrottleTimeout);
-      }    
 
-      lazyloadThrottleTimeout = setTimeout(function() {
+    function lazyload() {
+      if (lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout);
+      }
+
+      lazyloadThrottleTimeout = setTimeout(function () {
         var scrollTop = window.pageYOffset;
-        lazyloadImages.forEach(function(img) {
-            if(img.offsetTop < (window.innerHeight + scrollTop)) {
-              img.src = img.dataset.src;
-              img.classList.remove('lazy');
-            }
+        lazyloadImages.forEach(function (img) {
+          if (img.offsetTop < (window.innerHeight + scrollTop)) {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+          }
         });
-        fadeinElements.forEach(function(element) {
-            if(element.offsetTop < (window.innerHeight + scrollTop)) {
-              element.classList.add('fade-in-active');
-            }
+        fadeinElements.forEach(function (element) {
+          if (element.offsetTop < (window.innerHeight + scrollTop)) {
+            element.classList.add('fade-in-active');
+          }
         });
-        if(lazyloadImages.length == 0 && fadeinElements.length == 0) { 
+        if (lazyloadImages.length == 0 && fadeinElements.length == 0) {
           document.removeEventListener("scroll", lazyload);
           document.removeEventListener("facetwp-loaded", lazyload);
           window.removeEventListener("resize", lazyload);
@@ -81,38 +81,38 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // lazy load video
 document.addEventListener('DOMContentLoaded', function () {
-    const lazyVideos = document.querySelectorAll('.lazy-video');
+  const lazyVideos = document.querySelectorAll('.lazy-video');
 
-    const config = {
-        root: null,
-        rootMargin: '100px 0px',
-        threshold: 0.25
-    };
+  const config = {
+    root: null,
+    rootMargin: '100px 0px',
+    threshold: 0.25
+  };
 
-    const loadVideo = (video) => {
-        if (video.dataset.src) {
-            const source = document.createElement('source');
-            source.src = video.dataset.src;
-            source.type = 'video/mp4'; // You can make this dynamic if needed
-            video.appendChild(source);
-            video.load();
-            video.play();
-        }
-    };
+  const loadVideo = (video) => {
+    if (video.dataset.src) {
+      const source = document.createElement('source');
+      source.src = video.dataset.src;
+      source.type = 'video/mp4'; // You can make this dynamic if needed
+      video.appendChild(source);
+      video.load();
+      video.play();
+    }
+  };
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const video = entry.target;
-                loadVideo(video);
-                observer.unobserve(video);
-            }
-        });
-    }, config);
-
-    lazyVideos.forEach(video => {
-        observer.observe(video);
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const video = entry.target;
+        loadVideo(video);
+        observer.unobserve(video);
+      }
     });
+  }, config);
+
+  lazyVideos.forEach(video => {
+    observer.observe(video);
+  });
 });
 
 // add scrolled class

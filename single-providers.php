@@ -9,7 +9,8 @@
 
 get_header();
 
-
+$franscape_id = get_field('franscape_id');
+$location = get_field('location');
 
 // Global variables
 $provider_contact_form_id = get_field('provider_contact_form_id', 'option');
