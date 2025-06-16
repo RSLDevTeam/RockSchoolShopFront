@@ -154,7 +154,7 @@ function enqueue_custom_script_with_acf_data() {
     // Register your JS file
     wp_enqueue_script(
         'finder-map-js', 
-        get_template_directory_uri() . '/js/custom.js', 
+        get_template_directory_uri() . '/js/finder-map.js', 
         array('jquery'), 
         null, 
         true
