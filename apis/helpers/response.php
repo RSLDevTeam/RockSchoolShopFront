@@ -5,7 +5,6 @@ function rest_custom_json_response($data, $status = 200) {
 
     // Unset the keys from the $data array
     unset($data['code'], $data['message']);
-
     return new WP_REST_Response([
         'code' => $code,
         'message' => $message,

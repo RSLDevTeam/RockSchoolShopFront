@@ -36,7 +36,7 @@ $content_class = "{$alignment_class} {$width_class} block";
 
     <?php if ($banner_bg_video) : ?> 
         <div class="video-container absolute z-[-1] top-0 w-full h-full overflow-hidden">
-            <video class="w-full h-full object-cover" muted autoplay loop>
+            <video class="w-full h-full object-cover" muted autoplay loop playsinline>
                 <source src="<?php echo esc_url($banner_bg_video['url']); ?>">
             </video>
             <div class="overlay z-2"></div>
