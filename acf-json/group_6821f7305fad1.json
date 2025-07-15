@@ -128,47 +128,6 @@
             "zoom": "",
             "height": "",
             "allow_in_bindings": 0
-        },
-        {
-            "key": "field_6825f8d4b0c65",
-            "label": "Phone",
-            "name": "phone",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6825f8e5b0c66",
-            "label": "Email",
-            "name": "email",
-            "aria-label": "",
-            "type": "email",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
         }
     ],
     "location": [
@@ -187,7 +146,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "",
-    "show_in_rest": 0,
-    "modified": 1747319031
+    "description": "franscape_id, location, instruments",
+    "show_in_rest": 1,
+    "modified": 1749565600
 }

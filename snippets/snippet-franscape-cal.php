@@ -30,7 +30,10 @@ $franscape_id = get_field('franscape_id');
         if (!empty($data['items'])) {
             $classes = $data['items'];
         }
-    } ?>
+    } 
+
+    $index = 0;
+    ?>
 
 	<div id="franscape_cal" class="md:col-span-2 gap-6 mt-3 mb-3 grid md:grid-cols-3">
 	    <?php foreach ($classes as $class) : 
@@ -95,7 +98,7 @@ $franscape_id = get_field('franscape_id');
 	                Find Out More
 	            </a>
 	        </div>
-	    <?php endforeach; ?>
+	    <?php $index++; endforeach; ?>
 
 	    <?php if (count($classes) > 6): ?>
 		    <div class="col-span-full text-center mt-6">

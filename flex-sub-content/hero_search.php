@@ -40,7 +40,7 @@
                           "> 
                     <?php if ($banner_bg_video) : ?> 
                         <div class="video-container absolute top-0 w-full h-full overflow-hidden">
-                            <video class="w-full h-full object-cover" muted autoplay loop>
+                            <video class="w-full h-full object-cover" muted autoplay loop playsinline>
                                 <source src="<?php echo esc_url($banner_bg_video); ?>">
                             </video>
                         </div>

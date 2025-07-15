@@ -115,7 +115,20 @@ img.footer-logo {
 }
 }
 
+.finder-sidebar select {
+    background: #e7e7e7;
+    padding: 8px;
+    font-size: 0.8em;
+}
 
+.finder-sidebar input#distanceRange {
+    background: #e7e7e7;
+}
+
+section#filters-section {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
 
 
 
