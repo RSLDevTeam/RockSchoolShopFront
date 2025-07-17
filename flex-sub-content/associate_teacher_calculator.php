@@ -55,46 +55,6 @@ $content_class = "{$alignment_class} {$width_class} block";
 
     </div>
 
-    <script>
-      function formatCurrency(value) {
-        return value.toLocaleString('en-UK', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        });
-      }
-
-      function calculateIncome() {
-        const studentsEl = document.getElementById('studentsPerClass');
-        const lessonsEl = document.getElementById('lessonsPerEvening');
-        const costEl = document.getElementById('costPerLesson');
-
-        const students = parseFloat(studentsEl.value) || 0;
-        const lessons = parseFloat(lessonsEl.value) || 0;
-        const cost = parseFloat(costEl.value) || 0;
-
-        const grossEvening = students * lessons * cost;
-        const grossMonth = grossEvening * 3 * 4;
-        const grossYear = grossEvening * 3 * 45;
-
-        // Update value indicators
-        document.getElementById('studentsPerClassValue').textContent = students;
-        document.getElementById('lessonsPerEveningValue').textContent = lessons;
-        document.getElementById('costPerLessonValue').textContent = cost.toFixed(2);
-
-        // Update output
-        document.getElementById('grossEvening').textContent = formatCurrency(grossEvening);
-        document.getElementById('grossMonth').textContent = formatCurrency(grossMonth);
-        document.getElementById('grossYear').textContent = formatCurrency(grossYear);
-      }
-
-      document.querySelectorAll('#tutor-calc input').forEach(input => {
-        input.addEventListener('input', calculateIncome);
-      });
-
-      calculateIncome();
-        </script>
-    </div>
-
     <?php 
     get_template_part( 'snippets/snippet', 'bottom-border' ); ?>
 
