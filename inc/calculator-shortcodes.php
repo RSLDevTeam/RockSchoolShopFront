@@ -13,7 +13,7 @@ function associate_teacher_shortcode() {
               <!-- Title -->
               <div>
                 <h3>Associate Calculator</h3>
-                <div class="flex flex-col gap-4 mt-6 pb-2">
+                <div class="flex flex-col gap-4 w-[200px] mt-6 pb-2">
                   <button id="teacher-tab" class="py-2 px-4 border-2 text-rock-gray-900 border-b-4 focus:outline-none active-tab-button" data-target="teacher-form">
                     Teacher
                   </button>
