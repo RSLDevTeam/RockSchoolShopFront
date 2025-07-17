@@ -6,22 +6,26 @@ function associate_teacher_shortcode() {
     ob_start(); ?>
 
       <div class="bg-white text-rock-gray-900 shadow-lg p-8 mb-[2em]" data-aos="zoom-in">
-        <h3>Associate to Rockschool</h3>
-        <div class="flex mt-4 mb-4 mt justify-center gap-4 pb-2 border-b border-gray-200">
-          <button id="teacher-tab" class="py-2 px-4 border-2 text-rock-gray-900 border-b-4 focus:outline-none active-tab-button" data-target="teacher-form">
-            As Teacher
-          </button>
-          <button id="school-tab" class="py-2 px-4 text-gray-600 border-b-4 focus:outline-none" data-target="school-form">
-            As School
-          </button>
-        </div>
+        
         <div id="form-container" class="pt-6">
           <div id="tutor-calc" class="mt-6 py-4 form-section">
-            <h4 id="associate-heading-form" class="text-xl font-semibold mb-6 text-rock-gray-800">Associate Teacher Calculator</h4>
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-3 gap-8">
+              <!-- Title -->
+              <div>
+                <h3>Associate Calculator</h3>
+                <div class="flex flex-col gap-4 mt-6 pb-2">
+                  <button id="teacher-tab" class="py-2 px-4 border-2 text-rock-gray-900 border-b-4 focus:outline-none active-tab-button" data-target="teacher-form">
+                    Teacher
+                  </button>
+                  <button id="school-tab" class="py-2 px-4 text-gray-600 border-b-4 focus:outline-none" data-target="school-form">
+                    School
+                  </button>
+                </div>
+
+              </div>
               <!-- Inputs -->
               <div>
-
+                <h5 id="associate-heading-form" class="text-xl font-semibold mb-4 text-rock-gray-800">Teacher Calculator</h5>
                 <div class="mb-4 school-calculator hidden">
                   <label class="block mb-2 text-gray-700 font-medium">
                     Number of Teaching Studios: <span id="noOfTeachersValue" class="text-rock-blue-700 font-bold">3</span>
@@ -75,13 +79,13 @@ function associate_teacher_shortcode() {
               </div>
 
               <!-- Results -->
-              <div class="bg-gray-50 p-6 rounded-lg">
+              <div class="rounded-lg">
                 <h5 class="text-xl font-semibold mb-4 text-rock-gray-900">Estimated Income</h5>
                 <div class="space-y-4 text-lg">
                   <p class="school-calculator hidden"><strong>Gross per Day:</strong> <span class="block text-2xl font-bold text-rock-green-700">£<span id="grossPerDay">0.00</span></span></p>
                   <p><strong>Gross per Week:</strong> <span class="block text-2xl font-bold text-rock-green-700">£<span id="grossPerWeek">0.00</span></span></p>
                   <p><strong>Gross per Month:</strong> <span class="block text-2xl font-bold text-rock-green-700">£<span id="grossPerMonth">0.00</span></span></p>
-                  <p><strong>Gross per Year:</strong> <span class="block text-2xl font-bold text-rock-green-700">£<span id="grossPerYear">0.00</span></span></p>
+                  <p><strong>Gross per Year:</strong> <span class="block text-4xl font-bold text-rock-green-700">£<span id="grossPerYear">0.00</span></span></p>
                 </div>
               </div>
             </div>
@@ -108,7 +112,7 @@ function associate_teacher_shortcode() {
       teacherTab.addEventListener('click', () => {
         teacherTab.classList.add('active-tab-button');
         schoolTab.classList.remove('active-tab-button');
-        heading.textContent = 'Associate Teacher Calculator';
+        heading.textContent = 'Teacher Calculator';
         activeTab = 'teacher';
 
         // add hidden elements with calls school-calculator 
@@ -123,7 +127,7 @@ function associate_teacher_shortcode() {
       schoolTab.addEventListener('click', () => {
         schoolTab.classList.add('active-tab-button');
         teacherTab.classList.remove('active-tab-button');
-        heading.textContent = 'Associate School Calculator';
+        heading.textContent = 'School Calculator';
         activeTab = 'school';
         //show elements with calls school-calculator
         document.querySelectorAll('.school-calculator')?.forEach(el => el.classList.remove('hidden'));
@@ -212,10 +216,8 @@ function associate_teacher_shortcode() {
 
           // Bind correct calculator
           if (activeTab === 'school') {
-            console.log('Adding school event listener');
             cloned.addEventListener('input', calculateIncomeSchool);
           } else {
-            console.log('Adding teacher event listener');
             cloned.addEventListener('input', calculateIncomeTeacher);
           }
         });
