@@ -540,6 +540,14 @@
     margin-right: calc(var(--spacing) * 2);
   }
 
+  .mr-2\.5 {
+    margin-right: calc(var(--spacing) * 2.5);
+  }
+
+  .mr-12 {
+    margin-right: calc(var(--spacing) * 12);
+  }
+
   .mr-auto {
     margin-right: auto;
   }
@@ -774,6 +782,10 @@
 
   .w-\[180px\] {
     width: 180px;
+  }
+
+  .w-\[200px\] {
+    width: 200px;
   }
 
   .w-\[300px\] {
