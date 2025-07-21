@@ -30,6 +30,7 @@ function create_update_provider_api_callback($request) {
 	$location = $_POST['location'] ?? [];
 	$instruments = $_POST['instruments'] ?? '';
 	$user_type = $_POST['user_type'] ?? '';
+	$inquire_email = $_POST['inquire_email'] ?? '';
 	$profile_picture = $_FILES['profile_picture'] ?? '';
 
 	if($profile_picture) {
@@ -119,6 +120,8 @@ function create_update_provider_api_callback($request) {
 	$instruments_array = array_map('trim', explode(',', $instruments));
 	update_field('instruments', $instruments_array, $post_id);
 
+	update_field('inquire_email', $inquire_email, $post_id);
+
 	//Get updated post object
 	$post = get_post($post_id);
 	$photo = get_field('photo', $post->ID);
@@ -139,6 +142,7 @@ function create_update_provider_api_callback($request) {
 		'slug' => $post->slug,
 		'user_type' => get_field('user_type', $post->ID),
 		'link' => get_permalink($post),
+		'inquire_email'=> get_field('inquire_email', $post->ID),
 		'franscape_id' => get_field('franscape_id', $post->ID),
 		'location' => get_field('location', $post->ID),
 		'instruments' => get_field('instruments', $post->ID),

@@ -55,6 +55,7 @@ function get_provider_by_franchise_id($request) {
         'modified' => $post->post_modified,
         'status' => $post->post_status,
         'slug' => $post->post_name,
+        'inquire_email'=> get_field('inquire_email', $post->ID),
         'user_type' => get_field('user_type', $post->ID),
         'link' => get_permalink($post),
         'franscape_id' => get_field('franscape_id', $post->ID),
