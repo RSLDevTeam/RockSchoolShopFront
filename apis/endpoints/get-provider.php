@@ -35,7 +35,7 @@ function get_provider_by_franchise_id($request) {
         'posts_per_page' => 1
     ]);
     if (!$query->have_posts()) {
-        return rest_custom_json_response(['error' => 'Provider not found'], 200);
+        return rest_custom_json_response(['error' => 'Provider not found'], 404);
     }
     $post = $query->posts[0];
 
