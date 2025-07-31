@@ -121,6 +121,7 @@ function create_update_provider_api_callback($request) {
 	update_field('instruments', $instruments_array, $post_id);
 
 	update_field('inquire_email', $inquire_email, $post_id);
+	update_field('type', $user_type, $post_id);
 
 	//Get updated post object
 	$post = get_post($post_id);
