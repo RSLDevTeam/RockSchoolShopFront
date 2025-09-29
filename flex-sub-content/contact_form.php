@@ -28,13 +28,13 @@ $content_class = "{$alignment_class} {$width_class} block";
 
     <div class="container mx-auto px-4 max-w-[1300px] py-24 px-4 lg:px-16">
 
-        <h2 class="text-center text-5xl pb-12" data-aos="zoom-in"><?php echo get_sub_field('title'); ?></h2>
+        <h2 class="text-center text-5xl pb-12"><?php echo get_sub_field('title'); ?></h2>
 
-        <?php if (get_sub_field('content')) : ?><div class="text-<?php echo esc_attr($content_colour); ?> mb-[3em] text-left ml-0 mr-auto" data-aos="zoom-in"><?php echo get_sub_field('content'); ?></div><?php endif; ?>
+        <?php if (get_sub_field('content')) : ?><div class="text-<?php echo esc_attr($content_colour); ?> mb-[3em] text-left ml-0 mr-auto"><?php echo get_sub_field('content'); ?></div><?php endif; ?>
 
         <?php if (get_sub_field('shortcode')) : 
             $shortcode = get_sub_field('shortcode')?>
-            <div class="contact_shortcode" data-aos="zoom-in"><?php echo do_shortcode($shortcode); ?></div>
+            <div class="contact_shortcode"><?php echo do_shortcode($shortcode); ?></div>
         <?php endif; ?>
 
     </div>

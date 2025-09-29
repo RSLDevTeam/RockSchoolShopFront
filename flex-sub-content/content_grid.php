@@ -19,6 +19,8 @@ $enable_slick = get_sub_field('enable_slick');
 $grid_id = 'elements-grid-' . $flex_index;
 $full_bleed_elements = get_sub_field('full_bleed_elements');
 $image_size = get_sub_field('image_size');
+
+$centre_align = get_sub_field('centre_align');
 ?>
 
 
@@ -30,9 +32,12 @@ $image_size = get_sub_field('image_size');
     get_template_part( 'snippets/snippet', 'top-border' ); ?>
 
     <div class="split-module-inner split-module-<?php echo $flex_index; ?> w-[85%] mx-auto px-4 pt-[6em] pb-[1em]">
-        <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+
+        <?php if (!$centre_align) : ?>
+            <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+        <?php endif; ?>
             
-            <div class="split-text-holder" data-aos="fade-up">
+            <div class="split-text-holder" data-aos="fade-up" <?php if ($centre_align) { echo 'style="text-align: center;"';} ?>>
                 <h6 class="section-title-column font-semibold coffee uppercase pr-[10px] inline-block relative mb-[10px] tracking-[1.5px]">
                     <?php echo get_sub_field('title'); ?>
                 </h6>
@@ -41,8 +46,11 @@ $image_size = get_sub_field('image_size');
                 </h2>
                 <div class="text-edgray mb-[3em]"><?php echo get_sub_field('content'); ?></div>
             </div>
-            
-        </div>
+
+        <?php if (!$centre_align) : ?>    
+            </div>
+        <?php endif; ?>
+
     </div>
 
     <?php if (have_rows('elements')) : 

@@ -133,6 +133,20 @@ h4 {
 	font-size: 3em;
 }
 
+@media (max-width: 600px) {
+h2 {
+	font-size: 3em;
+}
+
+h3 {
+	font-size: 3em;
+}
+
+h4 {
+	font-size: 2em;
+}
+}
+
 h5 {
 	font-size: 2em;
 }
@@ -1214,4 +1228,72 @@ section.heroSearch.ContentSection+section .grid {
 
 .range-gradient::-moz-range-thumb:hover {
 	transform: scale(1.1);
+}
+
+span.wpcf7-spinner {
+    display: block;
+}
+
+img.pick-point {
+    display: block;
+    margin-right: 7px;
+    height: 27px;
+}
+
+@media (max-width: 600px) {
+.icon-carousel-single {
+    width: 200px;
+}
+}
+
+.pick-line {
+	text-align: left;
+    display: flex;
+    justify-content: center;
+}
+
+select.wpcf7-form-control.wpcf7-select {
+    width: 100%;
+    background: #f6f6f6;
+    padding: 19px;
+    border-radius: 3px;
+}
+
+.icon-carousel a img {
+    transition: .2s;
+}
+
+.icon-carousel a:hover img {
+    transform: scale(1.15);
+}
+
+@media (max-width: 600px) {
+.icon-carousel-single {
+	padding: 10px;
+}
+section.full_width_content .button-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+section.full_width_content .button-holder button {
+    margin-bottom: 10px;
+}
+section.full_width_content .text-.text-center.mx-auto.max-w-\[60\%\].block,
+section.icon_text_grid .text-edgray.mb-\[3em\].max-w-\[60\%\].block.mx-auto.text-center {
+    max-width: 95%;
+}
+.pick-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+}
+.pick-line p {
+    margin-bottom: 10px;
+}
+.pick-line div {
+    text-align: center;
+}
 }

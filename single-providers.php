@@ -11,7 +11,7 @@ get_header();
 
 $franscape_id = get_field('franscape_id');
 $location = get_field('location');
-
+$email = get_field('inquire_email');
 // Global variables
 $provider_contact_form_id = get_field('provider_contact_form_id', 'option');
 $background_image = get_field('provider_contact_form_image', 'option');
@@ -157,11 +157,43 @@ $background_image = get_field('provider_contact_form_image', 'option');
 
 				        <div class="text-white mb-[3em] text-center ml-0 mr-auto" data-aos="zoom-in">You can reach out directly to <?php echo get_the_title(); ?> by completing the form below.</div>
 
-				        <div class="contact_shortcode" data-aos="zoom-in">
-				        	<?php
-									echo do_shortcode('[contact-form-7 id="' . esc_attr($provider_contact_form_id) . '" recipient-email="' . esc_attr($email) . '"]');
-									?>
-				        </div>
+<div id="provider-contact-<?php echo (int) $provider_contact_form_id; ?>" class="contact_shortcode" data-aos="zoom-in">
+  <?php echo do_shortcode( '[contact-form-7 id="' . esc_attr( $provider_contact_form_id ) . '"]' ); ?>
+</div>
+
+<script>
+(function () {
+  var recipient = <?php echo json_encode( sanitize_email( (string) $email ) ); ?>;
+  if (!recipient) return;
+
+  var container = document.getElementById('provider-contact-<?php echo (int) $provider_contact_form_id; ?>');
+  if (!container) return;
+
+  function inject(formEl) {
+    if (!formEl) return;
+    var input = formEl.querySelector('input[name="recipient-email"]');
+    if (!input) {
+      input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'recipient-email';
+      formEl.appendChild(input);
+    }
+    input.value = recipient;
+  }
+
+  var form = container.querySelector('form.wpcf7-form');
+  inject(form);
+
+  document.addEventListener('wpcf7submit', function (e) {
+    if (!container.contains(e.target)) return;
+    inject(container.querySelector('form.wpcf7-form'));
+  });
+  document.addEventListener('wpcf7invalid', function (e) {
+    if (!container.contains(e.target)) return;
+    inject(container.querySelector('form.wpcf7-form'));
+  });
+})();
+</script>
 
 				    </div>
 

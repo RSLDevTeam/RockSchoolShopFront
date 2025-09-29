@@ -125,8 +125,8 @@ function rockschool_scripts() {
     wp_enqueue_script( 'slick', get_stylesheet_directory_uri() . '/js/slick.js', array('jquery'), filemtime( get_stylesheet_directory() . '/js/slick.js' ), true );
 
     // AOS Library
-    wp_enqueue_style('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.css', [], null);
-    wp_enqueue_script('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.js', [], null, true);
+    // wp_enqueue_style('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.css', [], null);
+    // wp_enqueue_script('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.js', [], null, true);
 
     // Compiled stylesheet 
     wp_enqueue_style( 'output', get_stylesheet_directory_uri() . '/css/output.css', array(), filemtime( get_stylesheet_directory() . '/css/output.css' ) );

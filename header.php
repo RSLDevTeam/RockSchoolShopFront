@@ -35,7 +35,7 @@ $enable_absolute_header = get_field('enable_absolute_header');
 				    <div class="container mx-auto flex items-center justify-between p-4">
 				        <div class="topbar-navigation ml-auto md:flex md:items-center md:space-x-6 relative lg:items-center lg:gap-[60px] xxs:gap-[30px]">
 				            <ul id="topbar-menu" class="flex text-[17px] ed-header-nav font-normal space-x-6 nav-menu">
-				                <li class="menu-item"><a href="/franchise/">Franchising</a></li>
+				                <!-- <li class="menu-item"><a href="/teach-rockschool/">Teach Rockschool</a></li> -->
 				                <li class="menu-item"><a href="https://backstage.rockschool.io/" target="_blank"><svg id="uuid-1479b198-69b7-4687-ac20-930e91e96471" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27.2 28.73"><defs><clipPath id="uuid-5242315f-e04f-4b56-ba8a-d4c281ba2d79"><path d="M13.72,26.96c7.45,0,13.48-6.04,13.48-13.48S21.17,0,13.72,0,.24,6.04.24,13.48s6.03,13.48,13.48,13.48" style="fill: none;"/></clipPath></defs><g style="clip-path: url(#uuid-5242315f-e04f-4b56-ba8a-d4c281ba2d79);"><path d="M13.48,26.96c7.45,0,13.48-6.04,13.48-13.48S20.92,0,13.48,0,0,6.04,0,13.48s6.03,13.48,13.48,13.48" style="fill: #fafafa;"/><path d="M17.48,12.68c1.2-1.07,1.96-2.61,1.96-4.35,0-3.24-2.62-5.86-5.86-5.86s-5.86,2.62-5.86,5.86c0,1.73.77,3.27,1.96,4.35-2.73,1.42-4.6,4.26-4.6,7.55,0,4.7,3.81,8.5,8.5,8.5s8.5-3.81,8.5-8.5c0-3.29-1.87-6.13-4.6-7.55" style="fill: #0f0f0f;"/></g></svg> Login</a></li>
 				            </ul>
 				        </div>

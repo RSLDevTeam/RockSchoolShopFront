@@ -39,6 +39,8 @@ function get_providers_json() {
     $results = [];
 
     foreach ($query->posts as $post) {
+
+
         $location = get_field('location', $post->ID);
         $published_content = get_last_published_provider_content($post->ID);
         $display_title = get_the_title($post->ID);

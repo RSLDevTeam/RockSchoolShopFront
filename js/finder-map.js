@@ -35,6 +35,7 @@ async function loadProviders(userType = '', userInstrument = '', userLat = 51.5,
 		const providers = await fetchProviders(userType, userInstrument, userLat, userLng);
 
 		allProviders = providers;
+		console.log('Fetched providers:', allProviders);
 
 		// Show all providers on the map
 		displayProvidersOnMap(providers);
