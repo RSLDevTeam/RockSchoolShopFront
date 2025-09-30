@@ -16,21 +16,20 @@ function get_provider_by_franchise_id($request) {
     $endpoint = $request->get_route();
     $custom_auth_check = rest_custom_check_jwt($headers);
 
-    $franscape_id = sanitize_text_field($request->get_param('franscape_id'));
+    $provider_id = sanitize_text_field($request->get_param('provider_id'));
 
     if (is_wp_error($custom_auth_check)) {
         return $custom_auth_check;
     }
 
     
-    if (empty($franscape_id)) {
-        return rest_custom_json_response(['error' => 'Franscape ID is required'], 400);
+    if (empty($provider_id) || !is_numeric($provider_id)) {
+        return rest_custom_json_response(['error' => 'Provider ID is required'], 400);
     }
 
     $query = new WP_Query([
-        'post_type'  => 'providers',
-        'meta_key'   => 'franscape_id',
-        'meta_value' => $franscape_id,
+        'post_type'      => 'providers',
+        'p'              => $provider_id, // post ID instead of meta_value
         'post_status'    => ['publish', 'draft', 'pending'],
         'posts_per_page' => 1
     ]);
@@ -58,7 +57,7 @@ function get_provider_by_franchise_id($request) {
         'inquire_email'=> get_field('inquire_email', $post->ID),
         'user_type' => get_field('user_type', $post->ID),
         'link' => get_permalink($post),
-        'franscape_id' => get_field('franscape_id', $post->ID),
+        'provider_id' => $post->ID,
         'location' => get_field('location', $post->ID),
         'instruments' => get_field('instruments', $post->ID),
         'profile_picture' => $profile_picture

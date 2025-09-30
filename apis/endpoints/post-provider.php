@@ -24,7 +24,7 @@ function create_update_provider_api_callback($request) {
 			return rest_custom_json_response(['error' => 'No data provided'], 400);
 	}
 	
-	$franscape_id = $_POST['franscape_id'] ?? '';
+	$provider_id = $_POST['provider_id'] ?? '';
 	$title = $_POST['title'] ?? '';
 	$content = $_POST['content'] ?? '';
 	$location = $_POST['location'] ?? [];
@@ -66,35 +66,31 @@ function create_update_provider_api_callback($request) {
 			return rest_custom_json_response(['error' => 'Invalid user type'], 400);
 	}
 
-	if (empty($franscape_id)) {
-			return rest_custom_json_response(['error' => 'franscape_id is required'], 400);
-	}
 
-	$query = new WP_Query([
-			'post_type'  => 'providers',
-			'meta_key'   => 'franscape_id',
-			'meta_value' => $franscape_id,
-			'post_status'    => ['publish', 'draft', 'pending'],
-			'posts_per_page' => 1,
-			'perm'           => 'readable' // Ensure the post is readable
-	]);
-	//wp_die(print_r($query->have_posts(), true));
+	if ($provider_id) {
+			$query = new WP_Query([
+				'post_type'      => 'providers',
+				'p'              => $provider_id, // post ID instead of meta_value
+				'post_status'    => ['publish', 'draft', 'pending'],
+				'posts_per_page' => 1
+			]);
 
-	if ($query->have_posts()) {
+			if (!$query->have_posts()) {
+				return rest_custom_json_response(['error' => 'Provider not found'], 404);
+			}
 			$post_id = $query->posts[0]->ID;
-			//wp update_post
 			$post_data = [
 					'ID'           => $post_id,
 					'post_title'   => $title,
 					'post_content' => $content,
-					'post_status'  => 'publish', 
+					'post_status'  => 'draft', 
 			];
 			$post_id = wp_update_post($post_data);
 			$message = 'Provider updated';
 	} else {
 			$post_id = wp_insert_post([
 					'post_type'   => 'providers',
-					'post_status' => 'publish',
+					'post_status' => 'pending',
 					'post_title'  => $title,
 					'post_content' => $content,
 			]);
@@ -103,7 +99,6 @@ function create_update_provider_api_callback($request) {
 					return new WP_Error('create_failed', 'Failed to create provider', ['status' => 500]);
 			}
 
-			update_field('franscape_id', $franscape_id, $post_id);
 			$message = 'Provider created';
 	}
 
@@ -141,10 +136,10 @@ function create_update_provider_api_callback($request) {
 		'modified' => $post->post_modified,
 		'status' => $post->post_status,
 		'slug' => $post->slug,
-		'user_type' => get_field('user_type', $post->ID),
+		'user_type' => get_field('type', $post->ID),
 		'link' => get_permalink($post),
 		'inquire_email'=> get_field('inquire_email', $post->ID),
-		'franscape_id' => get_field('franscape_id', $post->ID),
+		'provider_id' => $post->ID,
 		'location' => get_field('location', $post->ID),
 		'instruments' => get_field('instruments', $post->ID),
 		'profile_picture' => $profile_picture
