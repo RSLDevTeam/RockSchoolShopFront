@@ -35,7 +35,6 @@ async function loadProviders(userType = '', userInstrument = '', userLat = 51.5,
 		const providers = await fetchProviders(userType, userInstrument, userLat, userLng);
 
 		allProviders = providers;
-		console.log('Fetched providers:', allProviders);
 
 		// Show all providers on the map
 		displayProvidersOnMap(providers);
@@ -76,6 +75,8 @@ async function displayProvidersOnMap(providers) {
 	markers = [];
 
 	providers.forEach(provider => {
+		// Create marker for each provider if lat and lng are available
+		if (!provider.lat || !provider.lng) return;
 		const marker = new AdvancedMarkerElement({
 			position: {
 				lat: parseFloat(provider.lat),
