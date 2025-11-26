@@ -1297,3 +1297,12 @@ section.icon_text_grid .text-edgray.mb-\[3em\].max-w-\[60\%\].block.mx-auto.text
     text-align: center;
 }
 }
+
+h3.small-title {
+    font-size: 2em;
+}
+
+.post-card {
+    border: 1px solid #555;
+    background: #222;
+}

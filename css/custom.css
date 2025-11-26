@@ -348,3 +348,6 @@ p {
   pointer-events: all;
 }/*# sourceMappingURL=style.css.map */
 
+h3.small-title {
+    font-size: 2em;
+}
