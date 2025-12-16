@@ -10,7 +10,7 @@
 get_header();
 
 $posts_page_id       = get_option( 'page_for_posts' );
-$archive_title       = is_home() && $posts_page_id ? get_the_title( $posts_page_id ) : get_the_archive_title();
+$archive_title       = is_home() && $posts_page_id ? get_the_title( $posts_page_id ) : wp_strip_all_tags( get_the_archive_title(), true );
 $archive_description = is_home() && $posts_page_id ? get_the_excerpt( $posts_page_id ) : get_the_archive_description();
 ?>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
