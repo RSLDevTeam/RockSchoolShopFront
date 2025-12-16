@@ -105,7 +105,11 @@ $background_image = get_field('provider_contact_form_image', 'option');
 
 				</div>
 
-				<?php if ($franscape_id) { get_template_part( 'snippets/snippet', 'franscape-cal' ); } ?>
+				<?php 
+				// if ($franscape_id) { 
+				// 	get_template_part( 'snippets/snippet', 'franscape-cal' ); 
+				// } 
+				?>
 
 			</div>
 

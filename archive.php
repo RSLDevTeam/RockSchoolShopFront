@@ -49,7 +49,7 @@ $archive_description = is_home() && $posts_page_id ? get_the_excerpt( $posts_pag
 						<div class="flex flex-wrap items-center gap-3 text-xs font-semibold tracking-[1.5px] uppercase text-rock-gray-600 dark:text-rock-alabaster-300">
 							<span><?php echo esc_html( get_the_date() ); ?></span>
 							<span class="w-1 h-1 rounded-full bg-rock-gray-400 dark:bg-rock-alabaster-400"></span>
-							<span><?php echo esc_html( get_the_author() ); ?></span>
+							<!-- <span><?php echo esc_html( get_the_author() ); ?></span> -->
 						</div>
 
 						<h2 class="text-[2.6em] leading-[0.95em]">
