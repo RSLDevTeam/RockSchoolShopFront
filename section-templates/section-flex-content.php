@@ -10,9 +10,11 @@ defined( 'ABSPATH' ) || exit;
  
 $acf_json_path = get_template_directory() . '/acf-json';
 
+$flex_index = 1;
+
 // Check value exists.
 if( have_rows('flexible_elements') ):
- 
+
     // Loop through rows.
     while ( have_rows('flexible_elements') ) : the_row();
     
@@ -42,6 +44,8 @@ if( have_rows('flexible_elements') ):
                 }
             }
         }
+
+        $flex_index ++;
     
 
     endwhile;

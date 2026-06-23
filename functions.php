@@ -69,6 +69,7 @@ function register_footer_menu() {
     register_nav_menus(
         array(
             'footer-menu' => __('Footer Menu', 'rockschool'),
+            'footer-menu-2' => __('Footer Menu 2', 'rockschool'),
         )
     );
 }
@@ -97,6 +98,10 @@ function rockschool_include_inc_files() {
 add_action('after_setup_theme', 'rockschool_include_inc_files');
 
 function rockschool_scripts() {
+
+    // Enqueue jQuery
+    wp_enqueue_script('jquery');
+    
     // Enqueue the main stylesheet
     wp_enqueue_style( 'rockschool-style', get_stylesheet_uri(), array(), _S_VERSION );
     wp_style_add_data( 'rockschool-style', 'rtl', 'replace' );
@@ -114,7 +119,50 @@ function rockschool_scripts() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
+
+    // Slick.js 
+    wp_enqueue_style( 'slick', get_stylesheet_directory_uri() . '/css/slick.css', array(), filemtime( get_stylesheet_directory() . '/css/slick.css' ) );
+    wp_enqueue_script( 'slick', get_stylesheet_directory_uri() . '/js/slick.js', array('jquery'), filemtime( get_stylesheet_directory() . '/js/slick.js' ), true );
+
+    // AOS Library
+    // wp_enqueue_style('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.css', [], null);
+    // wp_enqueue_script('aos', get_stylesheet_directory_uri() . '/assets/vendor/aos/aos.js', [], null, true);
+
+    // Compiled stylesheet 
+    wp_enqueue_style( 'output', get_stylesheet_directory_uri() . '/css/output.css', array(), filemtime( get_stylesheet_directory() . '/css/output.css' ) );
+
+    // Custom JS 
+    wp_enqueue_script( 'custom', get_stylesheet_directory_uri() . '/js/custom.js', array(), filemtime( get_stylesheet_directory() . '/js/custom.js' ) );
+
+    // Custom stylesheet 
+    wp_enqueue_style( 'custom', get_stylesheet_directory_uri() . '/css/rs.min.css', array(), filemtime( get_stylesheet_directory() . '/css/rs.min.css' ) );
     
 }
 add_action( 'wp_enqueue_scripts', 'rockschool_scripts' );
 
+/**
+ * Api Directory functions.
+ */
+require get_template_directory() . '/apis/api-loader.php';
+
+/**
+ * Get Acf fields for the finder map.
+ */
+function enqueue_custom_script_with_acf_data() {
+    
+    $acf_value = get_field('finder_url', 'option'); 
+    // Register your JS file
+    wp_enqueue_script(
+        'finder-map-js', 
+        get_template_directory_uri() . '/js/finder-map.js', 
+        array('jquery'), 
+        null, 
+        true
+    );
+
+    // Pass ACF data to JS
+    wp_localize_script('finder-map-js', 'acfData', array(
+        'finderUrl' => $acf_value
+    ));
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_script_with_acf_data');

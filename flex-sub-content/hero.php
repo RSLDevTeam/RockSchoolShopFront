@@ -1,4 +1,4 @@
-<section class="hero ContentSection">
+<section class="hero ContentSection module-<?php echo $flex_index; ?>">
     <div class="ed-banner-slider swiper relative">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -16,8 +16,8 @@
                             <h2 class="font-bold text-[clamp(35px,4.57vw,80px)] leading-[1.13] mb-[15px]"><?php echo get_sub_field('title'); ?></h2>
                             <p class="leading-[1.75] mb-[41px]"><?php echo get_sub_field('intro'); ?></p>
                             <div class="flex items-center gap-[20px]">
-                                <button class="px-5 rounded-full h-[50px] text-md font-medium border-0 focus:outline-none focus:ring transition text-white bg-rock-moonstone-500 hover:bg-rock-moonstone-600 active:bg-rock-moonstone-700 focus:ring-rock-moonstone-300" type="submit">Apply Now</button>
-                                <button class="px-5 rounded-full h-[50px] text-md font-medium border-1 border-white focus:outline-none focus:ring transition text-white hover:text-rock-moonstone-600 active:text-rock-moonstone-700 focus:ring-rock-moonstone-300" type="submit">About Us</button>
+                                <button class="px-5" type="submit">Apply Now</button>
+                                <button class="px-5" type="submit">About Us</button>
                             </div>
                         </div>
                     </div>
