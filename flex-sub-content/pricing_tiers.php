@@ -1,15 +1,24 @@
 <?php
-$title = get_sub_field('title');
-$intro = get_sub_field('intro');
-$tiers = get_sub_field('tiers');
 $section_id = get_sub_field('section_id');
-$enable_offer_block = get_sub_field('enable_offer_block');
-$offer_block_title = get_sub_field('offer_block_title');
-$offer_block_content = get_sub_field('offer_block_content');
-$offer_block_price = get_sub_field('offer_block_price');
-$offer_block_button_text = get_sub_field('offer_block_button_text');
-$offer_block_button_link = get_sub_field('offer_block_button_link');
-$offer_block_price_note = get_sub_field('offer_block_price_note');
+$use_global_pricing_module_settings = get_sub_field('use_global_pricing_module_settings');
+$get_pricing_field = function ($field_name) use ($use_global_pricing_module_settings) {
+    if ($use_global_pricing_module_settings) {
+        return get_field('global_pricing_module_' . $field_name, 'option');
+    }
+
+    return get_sub_field($field_name);
+};
+
+$title = $get_pricing_field('title');
+$intro = $get_pricing_field('intro');
+$tiers = $get_pricing_field('tiers');
+$enable_offer_block = $get_pricing_field('enable_offer_block');
+$offer_block_title = $get_pricing_field('offer_block_title');
+$offer_block_content = $get_pricing_field('offer_block_content');
+$offer_block_price = $get_pricing_field('offer_block_price');
+$offer_block_button_text = $get_pricing_field('offer_block_button_text');
+$offer_block_button_link = $get_pricing_field('offer_block_button_link');
+$offer_block_price_note = $get_pricing_field('offer_block_price_note');
 ?>
 
 <section <?php if ($section_id) : ?>id="<?php echo esc_attr($section_id); ?>" <?php endif; ?>class="pricing_tiers module-<?php echo esc_attr($flex_index); ?>">

@@ -1391,7 +1391,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "<section id=\"franscape-finder\">\r\n\r\n\r\n     <!-- THESE STYLES ENSURE THE FINDER FILLS THE HOST SITE SPACE -->\r\n\r\n     <style>\r\n          #franscape-finder,\r\n          #franscape-finder-iframe {\r\n               width: 100%;\r\n               height: 100%;\r\n               margin: 0;\r\n               padding: 0;\r\n               border: 0;\r\n               position: relative;\r\n          }\r\n     <\/style>\r\n\r\n\r\n     <!-- THIS IS THE ACTUAL IFRAME -->\r\n\r\n     <iframe\r\n          id=\"franscape-finder-iframe\"\r\n          width=\"100%\"\r\n          allow=\"geolocation\"\r\n          name=\"Lesson Finder\"\r\n          title=\"Client Lesson Finder\"><\/iframe>\r\n\r\n\r\n     <!-- THIS SCRIPT ALLOWS PARAMETERS FROM THE URL TO BE PASSED TO THE FINDER -->\r\n\r\n     <script>\r\n          const iframeEl = document.getElementById('franscape-finder-iframe');\r\n          iframeEl.src = 'https:\/\/finder.client.franscape.io\/' + window.location.search;\r\n     <\/script>\r\n\r\n<\/section>",
+                            "default_value": "<section id=\"franscape-finder\">\r\n\r\n\r\n     <!-- THESE STYLES ENSURE THE FINDER FILLS THE HOST SITE SPACE -->\r\n\r\n     <style>\r\n          #franscape-finder,\r\n          #franscape-finder-iframe {\r\n               width: 100%;\r\n               height: 100%;\r\n               margin: 0;\r\n               padding: 0;\r\n               border: 0;\r\n               position: relative;\r\n          }\r\n     </style>\r\n\r\n\r\n     <!-- THIS IS THE ACTUAL IFRAME -->\r\n\r\n     <iframe\r\n          id=\"franscape-finder-iframe\"\r\n          width=\"100%\"\r\n          allow=\"geolocation\"\r\n          name=\"Lesson Finder\"\r\n          title=\"Client Lesson Finder\"></iframe>\r\n\r\n\r\n     <!-- THIS SCRIPT ALLOWS PARAMETERS FROM THE URL TO BE PASSED TO THE FINDER -->\r\n\r\n     <script>\r\n          const iframeEl = document.getElementById('franscape-finder-iframe');\r\n          iframeEl.src = 'https://finder.client.franscape.io/' + window.location.search;\r\n     </script>\r\n\r\n</section>",
                             "allow_in_bindings": 0,
                             "tabs": "all",
                             "toolbar": "full",
@@ -4595,6 +4595,27 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_6a430001global",
+                            "label": "Use global pricing module settings",
+                            "name": "use_global_pricing_module_settings",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "When enabled, this module uses the pricing content from Theme Settings instead of the fields below.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "allow_in_bindings": 0,
+                            "ui": 1,
+                            "ui_on_text": "Global",
+                            "ui_off_text": "This module"
+                        },
+                        {
                             "key": "field_6a3ba3b4a829a",
                             "label": "Title",
                             "name": "title",
@@ -4602,7 +4623,15 @@
                             "type": "text",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -4623,7 +4652,15 @@
                             "type": "wysiwyg",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -4644,7 +4681,15 @@
                             "type": "repeater",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -4813,7 +4858,7 @@
                                     "default_value": "",
                                     "maxlength": "",
                                     "allow_in_bindings": 0,
-                                    "placeholder": "https:\/\/",
+                                    "placeholder": "https://",
                                     "prepend": "",
                                     "append": "",
                                     "parent_repeater": "field_6a3ba3c6a829c"
@@ -5042,7 +5087,15 @@
                             "type": "true_false",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -5065,6 +5118,11 @@
                             "required": 0,
                             "conditional_logic": [
                                 [
+                                    {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    },
                                     {
                                         "field": "field_6a421da1a68e3",
                                         "operator": "==",
@@ -5095,6 +5153,11 @@
                             "conditional_logic": [
                                 [
                                     {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    },
+                                    {
                                         "field": "field_6a421da1a68e3",
                                         "operator": "==",
                                         "value": "1"
@@ -5123,6 +5186,11 @@
                             "required": 0,
                             "conditional_logic": [
                                 [
+                                    {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    },
                                     {
                                         "field": "field_6a421da1a68e3",
                                         "operator": "==",
@@ -5153,6 +5221,11 @@
                             "conditional_logic": [
                                 [
                                     {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    },
+                                    {
                                         "field": "field_6a421da1a68e3",
                                         "operator": "==",
                                         "value": "1"
@@ -5181,6 +5254,11 @@
                             "required": 0,
                             "conditional_logic": [
                                 [
+                                    {
+                                        "field": "field_6a430001global",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    },
                                     {
                                         "field": "field_6a421da1a68e3",
                                         "operator": "==",
@@ -5235,5 +5313,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1782721104
+    "modified": 1782724675
 }
