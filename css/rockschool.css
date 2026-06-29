@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@source "../*.php";
+@source "../flex-sub-content/**/*.php";
+@source "../section-templates/**/*.php";
+@source "../snippets/**/*.php";
+@source "../template-parts/**/*.php";
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -87,6 +92,243 @@ select:focus-visible {
 .provider-card p {
     margin: 0;
 }
+
+.pricing_tiers {
+    color: #f7f7f7;
+}
+
+.pricing-tiers-intro,
+.pricing-tiers-intro .text-edgray,
+.pricing-tiers-intro p {
+    color: #f7f7f7;
+}
+
+.pricing-tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--pricing-tier-count), minmax(280px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+    overflow-x: auto;
+    padding: 2.5rem 0.25rem;
+    scrollbar-width: thin;
+}
+
+.pricing-tier {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 2rem;
+    border: 1px solid rgba(255, 206, 123, 0.32);
+    border-radius: 8px;
+    background: #151515;
+    color: #f7f7f7;
+}
+
+.pricing-tier.highlighted,
+.pricing-tier--highlighted {
+    border-color: #ffce7b;
+    background: #1f1f1f;
+    box-shadow: 0px 0px 11px rgba(255, 206, 123, 0.14);
+}
+
+.pricing-tier-badge {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: max-content;
+    max-width: calc(100% - 2rem);
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    background: #ffce7b;
+    color: #151515;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.pricing-tier-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.pricing-tier-header h3 {
+    margin: 0 0 1rem;
+    color: #fff;
+    font-size: clamp(1.75rem, 2.2vw, 2.75rem);
+    line-height: 1;
+}
+
+.pricing-tier-stars {
+    margin-bottom: 1rem;
+    color: #ffce7b;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+}
+
+.pricing-tier-price {
+    color: #fff;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.pricing-tier-volume {
+    margin-bottom: 1.25rem;
+}
+
+.pricing-tier-volume-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    color: #f7f7f7;
+    font-weight: 700;
+}
+
+.pricing-tier-seat-slider {
+    width: 100%;
+    accent-color: #ffce7b;
+}
+
+.pricing-tier-button {
+    display: block;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.pricing-tier-features {
+    margin-bottom: 2rem;
+}
+
+.pricing-tier-actions {
+    margin-top: auto;
+    border-top: 1px solid #6c583a;
+    padding-top: 1.5em;
+}
+
+.pricing-tier-action-price {
+    margin-bottom: 1rem;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+}
+
+.pricing-tier-price-notes {
+    margin-top: 0.85rem;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.pricing-tier-feature-group + .pricing-tier-feature-group {
+    margin-top: 1.75rem;
+}
+
+.pricing-tier-feature-group h4 {
+    margin: 0 0 0.85rem;
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1.2;
+}
+
+.pricing-tier-feature-group ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-tier-feature-group li {
+    display: flex;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.84);
+    line-height: 1.35;
+}
+
+.pricing-tier-check {
+    flex: 0 0 auto;
+    color: #ffce7b;
+    font-weight: 800;
+}
+
+@media (max-width: 1024px) {
+    .pricing-tiers-grid {
+        grid-template-columns: 1fr;
+        overflow-x: visible;
+    }
+}
+
+.pricing-tier hr {
+    margin: 0;
+}
+
+.offer-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding: 2rem;
+    border: 1px solid rgba(255, 206, 123, 0.32);
+    border-radius: 8px;
+    background: #151515;
+    color: #f7f7f7;
+}
+
+.offer-block-content {
+    max-width: 760px;
+}
+
+.offer-block h3 {
+    margin: 0 0 0.75rem;
+    color: #fff;
+    font-size: clamp(1.75rem, 3vw, 3rem);
+    line-height: 1;
+}
+
+.offer-block-text,
+.offer-block-text p {
+    color: rgba(255, 255, 255, 0.84);
+}
+
+.offer-block-text p:last-child {
+    margin-bottom: 0;
+}
+
+.offer-block-action {
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+.offer-block-price {
+    margin-bottom: 1rem;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.offer-block-button {
+    display: block;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .offer-block {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
 
 
 .logo img {
