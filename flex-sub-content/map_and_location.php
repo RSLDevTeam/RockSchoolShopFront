@@ -1,6 +1,9 @@
-<?php $location = get_sub_field('location'); ?>    
+<?php 
+$location = get_sub_field('location'); 
+set_query_var( 'flex_index', $flex_index );
+?>    
 
-<section class="locationSection ContentSection">
+<section class="locationSection ContentSection module-<?php echo $flex_index; ?>">
     
     <?php if ($location) : ?>
 
