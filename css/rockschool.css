@@ -846,3 +846,8 @@ a.map-card-link:focus-visible {
 .finder-body h5 {
     font-size: 1em !important;
 }
+
+.payment-icon {
+    width: 60px;
+    display: inline-block;
+}
