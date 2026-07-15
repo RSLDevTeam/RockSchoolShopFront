@@ -26,6 +26,34 @@
             "append": ""
         },
         {
+            "key": "field_68777cf41a2b3",
+            "label": "Provider Type",
+            "name": "provider_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "provider": "Provider",
+                "associate": "Associate",
+                "franchise": "Franchise"
+            },
+            "default_value": "associate",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_68220858725b1",
             "label": "Photo",
             "name": "photo",
@@ -168,7 +196,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "franscape_id, location, instruments",
+    "description": "franscape_id, provider_type, location, instruments",
     "show_in_rest": 1,
-    "modified": 1767784600
+    "modified": 1784129999
 }

@@ -1,5 +1,6 @@
 <?php 
 $location = get_sub_field('location'); 
+$provider_type = rsl_shopfront_get_provider_type(get_the_ID());
 set_query_var( 'flex_index', $flex_index );
 ?>    
 
@@ -32,7 +33,7 @@ set_query_var( 'flex_index', $flex_index );
             data-lng="<?php echo esc_attr($location['lng']); ?>"
             data-title="<?php the_title(); ?>"
             data-address="<?php echo esc_attr($location['address']); ?>"
-            data-marker-icon="<?php echo get_template_directory_uri(); ?>/img/map-marker-single.svg"
+            data-marker-icon="<?php echo esc_url(rsl_shopfront_get_provider_marker_url($provider_type)); ?>"
             data-aos="zoom-in"
             >
         </div>
@@ -80,4 +81,3 @@ if (get_the_title() && $instruments && $location):
     }
     </script>
 <?php endif; ?>
-

@@ -32,6 +32,34 @@ function register_provider_post_type() {
 
 add_action('init', 'register_provider_post_type');
 
+function rsl_shopfront_normalize_provider_type($provider_type): string {
+    $provider_type = sanitize_key((string) $provider_type);
+
+    return in_array($provider_type, ['provider', 'associate', 'franchise'], true)
+        ? $provider_type
+        : 'associate';
+}
+
+function rsl_shopfront_get_provider_type($post_id = 0): string {
+    $post_id = $post_id ? (int) $post_id : (int) get_the_ID();
+    $provider_type = function_exists('get_field')
+        ? get_field('provider_type', $post_id)
+        : get_post_meta($post_id, 'provider_type', true);
+
+    return rsl_shopfront_normalize_provider_type($provider_type);
+}
+
+function rsl_shopfront_get_provider_marker_url($provider_type): string {
+    $filenames = [
+        'provider' => 'map-marker-basic.svg',
+        'associate' => 'map-marker-single.svg',
+        'franchise' => 'map-marker-star.svg',
+    ];
+    $provider_type = rsl_shopfront_normalize_provider_type($provider_type);
+
+    return get_template_directory_uri() . '/img/' . $filenames[$provider_type];
+}
+
 
 // Enable Revision box for Providers
 function add_provider_revisions_metabox() {

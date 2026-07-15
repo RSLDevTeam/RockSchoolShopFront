@@ -69,7 +69,12 @@ function applyFiltersAndUpdateMap() {
 
 async function displayProvidersOnMap(providers) {
 	const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
-	const markerIconUrl = document.getElementById('finder-map')?.dataset.markerIcon;
+	const mapElement = document.getElementById('finder-map');
+	const markerIcons = {
+		provider: mapElement?.dataset.markerProvider,
+		associate: mapElement?.dataset.markerAssociate,
+		franchise: mapElement?.dataset.markerFranchise
+	};
 	if (markerCluster) markerCluster.clearMarkers();
 	markers.forEach(marker => marker.setMap(null));
 	markers = [];
@@ -77,6 +82,9 @@ async function displayProvidersOnMap(providers) {
 	providers.forEach(provider => {
 		// Create marker for each provider if lat and lng are available
 		if (!provider.lat || !provider.lng) return;
+		const providerType = ['provider', 'associate', 'franchise'].includes(provider.provider_type)
+			? provider.provider_type
+			: 'associate';
 		const marker = new AdvancedMarkerElement({
 			position: {
 				lat: parseFloat(provider.lat),
@@ -86,7 +94,7 @@ async function displayProvidersOnMap(providers) {
 			title: provider.title,
 			content: (() => {
 				const img = document.createElement('img');
-				img.src = markerIconUrl;
+				img.src = markerIcons[providerType] || markerIcons.associate;
 				img.style.width = '82px';
 				img.style.height = '82px';
 				return img;
