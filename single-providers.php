@@ -12,6 +12,7 @@ get_header();
 $franscape_id = get_field('franscape_id');
 $location = get_field('location');
 $email = get_field('inquire_email');
+$provider_type = rsl_shopfront_get_provider_type(get_the_ID());
 // Global variables
 $provider_contact_form_id = get_field('provider_contact_form_id', 'option');
 $background_image = get_field('provider_contact_form_image', 'option');
@@ -140,7 +141,7 @@ $background_image = get_field('provider_contact_form_image', 'option');
 			        data-lng="<?php echo esc_attr($location['lng']); ?>"
 			        data-title="<?php the_title(); ?>"
 			        data-address="<?php echo esc_attr($location['address']); ?>"
-			        data-marker-icon="<?php echo get_template_directory_uri(); ?>/img/map-marker-single.svg"
+			        data-marker-icon="<?php echo esc_url(rsl_shopfront_get_provider_marker_url($provider_type)); ?>"
 			        data-aos="zoom-in"
 			        >
 			    </div>

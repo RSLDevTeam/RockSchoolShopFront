@@ -68,6 +68,7 @@ function get_providers_json() {
                 'lng'       => $location['lng'],
                 'address'   => $location['address'],
                 'type'      => get_field('type', $post->ID),
+                'provider_type' => rsl_shopfront_get_provider_type($post->ID),
                 'instrument'=> get_field('instruments', $post->ID),
                 'photo'     => get_field('photo', $post->ID)['sizes']['square'] ?? '',
                 'permalink' => get_permalink($post->ID),
