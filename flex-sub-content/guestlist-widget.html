@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="guestlist-widget"></div>
+    <script>
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var embedKey = params.get('embed_key');
+            var guestlistUrl = (params.get('guestlist_url') || 'https://guestlist.rockschool.io').replace(/\/+$/, '');
+
+            if (!embedKey || !/^https:\/\/[-a-z0-9.]+(?:\:\d+)?(?:\/.*)?$/i.test(guestlistUrl)) {
+                return;
+            }
+
+            var container = document.getElementById('guestlist-widget');
+            container.className = 'guestlist-widget';
+            container.setAttribute('data-guestlist-embed-key', embedKey);
+            container.setAttribute('data-guestlist-style-mode', 'styled');
+
+            var script = document.createElement('script');
+            script.src = guestlistUrl + '/assets/js/widgets/guestlist-embed.js';
+            script.async = true;
+            document.body.appendChild(script);
+
+            function sendHeight() {
+                window.parent.postMessage({
+                    type: 'guestlist-widget-height',
+                    height: Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight))
+                }, window.location.origin);
+            }
+
+            new ResizeObserver(sendHeight).observe(document.body);
+            window.addEventListener('load', sendHeight);
+        }());
+    </script>
+</body>
+
+</html>
