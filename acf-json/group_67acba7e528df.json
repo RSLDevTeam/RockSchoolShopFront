@@ -1374,38 +1374,17 @@
                 "layout_67d18b2cfb831": {
                     "key": "layout_67d18b2cfb831",
                     "name": "iframe",
-                    "label": "iFrame",
+                    "label": "Guestlist Widget",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_67d18b3bfb833",
-                            "label": "Iframe Finder",
-                            "name": "iframe_finder",
-                            "aria-label": "",
-                            "type": "wysiwyg",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "<section id=\"franscape-finder\">\r\n\r\n\r\n     <!-- THESE STYLES ENSURE THE FINDER FILLS THE HOST SITE SPACE -->\r\n\r\n     <style>\r\n          #franscape-finder,\r\n          #franscape-finder-iframe {\r\n               width: 100%;\r\n               height: 100%;\r\n               margin: 0;\r\n               padding: 0;\r\n               border: 0;\r\n               position: relative;\r\n          }\r\n     </style>\r\n\r\n\r\n     <!-- THIS IS THE ACTUAL IFRAME -->\r\n\r\n     <iframe\r\n          id=\"franscape-finder-iframe\"\r\n          width=\"100%\"\r\n          allow=\"geolocation\"\r\n          name=\"Lesson Finder\"\r\n          title=\"Client Lesson Finder\"></iframe>\r\n\r\n\r\n     <!-- THIS SCRIPT ALLOWS PARAMETERS FROM THE URL TO BE PASSED TO THE FINDER -->\r\n\r\n     <script>\r\n          const iframeEl = document.getElementById('franscape-finder-iframe');\r\n          iframeEl.src = 'https://finder.client.franscape.io/' + window.location.search;\r\n     </script>\r\n\r\n</section>",
-                            "allow_in_bindings": 0,
-                            "tabs": "all",
-                            "toolbar": "full",
-                            "media_upload": 1,
-                            "delay": 0
-                        },
-                        {
-                            "key": "field_682aed85b3afb",
-                            "label": "",
-                            "name": "",
+                            "label": "Guestlist embed key",
+                            "name": "guestlist_embed_key",
                             "aria-label": "",
                             "type": "text",
-                            "instructions": "",
-                            "required": 0,
+                            "instructions": "Paste only the Guestlist embed key. The widget markup and script are added automatically.",
+                            "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
@@ -1413,30 +1392,9 @@
                                 "id": ""
                             },
                             "default_value": "",
-                            "maxlength": "",
                             "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
-                        },
-                        {
-                            "key": "field_682aed88b3afc",
-                            "label": "Section ID",
-                            "name": "section_id",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
                             "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
+                            "placeholder": "e.g. ewa0xvwcjaruka66z2t0wub4blc1kgc6",
                             "prepend": "",
                             "append": ""
                         }
@@ -4858,7 +4816,7 @@
                                     "default_value": "",
                                     "maxlength": "",
                                     "allow_in_bindings": 0,
-                                    "placeholder": "https://",
+                                    "placeholder": "https:\/\/",
                                     "prepend": "",
                                     "append": "",
                                     "parent_repeater": "field_6a3ba3c6a829c"
@@ -5313,5 +5271,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1782724675
+    "modified": 1787058402
 }

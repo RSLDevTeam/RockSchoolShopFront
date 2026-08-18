@@ -1,15 +1,11 @@
-<section id="<?php echo get_sub_field('section_id'); ?>" class="iFrameSection module-<?php echo $flex_index; ?>">
-    <section id="franscape-finder" class="h-screen p-0 m-0 w-full"><!-- THESE STYLES ENSURE THE FINDER FILLS THE HOST SITE SPACE -->
+<?php
+$guestlist_embed_key = trim((string) get_sub_field('guestlist_embed_key'));
 
-        <iframe id="franscape-finder-iframe" title="Rockschool Lesson Finder" name="Lesson Finder" width="100%" height="100%"></iframe>
-
-        <!-- THIS SCRIPT ALLOWS PARAMETERS FROM THE URL TO BE PASSED TO THE FINDER -->
-
-        <script>
-            const iframeEl = document.getElementById('franscape-finder-iframe');
-        
-            iframeEl.src = 'https://finder.rockschool.franscape.io/' + window.location.search;
-        </script>
-
-    </section>
+if ($guestlist_embed_key === '') {
+    return;
+}
+?>
+<section class="guestlist-widget-section module-<?php echo esc_attr($flex_index); ?>">
+    <div class="guestlist-widget" data-guestlist-embed-key="<?php echo esc_attr($guestlist_embed_key); ?>" data-guestlist-style-mode="styled"></div>
 </section>
+<script src="https://guestlist.rockschool.io/assets/js/widgets/guestlist-embed.js" async></script>
