@@ -267,6 +267,13 @@ select:focus-visible {
     }
 }
 
+@media (max-width: 1024px) {
+    .pricing-tiers-grid {
+        grid-template-columns: 1fr;
+        overflow-x: visible;
+    }
+}
+
 .pricing-tier hr {
     margin: 0;
 }
