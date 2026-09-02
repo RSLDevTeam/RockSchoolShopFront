@@ -1,15 +1,43 @@
-<section id="<?php echo get_sub_field('section_id'); ?>" class="iFrameSection module-<?php echo $flex_index; ?>">
-    <section id="franscape-finder" class="h-screen p-0 m-0 w-full"><!-- THESE STYLES ENSURE THE FINDER FILLS THE HOST SITE SPACE -->
+<?php
+$guestlist_embed_key = trim((string) get_sub_field('guestlist_embed_key'));
+$guestlist_url = rtrim((string) get_field('guestlist_url', 'option'), '/');
 
-        <iframe id="franscape-finder-iframe" title="Rockschool Lesson Finder" name="Lesson Finder" width="100%" height="100%"></iframe>
+if ($guestlist_url === '') {
+    $guestlist_url = 'https://guestlist.rockschool.io';
+}
 
-        <!-- THIS SCRIPT ALLOWS PARAMETERS FROM THE URL TO BE PASSED TO THE FINDER -->
+if ($guestlist_embed_key === '') {
+    return;
+}
 
-        <script>
-            const iframeEl = document.getElementById('franscape-finder-iframe');
-        
-            iframeEl.src = 'https://finder.rockschool.franscape.io/' + window.location.search;
-        </script>
-
-    </section>
+$guestlist_widget_url = add_query_arg(
+    array(
+        'embed_key' => $guestlist_embed_key,
+        'guestlist_url' => $guestlist_url,
+    ),
+    get_template_directory_uri() . '/flex-sub-content/guestlist-widget.html'
+);
+?>
+<section class="guestlist-widget-section module-<?php echo esc_attr($flex_index); ?>">
+    <iframe
+        class="guestlist-widget-frame"
+        src="<?php echo esc_url($guestlist_widget_url); ?>"
+        title="Guestlist classes and lessons"
+        loading="lazy"
+        scrolling="no"
+        style="border: 0; display: block; min-height: 400px; width: 100%;"
+    ></iframe>
 </section>
+<script>
+    (function () {
+        var frame = document.currentScript.previousElementSibling.querySelector('.guestlist-widget-frame');
+
+        window.addEventListener('message', function (event) {
+            if (event.origin !== window.location.origin || event.source !== frame.contentWindow || !event.data || event.data.type !== 'guestlist-widget-height') {
+                return;
+            }
+
+            frame.style.height = event.data.height + 'px';
+        });
+    }());
+</script>

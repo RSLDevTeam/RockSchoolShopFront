@@ -49,6 +49,7 @@ $offer_block_price_note = $get_pricing_field('offer_block_price_note');
                     $price_notes = $tier['price_notes'] ?? '';
                     $feature_groups = $tier['feature_list'] ?? [];
                     $scalable_pricing = !empty($tier['scalable_pricing']);
+                    $limited_price = !empty($tier['limited_price']);
                     $volume_pricing = $tier['volume_pricing'] ?? [];
                     $pricing_points = [];
 
@@ -81,7 +82,7 @@ $offer_block_price_note = $get_pricing_field('offer_block_price_note');
                         $tier_classes .= ' highlighted pricing-tier--highlighted';
                     }
                     ?>
-                    <article class="<?php echo esc_attr($tier_classes); ?>" <?php if ($has_scalable_pricing) : ?>data-volume-pricing="<?php echo esc_attr($pricing_json); ?>"<?php endif; ?>>
+                    <article class="<?php echo esc_attr($tier_classes); ?>" <?php if ($has_scalable_pricing) : ?>data-volume-pricing="<?php echo esc_attr($pricing_json); ?>"<?php endif; ?><?php if ($has_scalable_pricing && $limited_price) : ?> data-limited-price="true"<?php endif; ?>>
                         <?php if ($badge_text) : ?>
                             <div class="pricing-tier-badge">
                                 <?php echo esc_html($badge_text); ?>
@@ -145,10 +146,10 @@ $offer_block_price_note = $get_pricing_field('offer_block_price_note');
                                         <input
                                             type="range"
                                             class="pricing-tier-seat-slider"
-                                            min="<?php echo esc_attr($initial_seats); ?>"
-                                            max="<?php echo esc_attr($max_seats); ?>"
+                                            min="<?php echo esc_attr($limited_price ? 0 : $initial_seats); ?>"
+                                            max="<?php echo esc_attr($limited_price ? count($pricing_points) - 1 : $max_seats); ?>"
                                             step="1"
-                                            value="<?php echo esc_attr($initial_seats); ?>"
+                                            value="<?php echo esc_attr($limited_price ? 0 : $initial_seats); ?>"
                                             aria-label="<?php echo esc_attr($tier_title ? $tier_title . ' seats' : 'Seats'); ?>"
                                             data-seat-slider
                                         />
@@ -225,7 +226,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         var updatePrice = function() {
-            var selectedSeats = parseInt(slider.value, 10);
+            var selectedSeats = tier.hasAttribute('data-limited-price')
+                ? parseInt(pricingPoints[parseInt(slider.value, 10)].seats, 10)
+                : parseInt(slider.value, 10);
             var activePoint = pricingPoints[0];
 
             pricingPoints.forEach(function(point) {
