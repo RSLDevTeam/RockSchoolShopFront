@@ -1,0 +1,263 @@
+.guestlist-provider-calendar,
+.guestlist-provider-calendar * {
+  box-sizing: border-box;
+}
+
+.guestlist-provider-calendar {
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(19, 34, 56, 0.14);
+  color: #132238;
+  margin: 4em auto 5em;
+  max-width: 1300px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.guestlist-provider-calendar__header,
+.guestlist-calendar-toolbar {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.guestlist-provider-calendar__header h2 {
+  margin: 0;
+}
+
+.guestlist-calendar-filters label > span {
+  color: #778392;
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
+}
+
+.guestlist-calendar-toolbar {
+  align-items: end;
+  border-top: 1px solid #d7e0e8;
+  margin: 0.75rem 0 1.5rem;
+  padding-top: 1.25rem;
+}
+
+.guestlist-calendar-filters {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(180px, 220px));
+}
+
+.guestlist-calendar-filters select {
+  appearance: none;
+  background: #fff;
+  border: 1px solid #b8c4ce;
+  border-radius: 0;
+  color: #132238;
+  min-height: 46px;
+  padding: 0 2.4rem 0 0.85rem;
+  width: 100%;
+}
+
+.guestlist-calendar-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.guestlist-calendar-tabs button,
+.guestlist-calendar-actions button,
+.guestlist-calendar-cta {
+  background: #fff;
+  border: 2px solid #4cadc2;
+  color: #248da4;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1rem;
+  text-transform: uppercase;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.guestlist-calendar-tabs button.is-active,
+.guestlist-calendar-tabs button:hover,
+.guestlist-calendar-tabs button:focus-visible,
+.guestlist-calendar-actions button:hover,
+.guestlist-calendar-actions button:focus-visible,
+.guestlist-calendar-cta:hover,
+.guestlist-calendar-cta:focus-visible {
+  background: #4cadc2;
+  color: #fff;
+  outline: none;
+}
+
+.guestlist-calendar-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.guestlist-calendar-card {
+  background: #eef1f3;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1rem;
+}
+
+.guestlist-calendar-card[hidden],
+.guestlist-calendar-panel[hidden],
+.guestlist-calendar-actions[hidden],
+.guestlist-calendar-empty[hidden] {
+  display: none !important;
+}
+
+.guestlist-calendar-card__top {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.guestlist-calendar-date {
+  align-items: center;
+  background: #4cadc2;
+  color: #fff;
+  display: flex;
+  flex: 0 0 3.5rem;
+  flex-direction: column;
+  height: 3.5rem;
+  justify-content: center;
+  text-align: center;
+}
+
+.guestlist-calendar-date span {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.guestlist-calendar-date small {
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.guestlist-calendar-discipline {
+  background: rgba(76, 173, 194, 0.13);
+  color: #247f93;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.55rem 0.7rem;
+  text-align: center;
+}
+
+.guestlist-calendar-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.guestlist-calendar-card h3 {
+  font-size: 1.15rem;
+  line-height: 1.2;
+  margin: 0 0 0.35rem;
+}
+
+.guestlist-calendar-description,
+.guestlist-calendar-schedule,
+.guestlist-calendar-detail,
+.guestlist-calendar-price {
+  color: #566575;
+  font-size: 0.9rem;
+  margin: 0 0 0.8rem;
+}
+
+.guestlist-calendar-schedule {
+  margin-bottom: 1rem;
+}
+
+.guestlist-calendar-meta {
+  display: grid;
+  gap: 0.35rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 0 1rem;
+}
+
+.guestlist-calendar-meta div {
+  background: #fff;
+  min-width: 0;
+  padding: 0.6rem 0.25rem;
+  text-align: center;
+}
+
+.guestlist-calendar-meta strong,
+.guestlist-calendar-meta small,
+.guestlist-calendar-price strong {
+  display: block;
+}
+
+.guestlist-calendar-meta strong {
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.guestlist-calendar-meta small {
+  color: #778392;
+  font-size: 0.65rem;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+}
+
+.guestlist-calendar-price strong {
+  color: #132238;
+  font-size: 1.35rem;
+  margin-top: 0.3rem;
+}
+
+.guestlist-calendar-cta {
+  margin-top: auto;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.guestlist-calendar-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.guestlist-calendar-empty {
+  color: #566575;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .guestlist-calendar-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .guestlist-calendar-filters,
+  .guestlist-calendar-grid {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .guestlist-calendar-tabs,
+  .guestlist-calendar-tabs button {
+    width: 100%;
+  }
+
+  .guestlist-calendar-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+header.guestlist-provider-calendar__header {
+    padding-top: 1em;
+}

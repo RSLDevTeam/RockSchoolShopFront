@@ -103,7 +103,9 @@ $distance = isset($_GET['distance']) ? sanitize_text_field($_GET['distance']) : 
 						<div
 							id="finder-map"
 							class="w-full h-[600px] shadow-md"
-							data-marker-icon="<?php echo get_template_directory_uri(); ?>/img/map-marker-single.svg"
+							data-marker-provider="<?php echo esc_url(rsl_shopfront_get_provider_marker_url('provider')); ?>"
+							data-marker-associate="<?php echo esc_url(rsl_shopfront_get_provider_marker_url('associate')); ?>"
+							data-marker-franchise="<?php echo esc_url(rsl_shopfront_get_provider_marker_url('franchise')); ?>"
 							data-cluster-icon="<?php echo get_template_directory_uri(); ?>/img/map-marker-single.svg">
 						</div>
 					</div>
