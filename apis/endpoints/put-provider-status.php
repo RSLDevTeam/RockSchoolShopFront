@@ -17,8 +17,14 @@ function update_provider_status_api_callback($request) {
     }
 
     $params = json_decode($request->get_body(), true);
+    $params = is_array($params) ? $params : [];
     $provider_id = $params['provider_id'] ?? '';
     $status       = $params['status'] ?? '';
+    $backstage_franchise_id_raw = $params['backstage_franchise_id'] ?? '';
+    $backstage_franchise_id_supplied = is_scalar($backstage_franchise_id_raw) && '' !== trim((string) $backstage_franchise_id_raw);
+    $backstage_franchise_id = $backstage_franchise_id_supplied && is_numeric($backstage_franchise_id_raw)
+        ? absint($backstage_franchise_id_raw)
+        : 0;
 
     // Validate required fields
     if (empty($provider_id) || empty($status)) {
@@ -29,6 +35,10 @@ function update_provider_status_api_callback($request) {
     $valid_statuses = ['publish', 'draft', 'pending', 'private'];
     if (!in_array($status, $valid_statuses)) {
         return rest_custom_json_response(['error' => 'Invalid status provided'], 400);
+    }
+
+    if ($backstage_franchise_id_supplied && $backstage_franchise_id <= 0) {
+        return rest_custom_json_response(['error' => 'Invalid Backstage franchise ID'], 400);
     }
 
     // Find provider post by provider_id
@@ -51,10 +61,15 @@ function update_provider_status_api_callback($request) {
     ];
     wp_update_post($updated_post);
 
+    if ($backstage_franchise_id_supplied) {
+        update_post_meta($post_id, 'backstage_franchise_id', $backstage_franchise_id);
+    }
+
     return rest_custom_json_response([
         'code'          => 'successful',
         'message'       => 'Provider status updated successfully',
         'provider_id'  => $provider_id,
+        'backstage_franchise_id' => rsl_shopfront_get_backstage_franchise_id($post_id),
         'status'        => $status,
         'post_id'       => $post_id,
     ], 200);

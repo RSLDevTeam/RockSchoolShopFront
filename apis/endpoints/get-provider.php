@@ -57,6 +57,7 @@ function get_provider_by_franchise_id($request) {
         'inquire_email'=> get_field('inquire_email', $post->ID),
         'user_type' => get_field('type', $post->ID),
         'provider_type' => rsl_shopfront_get_provider_type($post->ID),
+        'backstage_franchise_id' => rsl_shopfront_get_backstage_franchise_id($post->ID),
         'link' => get_permalink($post),
         'provider_id' => $post->ID,
         'location' => get_field('location', $post->ID),

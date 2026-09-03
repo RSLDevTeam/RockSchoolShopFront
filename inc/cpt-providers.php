@@ -49,6 +49,13 @@ function rsl_shopfront_get_provider_type($post_id = 0): string {
     return rsl_shopfront_normalize_provider_type($provider_type);
 }
 
+function rsl_shopfront_get_backstage_franchise_id($post_id = 0): int {
+    $post_id = $post_id ? (int) $post_id : (int) get_the_ID();
+    $backstage_franchise_id = get_post_meta($post_id, 'backstage_franchise_id', true);
+
+    return absint($backstage_franchise_id);
+}
+
 function rsl_shopfront_get_provider_marker_url($provider_type): string {
     $filenames = [
         'provider' => 'map-marker-basic.svg',

@@ -32,6 +32,11 @@ function create_update_provider_api_callback($request) {
 	$user_type = $_POST['user_type'] ?? '';
 	$provider_type_supplied = array_key_exists('provider_type', $_POST) && '' !== trim((string) $_POST['provider_type']);
 	$provider_type_raw = $provider_type_supplied ? sanitize_key(wp_unslash($_POST['provider_type'])) : '';
+	$backstage_franchise_id_raw = $_POST['backstage_franchise_id'] ?? '';
+	$backstage_franchise_id_supplied = is_scalar($backstage_franchise_id_raw) && '' !== trim((string) $backstage_franchise_id_raw);
+	$backstage_franchise_id = $backstage_franchise_id_supplied && is_numeric($backstage_franchise_id_raw)
+		? absint(wp_unslash($backstage_franchise_id_raw))
+		: 0;
 	$inquire_email = $_POST['inquire_email'] ?? '';
 	$profile_picture = $_FILES['profile_picture'] ?? '';
 
@@ -70,6 +75,10 @@ function create_update_provider_api_callback($request) {
 
 	if ($provider_type_supplied && !in_array($provider_type_raw, ['provider', 'associate', 'franchise'], true)) {
 		return rest_custom_json_response(['error' => 'Invalid provider type'], 400);
+	}
+
+	if ($backstage_franchise_id_supplied && $backstage_franchise_id <= 0) {
+		return rest_custom_json_response(['error' => 'Invalid Backstage franchise ID'], 400);
 	}
 
 
@@ -126,6 +135,9 @@ function create_update_provider_api_callback($request) {
 	if ($provider_type_supplied || !$provider_id) {
 		update_field('provider_type', $provider_type_supplied ? $provider_type_raw : 'associate', $post_id);
 	}
+	if ($backstage_franchise_id_supplied) {
+		update_post_meta($post_id, 'backstage_franchise_id', $backstage_franchise_id);
+	}
 
 	//Get updated post object
 	$post = get_post($post_id);
@@ -147,6 +159,7 @@ function create_update_provider_api_callback($request) {
 		'slug' => $post->slug,
 		'user_type' => get_field('type', $post->ID),
 		'provider_type' => rsl_shopfront_get_provider_type($post->ID),
+		'backstage_franchise_id' => rsl_shopfront_get_backstage_franchise_id($post->ID),
 		'link' => get_permalink($post),
 		'inquire_email'=> get_field('inquire_email', $post->ID),
 		'provider_id' => $post->ID,

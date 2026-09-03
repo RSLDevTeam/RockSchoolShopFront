@@ -13,6 +13,7 @@ $franscape_id = get_field('franscape_id');
 $location = get_field('location');
 $email = get_field('inquire_email');
 $provider_type = rsl_shopfront_get_provider_type(get_the_ID());
+$backstage_franchise_id = rsl_shopfront_get_backstage_franchise_id(get_the_ID());
 // Global variables
 $provider_contact_form_id = get_field('provider_contact_form_id', 'option');
 $background_image = get_field('provider_contact_form_image', 'option');
@@ -106,12 +107,6 @@ $background_image = get_field('provider_contact_form_image', 'option');
 
 				</div>
 
-				<?php 
-				// if ($franscape_id) { 
-				// 	get_template_part( 'snippets/snippet', 'franscape-cal' ); 
-				// } 
-				?>
-
 			</div>
 
 			<?php if ($location) : ?>
@@ -146,6 +141,16 @@ $background_image = get_field('provider_contact_form_image', 'option');
 			        >
 			    </div>
 
+			<?php endif; ?>
+
+			<?php if ($backstage_franchise_id) : ?>
+				<div class="container mx-auto p-2.5 max-w-[1440px] z-1 w-[85%] px-4 mt-10">
+					<?php
+					get_template_part('snippets/snippet', 'guestlist-calendar', [
+						'backstage_franchise_id' => $backstage_franchise_id,
+					]);
+					?>
+				</div>
 			<?php endif; ?>
 
 			<?php get_template_part( 'section-templates/section', 'flex-content' ); ?>
