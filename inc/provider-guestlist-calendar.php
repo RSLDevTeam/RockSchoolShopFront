@@ -30,12 +30,55 @@ function rsl_shopfront_guestlist_price($amount, string $currency = 'gbp'): strin
     return $symbol . number_format((float) $amount, 2);
 }
 
+function rsl_shopfront_next_guestlist_class_date($date, $start_time = ''): string {
+    $date = is_string($date) ? substr(trim($date), 0, 10) : '';
+    if ('' === $date) {
+        return '';
+    }
+
+    try {
+        $timezone = function_exists('wp_timezone') ? wp_timezone() : new DateTimeZone(date_default_timezone_get());
+        $class_date = (new DateTimeImmutable($date, $timezone))->setTime(0, 0);
+        $today = (new DateTimeImmutable('now', $timezone))->setTime(0, 0);
+    } catch (Exception $e) {
+        return $date;
+    }
+
+    $next_date = $class_date;
+    if ($next_date < $today) {
+        $days_since_start = (int) $next_date->diff($today)->format('%a');
+        $weeks_since_start = intdiv($days_since_start, 7);
+        if ($weeks_since_start > 0) {
+            $next_date = $next_date->modify('+' . $weeks_since_start . ' weeks');
+        }
+        if ($next_date < $today) {
+            $next_date = $next_date->modify('+1 week');
+        }
+    }
+
+    $start_time = is_string($start_time) ? trim($start_time) : '';
+    if ($next_date->format('Y-m-d') === $today->format('Y-m-d') && '' !== $start_time) {
+        try {
+            $class_start = new DateTimeImmutable($next_date->format('Y-m-d') . ' ' . $start_time, $timezone);
+            if ($class_start <= new DateTimeImmutable('now', $timezone)) {
+                $next_date = $next_date->modify('+1 week');
+            }
+        } catch (Exception $e) {
+            return $next_date->format('Y-m-d');
+        }
+    }
+
+    return $next_date->format('Y-m-d');
+}
+
 function rsl_shopfront_normalize_guestlist_item(array $item, string $type, string $guestlist_url): array {
     $is_lesson = 'lesson' === $type;
     $class = $is_lesson && is_array($item['course_class'] ?? null) ? $item['course_class'] : $item;
     $discipline = $item['discipline_name'] ?? ($class['discipline_name'] ?? ($class['discipline']['name'] ?? ''));
     $instructor = is_array($item['instructor'] ?? null) ? ($item['instructor']['name'] ?? '') : '';
-    $date = $is_lesson ? ($item['lesson_date'] ?? '') : ($item['start_date'] ?? '');
+    $date = $is_lesson
+        ? ($item['lesson_date'] ?? '')
+        : rsl_shopfront_next_guestlist_class_date($item['start_date'] ?? '', $item['start_time'] ?? '');
     $date = is_string($date) ? substr($date, 0, 10) : '';
     $currency = strtolower((string) ($class['currency'] ?? 'gbp'));
     $price_amount = $is_lesson
@@ -136,7 +179,11 @@ function rsl_shopfront_get_guestlist_calendar_data(int $backstage_franchise_id) 
 }
 
 function rsl_shopfront_normalize_guestlist_embed_item(array $item, string $type): array {
-    $date = is_string($item['date'] ?? null) ? substr($item['date'], 0, 10) : '';
+    $is_lesson = 'lesson' === $type;
+    $date = $is_lesson
+        ? ($item['date'] ?? '')
+        : rsl_shopfront_next_guestlist_class_date($item['date'] ?? '', $item['start_time'] ?? '');
+    $date = is_string($date) ? substr($date, 0, 10) : '';
 
     return [
         'type'            => $type,

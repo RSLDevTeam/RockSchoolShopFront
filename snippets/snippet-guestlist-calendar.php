@@ -26,6 +26,12 @@ foreach ($all_items as $item) {
 }
 ksort($days);
 
+$calendar_id = function_exists('wp_unique_id') ? wp_unique_id('guestlist-calendar-') : uniqid('guestlist-calendar-', false);
+$show_sticky_cta = !empty($all_items) && empty($GLOBALS['rsl_shopfront_guestlist_sticky_cta_rendered']);
+if ($show_sticky_cta) {
+    $GLOBALS['rsl_shopfront_guestlist_sticky_cta_rendered'] = true;
+}
+
 $render_cards = static function (array $items): void {
     foreach ($items as $item) {
         $timestamp = !empty($item['date']) ? strtotime($item['date']) : false;
@@ -96,7 +102,13 @@ $render_cards = static function (array $items): void {
 };
 ?>
 
-<section class="guestlist-provider-calendar" data-guestlist-calendar data-default-tab="<?php echo esc_attr($default_tab); ?>" data-aos="zoom-in">
+<?php if ($show_sticky_cta) : ?>
+    <a class="guestlist-calendar-sticky-cta" href="#<?php echo esc_attr($calendar_id); ?>" data-calendar-sticky-cta aria-label="<?php esc_attr_e('Jump to booking calendar', 'rockschool'); ?>">
+        <?php esc_html_e('Book a class', 'rockschool'); ?>
+    </a>
+<?php endif; ?>
+
+<section id="<?php echo esc_attr($calendar_id); ?>" class="guestlist-provider-calendar" data-guestlist-calendar data-default-tab="<?php echo esc_attr($default_tab); ?>" data-aos="zoom-in">
     <header class="guestlist-provider-calendar__header">
         <div>
             <h2><?php esc_html_e('Upcoming classes & lessons', 'rockschool'); ?></h2>

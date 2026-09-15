@@ -68,8 +68,33 @@
     activateTab(calendar.dataset.defaultTab || 'classes');
   }
 
+  function initialiseStickyCta(cta) {
+    const targetId = decodeURIComponent(String(cta.hash || '').replace(/^#/, ''));
+    const target = targetId ? document.getElementById(targetId) : null;
+    if (!target) {
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.some((entry) => entry.isIntersecting);
+      cta.classList.toggle('is-hidden', visible);
+      cta.setAttribute('aria-hidden', visible ? 'true' : 'false');
+      cta.tabIndex = visible ? -1 : 0;
+    }, {
+      root: null,
+      threshold: 0,
+    });
+
+    observer.observe(target);
+  }
+
   function boot() {
     document.querySelectorAll('[data-guestlist-calendar]').forEach(initialiseCalendar);
+    document.querySelectorAll('[data-calendar-sticky-cta]').forEach(initialiseStickyCta);
   }
 
   if (document.readyState === 'loading') {
